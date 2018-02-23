@@ -1,0 +1,578 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+	 		<script type="text/javascript" src="js/jquery-2.0.2.min.js"></script>
+
+			<!-- alert message -->
+		<link href="alert/css/alert.css" rel="stylesheet" />
+		<link href="alert/themes/dark/theme.css" rel="stylesheet" />
+
+
+			<link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css"/>
+			<script src="http://js.arcgis.com/3.14/"></script>
+
+		
+		<script src="alert/js/alert.js"></script>
+
+
+        <script type="text/javascript" src="mdetect.js"></script>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <title>Algonquin College - Room Finder</title>
+
+        <script type="text/javascript">
+            var main = document.createElement('link')
+            main.setAttribute("rel", "stylesheet")
+            main.setAttribute("type", "text/css")
+            main.setAttribute("href", "App_Themes/e-learning/css/template.css")
+            main.setAttribute("media", "screen")
+
+            var mobile = document.createElement('link')
+            mobile.setAttribute("rel", "stylesheet")
+            mobile.setAttribute("type", "text/css")
+            mobile.setAttribute("href", "App_Themes/e-learning/css/mobile.css")
+            mobile.setAttribute("media", "screen")
+
+            if (DetectTierIphone()) {
+                if (typeof main != "undefined")
+                    document.getElementsByTagName("head")[0].appendChild(mobile)
+            }
+            else {
+                if (typeof main != "undefined")
+                    document.getElementsByTagName("head")[0].appendChild(main)
+            }
+
+        </script>
+
+        <link href="App_Themes/e-learning/css/printtemplateStyle.css" rel="stylesheet" type="text/css" media="print" />
+
+        <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+
+        <script type="text/javascript">
+            djConfig = {
+                parseOnLoad: true
+            };
+        </script>
+		
+		
+<!-- Mike Aug removal - replaced with new api
+        <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.6"></script>
+-->
+
+
+        <script type="text/javascript" language="Javascript">
+		  		function showAlert(msg, alertCallBack){
+					$.alert.open(
+						{
+							draggable: false,
+							cancel: false,
+							icon:'warning',
+							title:'Download the mobile version!',
+							content:msg,
+							buttons:{btnConfirm:'Ok',btnDeny:'No thanks'},
+							callback:alertCallBack
+						}
+					);
+
+				}
+
+				function alertRedirect(rdPage){
+					window.location.href = rdPage;
+				}
+
+				function gotoAndroidLink(button, value)
+				{
+					if(button == null || button == 'btnConfirm')
+						alertRedirect("builds/AlgonquinCollegeRoomFinder-release.apk");
+				}
+
+				function gotoIosLink(button, value)
+				{
+					if(button == null || button == 'btnConfirm')
+						alertRedirect("https://itunes.apple.com/us/app/algonquin-college-room-finder/id772122966");
+				}
+
+				$(function(){
+					var ua = navigator.userAgent;
+					var checker = {
+					iphone: ua.match(/(iPhone|iPod|iPad)/),
+					blackberry: ua.match(/BlackBerry/),
+					android: ua.match(/Android/)
+					};
+					if (checker.android){
+						showAlert("A mobile app version of the RoomFinder is available for your device. Do you want to download it now?", gotoAndroidLink);
+					}
+					else if (checker.iphone){
+						showAlert("A mobile app version of the RoomFinder is available for your device. Do you want to download it now?", gotoIosLink);
+					}
+					else if (checker.blackberry){
+						//$('.berry-only').show();
+					}
+					else {
+						//showAlert("Download android app.", gotoAndroidLink);
+						//$('.unknown-device').show();
+					}
+				});
+
+
+// Mike Aug removal 
+
+            dojo.require("dojox.grid.DataGrid");
+            dojo.require("dojo.data.ItemFileReadStore");
+            dojo.require("esri.map");
+            dojo.require("esri.tasks.find");
+            dojo.require("esri.layers.FeatureLayer");
+            dojo.require("dijit.layout.BorderContainer");
+            dojo.require("dijit.layout.ContentPane");
+
+// mike end	
+
+            var initExtent;
+            var findTask, findParams, map;
+            var resultsForZoom;
+            var ZoomSpaceAroundRoom = 80;
+			var basemapUrl = "http://acmaps.algonquincollege.com:6080/arcgis/rest/services/RFDetailFloors/MapServer";
+            //var basemapUrl = "http://acmaps.algonquincollege.com/ArcGIS/rest/services/RFDetailFloors/MapServer";
+            var basemap;
+            var zoomIndex;
+
+            function searchQuery(e) {
+                if (e.keyCode == 13) {
+                    var searchBox = document.getElementById("searchBox");
+                    executeQuery(searchBox.value);
+                    return false;
+                }
+            }
+
+            function searchQueryMobile(e) {
+                if (e.keyCode == 13) {
+                    var searchBox1 = document.getElementById("searchBox1");
+                    executeQuery(searchBox1.value);
+                    return false;
+                }
+            }
+
+            function searchButtonQuery() {
+                var tb = document.getElementById("searchBox");
+                executeQuery(tb.value);
+            }
+
+            function searchButtonQueryMobile() {
+                var tb = document.getElementById("searchBox1");
+                executeQuery(tb.value);
+            }
+
+            function clearTextBox() {
+                var tb = document.getElementById("searchBox");
+                tb.value = "";
+            }
+
+            function clearTextBoxMobile() {
+                var tb = document.getElementById("searchBox1");
+                tb.value = "";
+            }
+
+            function getQuerystring(key, default_) {
+                if (default_ == null)
+                    default_ = "";
+
+                key = key.toLowerCase();
+                key = key.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+                var regex = new RegExp("[\\?&]" + key + "=([^&#]*)");
+
+                var qs = regex.exec(window.location.href.toString().toLowerCase());
+
+                if (qs == null)
+                    return default_;
+                else
+                    return qs[1];
+            }
+
+            function init() {
+                
+// mike remove
+/* 
+				initExtent = new esri.geometry.Extent({ "xmin": -8433857, "ymin": 5676164, "xmax": -8432270, "ymax": 5677319, "spatialReference": { "wkid": 3857} });
+
+                map = new esri.Map("map", { extent: initExtent, logo: false, slider: false });
+                map.hideZoomSlider();
+                map.hidePanArrows();
+                map.disableRubberBandZoom();
+
+                basemap = new esri.layers.ArcGISDynamicMapServiceLayer(basemapUrl);
+
+                // connect the map object to the right DIV
+                dojo.connect(map, 'onLoad', function (theMap) {
+                    dojo.connect(dijit.byId('map'), 'resize', map, map.resize);
+                });
+*/ 
+// Mike  remove end
+
+// mike aug additions
+				require([
+					"esri/map",
+					"esri/layers/ArcGISDynamicMapServiceLayer",
+					"esri/layers/ImageParameters",
+					"esri/tasks/FindTask",
+					"esri/tasks/FindParameters"
+				  ], function (
+					Map, ArcGISDynamicMapServiceLayer, ImageParameters) {
+					initExtent = new esri.geometry.Extent({ "xmin": -8433857, "ymin": 5676164, "xmax": -8432270, "ymax": 5677319, "spatialReference": { "wkid": 3857} });
+					console.log(initExtent);
+					map = new Map("map", {
+						extent: initExtent, logo: false, slider: false
+					});
+// 440300, 5021700, 441300, 5022500
+					var imageParameters = new ImageParameters();
+					imageParameters.format = "jpeg"; //set the image type to PNG24, note default is PNG8.
+
+					//Takes a URL to a non cached map service.
+					basemap = new ArcGISDynamicMapServiceLayer("http://acmaps.algonquincollege.com:6080/arcgis/rest/services/RFDetailFloors/MapServer", {
+					  
+					});
+					
+					map.addLayer(basemap);
+					findParams = new esri.tasks.FindParameters();
+					findParams.returnGeometry = true;
+					findParams.layerIds = [0];
+					findParams.searchFields = ["POLY_IDENTIFIER"];
+
+					findTask = new esri.tasks.FindTask(basemapUrl);
+					});
+					
+/* mike moved up inside require ;
+
+
+
+					
+
+
+                findParams = new esri.tasks.FindParameters();
+                findParams.returnGeometry = true;
+                findParams.layerIds = [0];
+                findParams.searchFields = ["ROOMNUMBER"];
+
+                findTask = new esri.tasks.FindTask(basemapUrl);
+*/
+ 
+                var url = window.location.href;
+
+                if (url.indexOf('?') > 1)
+                    executeQuery(getQuerystring("POI"));
+                else
+                    executeQuery("");
+            }
+
+            function executeQuery(searchText) {
+					
+					searchText = searchText.replace("ac", "ca");
+					
+                var cell = document.getElementById("outputCell");
+                cell.style.visibility = 'visible';
+
+                var outputCell1 = document.getElementById("outputCell1");
+                outputCell1.style.visibility = 'visible';
+
+                var goToButton = document.getElementById("goToButton");
+                goToButton.disabled = false;
+                goToButton.style.backgroundColor = "#333333";
+
+                var clearButton = document.getElementById("clearButton");
+                clearButton.disabled = false;
+
+                var clearButton1 = document.getElementById("clearButton1");
+                clearButton1.disabled = false;
+
+                var buildingLabel = document.getElementById("buildingLabel");
+
+                var buildingLabel1 = document.getElementById("buildingLabel1");
+
+                var floorNumber, roomNumber;
+                var layerDefinitions = [];
+
+                map.removeAllLayers();
+
+                var search = searchText.toString();
+                search = search.toUpperCase();
+                search = search.replace(/^\s+|\s+$/g, '');
+                search = search.split(' ').join('');
+
+                if (searchText.toString() != "") {
+                    var pattern = new RegExp("[CW][A-Q,S-Z]");
+                    var pattern1 = new RegExp("[A-Q,S-Z][0-9]");
+                    var pattern2 = new RegExp("[W][R][1-3][0-9]");
+                    var pattern3 = new RegExp("[R][1-3][0-9]");
+                    var pattern4 = new RegExp("[0-9]");
+
+                    if (pattern.test(search)) {
+						console.log("pattern1: " + search);
+                        floorNumber = search.slice(0, 3) + "00";
+                        roomNumber = search;
+                        buildingLabel.innerHTML = "Showing .. Building: " + search.slice(1, 2).toUpperCase() + ",&nbsp;&nbsp;&nbsp;Floor: " + search.slice(2, 3) + ",&nbsp;&nbsp;&nbsp;Room: " + search.slice(2, searchText.toString().length);
+                        buildingLabel1.innerHTML = buildingLabel.innerHTML;
+
+                        layerDefinitions[2] = "FloorNumber LIKE '%" + floorNumber.slice(2, floorNumber.length) + "'";  // floor plans
+                        layerDefinitions[0] = "FloorNumber LIKE '%" + floorNumber.slice(2, floorNumber.length) + "' AND ROOMNUMBER <> ''";  // Points of interest POI - rooms;
+                    }
+                    else if (pattern1.test(search)) {
+						console.log("pattern2: " + search);
+                        floorNumber = search.slice(0, 2) + "00";
+                        roomNumber = search;
+                        buildingLabel.innerHTML = "Showing .. Building: " + search.slice(0, 1).toUpperCase() + ",&nbsp;&nbsp;&nbsp;Floor: " + search.slice(1, 2) + ",&nbsp;&nbsp;&nbsp;Room: " + search.slice(1, searchText.toString().length);
+                        buildingLabel1.innerHTML = buildingLabel.innerHTML;
+
+                        layerDefinitions[2] = "FloorNumber LIKE '%" + floorNumber.slice(1, floorNumber.length) + "'";  // floor plans
+                        layerDefinitions[0] = "FloorNumber LIKE '%" + floorNumber.slice(1, floorNumber.length) + "' AND ROOMNUMBER <> ''";  // Points of interest POI - rooms;
+                    }
+//                    else if (pattern2.test(search)) {
+//                        floorNumber = search.slice(0, 4) + "00";
+//                        roomNumber = search;
+//                        buildingLabel.innerHTML = "Showing .. Building: " + search.slice(0, 1).toUpperCase() + ",&nbsp;&nbsp;&nbsp;Floor: " + search.slice(1, 2) + ",&nbsp;&nbsp;&nbsp;Room: " + search.slice(1, searchText.toString().length);
+//                        buildingLabel1.innerHTML = buildingLabel.innerHTML;
+
+//                        layerDefinitions[2] = "FloorNumber LIKE '%" + floorNumber.slice(1, floorNumber.length) + "'";  // floor plans
+//                        layerDefinitions[0] = "FloorNumber LIKE '%" + floorNumber.slice(1, floorNumber.length) + "' AND RoomNumber <> ''";  // Points of interest POI - rooms;
+//                    }
+//                    else if (pattern4.test(search)) {
+//                        floorNumber = search.slice(0, 1) + "00";
+//                        roomNumber = search;
+//                        buildingLabel.innerHTML = "Showing .. Building: " + search.slice(0, 1).toUpperCase() + ",&nbsp;&nbsp;&nbsp;Floor: " + search.slice(1, 2) + ",&nbsp;&nbsp;&nbsp;Room: " + search.slice(1, searchText.toString().length);
+//                        buildingLabel1.innerHTML = buildingLabel.innerHTML;
+
+//                        layerDefinitions[2] = "FloorNumber LIKE '%" + floorNumber.slice(1, floorNumber.length) + "'";  // floor plans
+//                        layerDefinitions[0] = "FloorNumber LIKE '%" + floorNumber.slice(1, floorNumber.length) + "' AND RoomNumber <> ''";  // Points of interest POI - rooms;
+//                    }
+                    else {
+                        floorNumber = search;
+                        roomNumber = search;
+                        buildingLabel.innerHTML = "Many points of interest found";
+                        buildingLabel1.innerHTML = buildingLabel.innerHTML;
+                    }
+
+                    basemap.setDefaultVisibleLayers();
+                    basemap.setLayerDefinitions(layerDefinitions);
+
+                    map.addLayer(basemap);
+
+                    findParams.searchText = roomNumber;
+                    findTask.execute(findParams, showResults);
+                }
+                else {
+                    if (map.graphics != null)
+                        map.graphics.clear();
+
+                    layerDefinitions[2] = "FloorNumber LIKE '%100'";  // floor plans
+                    layerDefinitions[0] = "FloorNumber LIKE '%100'";  // Points of interest POI - rooms;
+
+                    basemap.setDefaultVisibleLayers();
+                    basemap.setLayerDefinitions(layerDefinitions);
+
+                    map.addLayer(basemap);
+
+                    map.setExtent(initExtent);
+
+                    buildingLabel.innerHTML = "";
+
+                    cell.style.visibility = 'hidden';
+                    goToButton.disabled = true;
+                    goToButton.style.backgroundColor = "#cfcfcf";
+                    clearButton.disabled = true;
+                    clearButton1.disabled = true;
+                }
+            }
+
+            function showResults(results) {
+                var clearButton = document.getElementById("clearButton");
+                clearButton.disabled = true;
+
+                var clearButton1 = document.getElementById("clearButton1");
+                clearButton1.disabled = true;
+
+                resultsForZoom = results;
+
+                if (results.length == 0) {
+                    map.graphics.clear();
+                    map.setExtent(initExtent);
+
+                    var buildingLabel = document.getElementById("buildingLabel");
+                    buildingLabel.innerHTML = "No results found";
+
+                    var goToButton = document.getElementById("goToButton");
+                    goToButton.disabled = true;
+                    return;
+                }
+
+                clearButton.disabled = false;
+                clearButton1.disabled = false;
+
+                var extent;
+                //symbology for graphics
+                var markerSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 15, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 1), new dojo.Color([255, 0, 0, 0.45]));
+                map.graphics.clear();
+                var dataForGrid = [];
+
+                dojo.forEach(results, function (result) {
+                    //Build an array of attribute information and add each found graphic to the map
+                    dataForGrid.push([result.layerName, result.foundFieldName, result.value]);
+
+                    var graphic = result.feature;
+                    graphic.setSymbol(markerSymbol);
+                    map.graphics.add(graphic);
+                    if (extent) {
+                        //alert("adding to extent");
+                        //if extent already initialized, union it with point's extent
+                        extent = extent.union(new esri.geometry.Extent(graphic.geometry.x - ZoomSpaceAroundRoom, graphic.geometry.y - ZoomSpaceAroundRoom, graphic.geometry.x + ZoomSpaceAroundRoom, graphic.geometry.y + ZoomSpaceAroundRoom, new esri.SpatialReference({ wkid: 3857 })));
+                    }
+                    else {
+                        //if extent not initialized, set it to point's extent
+                        //alert("setting extent");
+                        extent = new esri.geometry.Extent(graphic.geometry.x - ZoomSpaceAroundRoom, graphic.geometry.y - ZoomSpaceAroundRoom, graphic.geometry.x + ZoomSpaceAroundRoom, graphic.geometry.y + ZoomSpaceAroundRoom, new esri.SpatialReference({ wkid: 3857 }));
+                    } 
+                });
+
+                map.setExtent(extent);
+
+                zoomIndex = 1;
+            }
+
+            function zoomIn() {
+                if (resultsForZoom == null || resultsForZoom == undefined)
+                    return;
+
+                var zoomLevel = 15;
+
+                if (zoomIndex == 2)
+                    return;
+
+                var extent;
+                var markerSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE, 15, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 1), new dojo.Color([255, 0, 0, 0.45]));
+                map.graphics.clear();
+
+                dojo.forEach(resultsForZoom, function (result) {
+                    var graphic = result.feature;
+                    graphic.setSymbol(markerSymbol);
+                    map.graphics.add(graphic);
+
+                    if (extent)
+                        extent = extent.union(new esri.geometry.Extent(graphic.geometry.x - zoomLevel, graphic.geometry.y - zoomLevel, graphic.geometry.x + zoomLevel, graphic.geometry.y + zoomLevel, new esri.SpatialReference({ wkid: 3857 })));
+                    else
+                        extent = new esri.geometry.Extent(graphic.geometry.x - zoomLevel, graphic.geometry.y - zoomLevel, graphic.geometry.x + zoomLevel, graphic.geometry.y + zoomLevel, new esri.SpatialReference({ wkid: 3857 }));
+                });
+
+                map.setExtent(extent);
+
+                zoomIndex++;
+            }
+
+            function zoomOut() {
+                map.setExtent(initExtent);
+                zoomIndex = 1;
+            }
+
+            function zoom(factor) {
+                var xDiff = map.extent.xmax - map.extent.xmin
+                var yDiff = map.extent.ymax - map.extent.ymin
+                var shiftx = xDiff - (xDiff * factor);
+                var shifty = yDiff - (yDiff * factor);
+
+                var newExtent = new esri.geometry.Extent(map.extent.xmin - shiftx, map.extent.ymin - shifty, map.extent.xmax + shiftx, map.extent.ymax + shifty, new esri.SpatialReference({ wkid: 3857 }));
+                map.setExtent(newExtent);
+            }
+
+            function clear() {
+                var clearButton = document.getElementById("clearButton");
+                clearButton.disabled = true;
+
+                var clearButton1 = document.getElementById("clearButton1");
+                clearButton1.disabled = true;
+
+                var goToButton = document.getElementById("goToButton");
+                goToButton.disabled = true;
+                goToButton.style.backgroundColor = "#cfcfcf";
+
+                var cell = document.getElementById("outputCell");
+                cell.style.visibility = 'hidden';
+
+                var outputCell1 = document.getElementById("outputCell1");
+                outputCell1.style.visibility = 'hidden';
+
+                var searchBox = document.getElementById("searchBox");
+                searchBox.value = "";
+
+                var searchBox = document.getElementById("searchBox1");
+                searchBox1.value = "";
+
+                resultsForZoom = null;
+
+                if (map.graphics != null)
+                    map.graphics.clear();
+
+                executeQuery("");
+            }
+
+            dojo.addOnLoad(init);
+        </script>
+    </head>
+    <body style="background: #fff">
+        
+        <div id="content-wrapper">
+            <div id="contentGeneral" class="content-no-sb">
+                <div id="main-content">
+                    <div id="main-content-outer">
+                        <div id="content">
+                            <div id="tableMapSearch">
+                                <table>
+                                    <tr>
+                                        <td style="width: 37%;">
+                                            <input class="inputText" type="text" id="searchBox" style="width: 170px" onkeypress="return searchQuery(event)" value="" /> <input id="searchButton" class="button" type="submit" value="Search Map" onclick="searchButtonQuery()" /> <input id="clearButton" type='button' onclick="clear()" value="Clear" />
+                                        </td>
+                                        <td id="outputCell" style="width: 63%;" class="label">
+                                            <div id="buildingLabel" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div id="tableMapSearchMOBILE">
+                                <table>
+                                    <tr>
+                                        <td style="width: 32%;">
+                                            <input class="inputText1" type="text" id="searchBox1" style="width: 100px" onkeypress="return searchQueryMobile(event)" value="" /> <input class="button" type="submit" value="Search Map" onclick="searchButtonQueryMobile()" /> <input id="clearButton1" type='button' onclick="clear()" value="Clear" />
+                                        </td>
+                                    </tr>
+                                    <tr id="outputCell1">
+                                      <td class="label"><div id="buildingLabel1" /></td>
+                                  </tr>
+                                </table>
+                            </div>
+                            <div id="map1" style="border: 1px solid black;">
+                                <div id="map">
+                                </div>
+                                <div id="layerMapButton">
+                                    <input id="goToButton" type="button" onclick="zoomIn()" value="Go To Search" class="mapButtons" />
+                                    <input id="fullCampusnButton" type="button" onclick="zoomOut()" value="Full Campus" class="mapButtons" />
+                                    <input type='button' onclick="zoom(1.4)" value="Zoom In" class="mapButtons" />
+                                    <input type='button' onclick="zoom(0.3)" value="Zoom Out" class="mapButtons" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-1517407-15']);
+            _gaq.push(['_trackPageview']);
+
+            (function () {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </body>
+</html>

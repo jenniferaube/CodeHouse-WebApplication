@@ -1,0 +1,44 @@
+#wrap {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+}
+
+
+/* ========== Custom Keyboard ============== */
+body {
+    background: #fff url("../img/swoosh.png") no-repeat fixed left bottom;
+    background-size: 100%;
+}
+
+.login-container {
+    margin: 450px auto 0 auto;
+    width: 500px;
+    font-size: 3em;
+    color: #006341;
+}
+
+.well {
+    background-color: rgb(19, 139, 19);
+}
+
+
+
+.btn-success {
+    background-color: #00864a;
+    border-color: #418341;
+}
+
+.login-container .form-control {
+    height: 50px;
+    font-size: 0.8em;
+}
+
+.btn {
+    font-size: 30px;
+}
+
+.input-sm{
+    height: 60px;
+    font-size: 40px;
+}

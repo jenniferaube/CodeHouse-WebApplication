@@ -1,0 +1,74 @@
+body {
+    background: #fff url("../img/map-bg.png") no-repeat fixed left bottom;
+    background-size: 100%;
+}
+#wrap {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+}
+
+.search-container {
+    margin: 20px auto 0 auto;
+    width: 922px;
+    font-size: 3em;
+    color: #00713d;
+    text-align: center;
+}
+
+.search-container input {
+    margin: 0 auto;
+}
+
+.well {
+    background-color: rgb(19, 139, 19);
+}
+
+.btn-success {
+    background-color: #00864a;
+    border-color: #418341;
+    position: relative;
+    top: 2px;
+}
+
+.search-container .form-control {
+    height: 50px;
+    font-size: 0.8em;
+}
+
+.btn {
+    font-size: 26px;
+}
+
+.input-sm{
+    height: 60px;
+    font-size: 40px;
+}
+
+#mapContainer {
+    margin: 0 auto;
+    width: 922px;
+    height: 356px;
+    position: relative;
+    overflow: hidden;
+}
+
+#map{
+    position: absolute;
+    top: -76px;
+    left: -35px;
+    width: 960px;
+    height: 450px;
+}
+
+#keyboard-text {
+    width: 780px;
+}
+
+#outputSearch{
+    margin: 10px;
+    text-align: center;
+    font-size: 3em;
+    color: #006341;
+    height: 60px;
+}
