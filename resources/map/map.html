@@ -56,12 +56,6 @@
                 parseOnLoad: true
             };
         </script>
-		
-		
-<!-- Mike Aug removal - replaced with new api
-        <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.6"></script>
--->
-
 
         <script type="text/javascript" language="Javascript">
 		  		function showAlert(msg, alertCallBack){
@@ -105,20 +99,11 @@
 					if (checker.android){
 						showAlert("A mobile app version of the RoomFinder is available for your device. Do you want to download it now?", gotoAndroidLink);
 					}
-					else if (checker.iphone){
-						showAlert("A mobile app version of the RoomFinder is available for your device. Do you want to download it now?", gotoIosLink);
-					}
-					else if (checker.blackberry){
-						//$('.berry-only').show();
-					}
-					else {
-						//showAlert("Download android app.", gotoAndroidLink);
-						//$('.unknown-device').show();
-					}
+					else if (checker.iphone) {
+                        showAlert("A mobile app version of the RoomFinder is available for your device. Do you want to download it now?", gotoIosLink);
+                    }
 				});
 
-
-// Mike Aug removal 
 
             dojo.require("dojox.grid.DataGrid");
             dojo.require("dojo.data.ItemFileReadStore");
@@ -128,14 +113,13 @@
             dojo.require("dijit.layout.BorderContainer");
             dojo.require("dijit.layout.ContentPane");
 
-// mike end	
+
 
             var initExtent;
             var findTask, findParams, map;
             var resultsForZoom;
             var ZoomSpaceAroundRoom = 80;
 			var basemapUrl = "http://acmaps.algonquincollege.com:6080/arcgis/rest/services/RFDetailFloors/MapServer";
-            //var basemapUrl = "http://acmaps.algonquincollege.com/ArcGIS/rest/services/RFDetailFloors/MapServer";
             var basemap;
             var zoomIndex;
 
@@ -192,26 +176,7 @@
             }
 
             function init() {
-                
-// mike remove
-/* 
-				initExtent = new esri.geometry.Extent({ "xmin": -8433857, "ymin": 5676164, "xmax": -8432270, "ymax": 5677319, "spatialReference": { "wkid": 3857} });
 
-                map = new esri.Map("map", { extent: initExtent, logo: false, slider: false });
-                map.hideZoomSlider();
-                map.hidePanArrows();
-                map.disableRubberBandZoom();
-
-                basemap = new esri.layers.ArcGISDynamicMapServiceLayer(basemapUrl);
-
-                // connect the map object to the right DIV
-                dojo.connect(map, 'onLoad', function (theMap) {
-                    dojo.connect(dijit.byId('map'), 'resize', map, map.resize);
-                });
-*/ 
-// Mike  remove end
-
-// mike aug additions
 				require([
 					"esri/map",
 					"esri/layers/ArcGISDynamicMapServiceLayer",
@@ -225,7 +190,7 @@
 					map = new Map("map", {
 						extent: initExtent, logo: false, slider: false
 					});
-// 440300, 5021700, 441300, 5022500
+
 					var imageParameters = new ImageParameters();
 					imageParameters.format = "jpeg"; //set the image type to PNG24, note default is PNG8.
 
@@ -243,21 +208,7 @@
 					findTask = new esri.tasks.FindTask(basemapUrl);
 					});
 					
-/* mike moved up inside require ;
 
-
-
-					
-
-
-                findParams = new esri.tasks.FindParameters();
-                findParams.returnGeometry = true;
-                findParams.layerIds = [0];
-                findParams.searchFields = ["ROOMNUMBER"];
-
-                findTask = new esri.tasks.FindTask(basemapUrl);
-*/
- 
                 var url = window.location.href;
 
                 if (url.indexOf('?') > 1)
@@ -327,24 +278,7 @@
                         layerDefinitions[2] = "FloorNumber LIKE '%" + floorNumber.slice(1, floorNumber.length) + "'";  // floor plans
                         layerDefinitions[0] = "FloorNumber LIKE '%" + floorNumber.slice(1, floorNumber.length) + "' AND ROOMNUMBER <> ''";  // Points of interest POI - rooms;
                     }
-//                    else if (pattern2.test(search)) {
-//                        floorNumber = search.slice(0, 4) + "00";
-//                        roomNumber = search;
-//                        buildingLabel.innerHTML = "Showing .. Building: " + search.slice(0, 1).toUpperCase() + ",&nbsp;&nbsp;&nbsp;Floor: " + search.slice(1, 2) + ",&nbsp;&nbsp;&nbsp;Room: " + search.slice(1, searchText.toString().length);
-//                        buildingLabel1.innerHTML = buildingLabel.innerHTML;
 
-//                        layerDefinitions[2] = "FloorNumber LIKE '%" + floorNumber.slice(1, floorNumber.length) + "'";  // floor plans
-//                        layerDefinitions[0] = "FloorNumber LIKE '%" + floorNumber.slice(1, floorNumber.length) + "' AND RoomNumber <> ''";  // Points of interest POI - rooms;
-//                    }
-//                    else if (pattern4.test(search)) {
-//                        floorNumber = search.slice(0, 1) + "00";
-//                        roomNumber = search;
-//                        buildingLabel.innerHTML = "Showing .. Building: " + search.slice(0, 1).toUpperCase() + ",&nbsp;&nbsp;&nbsp;Floor: " + search.slice(1, 2) + ",&nbsp;&nbsp;&nbsp;Room: " + search.slice(1, searchText.toString().length);
-//                        buildingLabel1.innerHTML = buildingLabel.innerHTML;
-
-//                        layerDefinitions[2] = "FloorNumber LIKE '%" + floorNumber.slice(1, floorNumber.length) + "'";  // floor plans
-//                        layerDefinitions[0] = "FloorNumber LIKE '%" + floorNumber.slice(1, floorNumber.length) + "' AND RoomNumber <> ''";  // Points of interest POI - rooms;
-//                    }
                     else {
                         floorNumber = search;
                         roomNumber = search;
