@@ -10,7 +10,7 @@
 
     // Check if the request method is post
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        header("Location: /");
+        header("Location: login.html");
     }
 
     if ($pass != null && $login != null)  {
@@ -19,17 +19,25 @@
             if ($user != NULL) {
                 if (Bcrypt::check($pass, $user->getPass())) {
                     $session->loginUser($user);
-                    echo '1';
+                    if ($user->getType() == 2) {
+                        echo '2';
+                    } elseif ($user->getType() == 1) {
+                        #professor page
+                        echo '1';
+                    } else {
+                        echo '2';
+                        #admin page
+                    }
                 } else {
-                    echo "Usuário ou senha inválido!";
+                    echo "Invalid user or password";
                 }
             } else {
-                echo "Usuário ou senha inválido!";
+                echo "Invalid user or password";
             }
-        } catch (PDOException $e) {
+        } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     } else {
-        echo "Preencha corretamente os campos solicitados!";
+        echo "Fill in the requested fields correctly";
     }
 ?>

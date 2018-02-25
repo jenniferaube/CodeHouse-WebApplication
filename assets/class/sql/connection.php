@@ -2,23 +2,19 @@
 
 class Connection {
 
-    private static $host = "localhost";
-    private static $port = "5432";
-    private static $database = "web_db";
-    private static $user = "web_user";
-    private static $pass = "adm@user";
+    private static $host = "thevault.myftp.org";
+    private static $port = "3306";
+    private static $database = "codehouse";
+    private static $user = "codehouse";
+    private static $pass = "codehouse";
 
     public static function getConnection() {
-        $connection = "pgsql:host=".self::$host.";port=".self::$port.";dbname=".self::$database.";user=".self::$user.";password=".self::$pass;
-        $conn = new PDO($connection);
-
-        // Active throw exceptions mode
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-        return $conn;
+        $connection = new mysqli(self::$host, self::$user, self::$pass, self::$database);
+        return $connection;
     }
 
     public static function closeConnection($conn) {
+        $conn->close();
         return $conn = NULL;
     }
 }

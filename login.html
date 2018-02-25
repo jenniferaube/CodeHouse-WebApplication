@@ -52,14 +52,14 @@
 
     <div class="container">
         <div class="login-container">
-            <form>
+            <form id="loginForm" method="post">
                 <div class="form-group">
                     <label for="keyboard-text">Email address</label>
-                    <input type="email" class="form-control" id="keyboard-text" placeholder="Email">
+                    <input type="email" name="login" class="form-control" id="keyboard-text" placeholder="Email">
                 </div>
                 <div class="form-group">
                     <label for="keyboard-pwd">Password</label>
-                    <input type="password" class="form-control" id="keyboard-pwd" placeholder="Password">
+                    <input type="password" name="pass" class="form-control" id="keyboard-pwd" placeholder="Password">
                 </div>
                 <button type="submit" class="btn btn-success pull-right">Sing In</button>
             </form>
@@ -79,12 +79,9 @@
 
     <!-- Custom Javascript -->
     <script type="text/javascript" src="assets/js/keyboard-login.js"></script>
+    <script src="assets/js/history.js"></script>
+    <script src="assets/js/post.js"></script>
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
 
 </body>
 

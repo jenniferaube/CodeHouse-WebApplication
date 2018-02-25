@@ -37,7 +37,8 @@ Class Session {
     public function loginUser(User $u) {
         if (session_status() == PHP_SESSION_ACTIVE) {
             $_SESSION['userId'] = $u->getId();
-            $_SESSION['userName'] = $u->getName();
+            $_SESSION['userfName'] = $u->getfName();
+            $_SESSION['userlName'] = $u->getlName();
             $_SESSION['userLogin'] = $u->getLogin();
             $_SESSION['userPass'] = $u->getPass();
         } else {

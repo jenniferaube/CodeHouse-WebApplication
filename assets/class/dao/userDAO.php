@@ -5,7 +5,7 @@ include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/lib/bcrypt.php";
 
 class UserDAO {
-    
+
     public function insert(User $u) {
         $query = 'INSERT INTO "user"(login, pass) VALUES (?, ?)';
 
@@ -23,28 +23,39 @@ class UserDAO {
     }
 
     public function login(User $u) {
-        $query = 'SELECT id, name, pass FROM "user" WHERE login~*?';
+        $query = 'SELECT id, first_name, last_name, email, password, type FROM user WHERE email = ?;';
 
         $conn = Connection::getConnection();
 
         $stmt = $conn->prepare($query);
-        $stmt->bindValue(1, $u->getLogin(), PDO::PARAM_STR);
+        $login = $u->getLogin();
+        $stmt->bind_param("s", $login);
 
+        /* execute query */
         $stmt->execute();
 
-        if ($stmt->rowCount() == 1) {
-            $row = $stmt->fetch(PDO::FETCH_OBJ);
-            $u->setId($row->id);
-            $u->setPass($row->pass);
-            $u->setName($row->name);
+        /* store result */
+        $stmt->store_result();
 
+        if ($stmt->num_rows == 1) {
+            $stmt->bind_result($id, $fname, $lname, $email, $pass, $type);
+            $stmt->fetch();
+
+            $u->setId($id);
+            $u->setfName($fname);
+            $u->setlName($lname);
+            $u->setLogin($email);
+            $u->setPass($pass);
+            $u->setType($type);
+
+            $stmt->close();
             Connection::closeConnection($conn);
             return $u;
         } else {
             Connection::closeConnection($conn);
-            return NULL;
+            return $stmt->errno;
         }
-        
+
     }
 
 }

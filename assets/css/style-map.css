@@ -73,3 +73,7 @@ body {
     color: #006341;
     height: 60px;
 }
+
+.icon {
+    cursor: pointer;
+}

@@ -42,3 +42,7 @@ body {
     height: 60px;
     font-size: 40px;
 }
+
+.icon {
+    cursor: pointer;
+}

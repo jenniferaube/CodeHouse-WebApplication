@@ -102,3 +102,11 @@
 .navbar-nav .icon img{
     width: 30px;
 }
+
+.navbar-brand:hover {
+    filter: opacity(.5) drop-shadow(0 0 0 #80b1a0);
+}
+
+.navbar-nav .icon img:hover {
+    filter: opacity(.5) drop-shadow(0 0 0 #80b1a0);
+}
