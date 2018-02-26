@@ -1,3 +1,10 @@
+<?php
+    include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/session.php";
+
+    $session = new Session();
+    $session->blockReLoggin();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,38 +31,36 @@
 </head>
 
 <body>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html" ><img src="assets/img/ac-icon.png"></a>
+    <?php include_once $_SERVER['DOCUMENT_ROOT']."/include/nav.php"; ?>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Alert!</h4>
+
+                    </div>
+                    <div class="modal-body">
+                        <p id="login-feedback"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <!--<li class=""><a class="icon" href="#"><img src="assets/img/home.png"></a></li>-->
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class=""><a class="icon" href="map.html"><img src="assets/img/map.png"></a></li>
-                    <li class=""><a class="icon" onclick = "goBack()" ><img src="assets/img/back.png"></a></li>
-                    <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
-                    <!--<li class=""><a class="icon" href="#"><img src="assets/img/off.png"></a></li>-->
-                </ul>
-            </div><!--/.nav-collapse -->
         </div>
-    </nav>
+    </div>
 
     <div class="container">
         <div class="login-container">
-            <form id="loginForm" method="post">
+            <form id="loginForm" method="post" novalidate>
                 <div class="form-group">
                     <label for="keyboard-text">Email address</label>
-                    <input type="email" name="login" class="form-control" id="keyboard-text" placeholder="Email">
+                    <input type="email" name="login" class="form-control" id="keyboard-text" placeholder="Email" autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="keyboard-pwd">Password</label>
@@ -77,10 +82,15 @@
     <script type="text/javascript" src="resources/mottie-keyboard/js/jquery.mousewheel.min.js"></script>
     <script type="text/javascript" src="resources/mottie-keyboard/js/jquery.keyboard.extension-typing.min.js"></script>
 
+    <!-- Bootstrap@3.3.7 -->
+    <script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+
     <!-- Custom Javascript -->
     <script type="text/javascript" src="assets/js/keyboard-login.js"></script>
     <script src="assets/js/history.js"></script>
     <script src="assets/js/post.js"></script>
+
+    <script src="assets/js/timeout.js"></script>
 
 
 </body>

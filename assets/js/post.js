@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(function () {
 
     var request;
 
@@ -55,6 +55,8 @@ $(document).ready(function() {
             request.abort();
         }
 
+
+
         // Setup some local variables
         var form = $(this);
         // Serialize the data in the form
@@ -62,7 +64,6 @@ $(document).ready(function() {
 
         // Let's select and cache all the fields - ("input, select, button, textarea")
         var inputs = form.find('input');
-
 
         // Let's disable the inputs for the duration of the Ajax request.
         // Note: we disable elements AFTER the form data has been serialized.
@@ -81,9 +82,9 @@ $(document).ready(function() {
 
         request.done(function(result) {
             if (result == "1") {
-                window.location = '/professor';
+                window.location = '/professor.php';
             } else if (result == "2") {
-                window.location = '/student';
+                window.location = '/student.php';
             } else {
                 showError(result);
             }
@@ -101,8 +102,11 @@ $(document).ready(function() {
     });
 
     function showError(data) {
-        alert(data);
+        $("#login-feedback").html(data);
+        $('#myModal').modal('show');
     }
+
+
 
 });
 

@@ -24,13 +24,12 @@ Class Session {
             } 
             
             session_destroy();
-            header("Location: /");
         }
     }
 
     public function blockPage() {
-        if (!isset($_SESSION['userId']) || !isset($_SESSION['userName']) || !isset($_SESSION['userLogin']) || !isset($_SESSION['userPass'])) {
-            header("Location: /");
+        if (!isset($_SESSION['userId']) || !isset($_SESSION['userfName']) || !isset($_SESSION['userlName']) || !isset($_SESSION['userLogin']) || !isset($_SESSION['userType'])) {
+            header("Location: /index.php");
         }
     }
 
@@ -40,21 +39,41 @@ Class Session {
             $_SESSION['userfName'] = $u->getfName();
             $_SESSION['userlName'] = $u->getlName();
             $_SESSION['userLogin'] = $u->getLogin();
-            $_SESSION['userPass'] = $u->getPass();
+            $_SESSION['userType'] = $u->getType();
         } else {
             echo 'Unable to login!';
         }
     }
 
     public function logoutUser() {
-        if (isset($_GET['logout'])) {
-            $this->destroy();
+        if ($this->isLogged()) {
+            if (isset($_GET['logout'])) {
+                $this->destroy();
+                header("Location: ".$_GET['logout'].".php");
+            }
         }
     }
 
-    public function isUserLogged() {
-        if (isset($_SESSION['userId']) && isset($_SESSION['userName']) && isset($_SESSION['userLogin']) && isset($_SESSION['userPass'])) {
-            header("Location: /home");
+
+
+
+    public function isLogged() {
+        return isset($_SESSION['userId']) && isset($_SESSION['userfName']) && isset($_SESSION['userlName']) && isset($_SESSION['userLogin']) && isset($_SESSION['userType']);
+    }
+
+
+    public function blockReLoggin() {
+        if ($this->isLogged()) {
+            if ($_SESSION['userType'] == 2) {
+                header("Location: /student.php");
+            } elseif ($_SESSION['userType'] == 1) {
+                #professor page
+                header("Location: /professor.php");
+            } else {
+                #admin page
+                header("Location: /");
+            }
+
         }
     }
 

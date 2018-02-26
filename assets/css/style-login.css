@@ -11,6 +11,42 @@ body {
     background-size: 100%;
 }
 
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+    pointer-events:none;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+    pointer-events:none;
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    width:inherit;
+    max-width:inherit; /* For Bootstrap 4 - to avoid the modal window stretching full width */
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    pointer-events:all;
+}
+
+.modal-content .modal-header{
+    background: #be4b49;
+}
+
+.modal-content .modal-header .modal-title{
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+}
+
+#login-feedback{
+    font-size: 50px;
+}
+
 .login-container {
     margin: 500px auto 0 auto;
     width: 500px;
@@ -46,3 +82,4 @@ body {
 .icon {
     cursor: pointer;
 }
+

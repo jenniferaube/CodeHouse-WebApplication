@@ -15,11 +15,22 @@ h2{
     font-size: 3em;
     color: #006341;
 }
+h4{
+    text-align: center;
+    color: white;
+}
+
+.info-block {
+    background: #006341;
+    width: 400px;
+    padding: 10px;
+    margin: 70px auto 0 auto;
+}
 
 .container-actions {
     margin: 0 auto;
-    padding-top: 200px;
-    width: 1500px;
+    padding-top: 50px;
+    display: table;
 }
 
 .container-actions .action {
@@ -28,11 +39,11 @@ h2{
 }
 
 .container-actions a {
-    width: 370px;
     text-decoration: none;
 }
 
 .container-actions .action a img {
     display: block;
     margin: 0 auto;
+    filter: drop-shadow(50px 50px 50px white);
 }
