@@ -1,0 +1,17 @@
+.block-highlight{
+	margin-top:100px;
+	background: #fff url("../img/welcome.png") no-repeat fixed left bottom;
+	
+}
+.block-highlight p{
+	color: #fff;
+	background-color: #00864a;
+	padding: 50px;
+	text-align: center;
+	font-size: 2em;
+}
+.block-highlight p a{
+
+	color: #fff;
+	text-decoration: underline;
+}
