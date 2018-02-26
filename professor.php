@@ -59,6 +59,10 @@
         </div>
     </nav>
 
+<!--                            -->
+<!--    Insert code here        -->
+<!--                            -->
+<!--                            -->
 
     <!-- Jquery@1.9.1 -->
     <script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
