@@ -186,7 +186,6 @@
 				  ], function (
 					Map, ArcGISDynamicMapServiceLayer, ImageParameters) {
 					initExtent = new esri.geometry.Extent({ "xmin": -8433857, "ymin": 5676164, "xmax": -8432270, "ymax": 5677319, "spatialReference": { "wkid": 3857} });
-					console.log(initExtent);
 					map = new Map("map", {
 						extent: initExtent, logo: false, slider: false
 					});

@@ -2,21 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="217f2d4c-35d1-430f-a62c-91e040647e98" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/include/nav.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/student.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/logged_out.html" afterPath="$PROJECT_DIR$/logged_out.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/login.html" afterPath="$PROJECT_DIR$/login.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/map.html" afterPath="$PROJECT_DIR$/map.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/img/swoosh.png" afterPath="$PROJECT_DIR$/assets/img/swoosh.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/professor.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/class/control/user_login.php" afterPath="$PROJECT_DIR$/assets/class/control/user_login.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/class/session.php" afterPath="$PROJECT_DIR$/assets/class/session.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/style-index.css" afterPath="$PROJECT_DIR$/assets/css/style-index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/style-login.css" afterPath="$PROJECT_DIR$/assets/css/style-login.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/style-map.css" afterPath="$PROJECT_DIR$/assets/css/style-map.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/history.js" afterPath="$PROJECT_DIR$/assets/js/history.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/post.js" afterPath="$PROJECT_DIR$/assets/js/post.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/timeout.js" afterPath="$PROJECT_DIR$/assets/js/timeout.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/include/nav.php" afterPath="$PROJECT_DIR$/include/nav.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logged_out.php" afterPath="$PROJECT_DIR$/logged_out.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login.php" afterPath="$PROJECT_DIR$/login.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/map.php" afterPath="$PROJECT_DIR$/map.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/map/map.html" afterPath="$PROJECT_DIR$/resources/map/map.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/student.php" afterPath="$PROJECT_DIR$/student.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,20 +27,8 @@
       <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/login.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="742">
-              <caret line="92" column="4" lean-forward="false" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="48" />
-              <folding>
-                <element signature="e#1430#1437#1#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nav.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/nav.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="72" lean-forward="false" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="72" />
+            <state relative-caret-position="402">
+              <caret line="48" column="108" lean-forward="false" selection-start-line="48" selection-start-column="108" selection-end-line="48" selection-end-column="108" />
               <folding />
             </state>
           </provider>
@@ -52,22 +37,12 @@
       <file leaf-file-name="student.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/student.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="5" selection-end-column="27" />
+            <state relative-caret-position="521">
+              <caret line="52" column="73" lean-forward="true" selection-start-line="52" selection-start-column="73" selection-end-line="52" selection-end-column="73" />
               <folding>
-                <marker date="1519626845645" expanded="true" signature="207:227" ph="..." />
-                <marker date="1519626845645" expanded="true" signature="901:904" ph="..." />
+                <marker date="1519631279070" expanded="true" signature="239:259" ph="..." />
+                <marker date="1519631279070" expanded="true" signature="933:936" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style-login.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/css/style-login.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -75,31 +50,51 @@
       <file leaf-file-name="map.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/map.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="986">
-              <caret line="58" column="48" lean-forward="true" selection-start-line="58" selection-start-column="48" selection-end-line="59" selection-end-column="48" />
+            <state relative-caret-position="374">
+              <caret line="40" column="108" lean-forward="false" selection-start-line="40" selection-start-column="108" selection-end-line="40" selection-end-column="108" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style-map.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/css/style-map.css">
+      <file leaf-file-name="nav.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/nav.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="67" column="14" lean-forward="true" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
+            <state relative-caret-position="221">
+              <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.php">
+      <file leaf-file-name="user_login.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/class/control/user_login.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="78" lean-forward="false" selection-start-line="14" selection-start-column="78" selection-end-line="14" selection-end-column="78" />
+            <state relative-caret-position="459">
+              <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="history.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/history.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="6" />
               <folding>
-                <marker date="1519626055035" expanded="true" signature="39:58" ph="..." />
+                <element signature="n#!!doc" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="professor.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/professor.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="674">
+              <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -107,8 +102,8 @@
       <file leaf-file-name="logged_out.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/logged_out.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-57">
-              <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
+            <state relative-caret-position="68">
+              <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -117,18 +112,18 @@
       <file leaf-file-name="session.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/class/session.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="51" column="53" lean-forward="false" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="53" />
+            <state relative-caret-position="1003">
+              <caret line="62" column="33" lean-forward="true" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="timeout.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="timeout.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/js/timeout.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="19" lean-forward="true" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+            <state relative-caret-position="442">
+              <caret line="26" column="33" lean-forward="false" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -153,6 +148,14 @@
       <find>aler</find>
       <find>destroy</find>
       <find>\n</find>
+      <find>console</find>
+      <find>his</find>
+      <find>hiso</find>
+      <find>hisot</find>
+      <find>history</find>
+      <find>hist</find>
+      <find>go</find>
+      <find>mapIcon</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\evand\Documents\GitRepository\CodeHouse</dir>
@@ -164,7 +167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/map/map.html" />
         <option value="$PROJECT_DIR$/resources/map/alert/css/alert.css" />
         <option value="$PROJECT_DIR$/assets/class/control/user_add.php" />
         <option value="$PROJECT_DIR$/assets/js/goback.js" />
@@ -173,25 +175,27 @@
         <option value="$PROJECT_DIR$/phpinfo.php" />
         <option value="C:/xampp/htdocs/assets/class/dao/userDAO.php" />
         <option value="$PROJECT_DIR$/assets/class/dao/userDAO.php" />
-        <option value="$PROJECT_DIR$/assets/class/control/user_login.php" />
         <option value="$PROJECT_DIR$/assets/class/user.php" />
         <option value="$PROJECT_DIR$/zuera.html" />
         <option value="$PROJECT_DIR$/assets/css/style-index.css" />
         <option value="$PROJECT_DIR$/map.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/login.html" />
-        <option value="$PROJECT_DIR$/assets/js/history.js" />
         <option value="$PROJECT_DIR$/assets/js/post.js" />
         <option value="$PROJECT_DIR$/assets/css/style-login.css" />
-        <option value="$PROJECT_DIR$/map.php" />
-        <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/include/nav.php" />
-        <option value="$PROJECT_DIR$/login.php" />
-        <option value="$PROJECT_DIR$/student.php" />
-        <option value="$PROJECT_DIR$/assets/class/session.php" />
-        <option value="$PROJECT_DIR$/logged_out.php" />
         <option value="$PROJECT_DIR$/assets/css/style-map.css" />
         <option value="$PROJECT_DIR$/assets/js/timeout.js" />
+        <option value="$PROJECT_DIR$/resources/map/map.html" />
+        <option value="$PROJECT_DIR$/assets/class/session.php" />
+        <option value="$PROJECT_DIR$/include/nav.php" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/assets/js/history.js" />
+        <option value="$PROJECT_DIR$/map.php" />
+        <option value="$PROJECT_DIR$/login.php" />
+        <option value="$PROJECT_DIR$/logged_out.php" />
+        <option value="$PROJECT_DIR$/assets/class/control/user_login.php" />
+        <option value="$PROJECT_DIR$/student.php" />
+        <option value="$PROJECT_DIR$/professor.php" />
       </list>
     </option>
   </component>
@@ -294,6 +298,12 @@
               <item name="bootstrap" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="CodeHouse" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CodeHouse" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="resources" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="map" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -305,7 +315,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="web.server" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
@@ -315,6 +325,7 @@
       <recent name="D:\Google Drive\Algonquin\Level 4\CST8334\Keyboard\resources" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\evand\Documents\GitRepository\CodeHouse" />
       <recent name="C:\Users\evand\Documents\GitRepository\CodeHouse\assets\img" />
       <recent name="C:\Users\evand\Documents\GitRepository\CodeHouse\assets\class" />
       <recent name="C:\Users\evand\Documents\GitRepository\CodeHouse\assets\js" />
@@ -351,12 +362,12 @@
       <workItem from="1519557360501" duration="747000" />
       <workItem from="1519601895217" duration="1716000" />
       <workItem from="1519604582301" duration="2317000" />
-      <workItem from="1519609144605" duration="16588000" />
+      <workItem from="1519609144605" duration="20726000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54004000" />
+    <option name="totallyTimeSpent" value="58142000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -393,21 +404,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/map.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -489,13 +485,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/map/map.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6934">
-          <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -627,34 +616,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/keyboard-login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/css/style-loggedout.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/class/control/user_login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="40" column="35" lean-forward="false" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/post.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="674">
-          <caret line="104" column="40" lean-forward="false" selection-start-line="104" selection-start-column="40" selection-end-line="104" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -667,71 +632,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/history.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="92" column="4" lean-forward="false" selection-start-line="92" selection-start-column="4" selection-end-line="92" selection-end-column="48" />
-          <folding>
-            <element signature="e#1430#1437#1#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/css/style-login.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="44" column="0" lean-forward="true" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/nav.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="72" lean-forward="false" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/student.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="5" selection-end-column="27" />
-          <folding>
-            <marker date="1519626845645" expanded="true" signature="207:227" ph="..." />
-            <marker date="1519626845645" expanded="true" signature="901:904" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/class/session.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="51" column="53" lean-forward="false" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logged_out.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <caret line="3" column="7" lean-forward="true" selection-start-line="3" selection-start-column="7" selection-end-line="3" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/map.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="986">
-          <caret line="58" column="48" lean-forward="true" selection-start-line="58" selection-start-column="48" selection-end-line="59" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -744,20 +648,129 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/map/map.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="187" column="169" lean-forward="false" selection-start-line="187" selection-start-column="169" selection-end-line="187" selection-end-column="169" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/map/mdetect.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/keyboard-login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/post.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="85" column="35" lean-forward="false" selection-start-line="85" selection-start-column="35" selection-end-line="85" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="78" lean-forward="false" selection-start-line="14" selection-start-column="78" selection-end-line="14" selection-end-column="78" />
+        <state relative-caret-position="425">
+          <caret line="25" column="46" lean-forward="true" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
           <folding>
-            <marker date="1519626055035" expanded="true" signature="39:58" ph="..." />
+            <marker date="1519630488250" expanded="true" signature="39:58" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/class/session.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="62" column="33" lean-forward="true" selection-start-line="62" selection-start-column="33" selection-end-line="62" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/nav.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="19" column="41" lean-forward="true" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="48" column="108" lean-forward="false" selection-start-line="48" selection-start-column="108" selection-end-line="48" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logged_out.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/timeout.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="19" lean-forward="true" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+        <state relative-caret-position="442">
+          <caret line="26" column="33" lean-forward="false" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/history.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="4" selection-end-column="6" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/map.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="40" column="108" lean-forward="false" selection-start-line="40" selection-start-column="108" selection-end-line="40" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/class/control/user_login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/student.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="52" column="73" lean-forward="true" selection-start-line="52" selection-start-column="73" selection-end-line="52" selection-end-column="73" />
+          <folding>
+            <marker date="1519631279070" expanded="true" signature="239:259" ph="..." />
+            <marker date="1519631279070" expanded="true" signature="933:936" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/professor.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="674">
+          <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding />
         </state>
       </provider>

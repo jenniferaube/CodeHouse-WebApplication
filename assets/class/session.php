@@ -33,6 +33,18 @@ Class Session {
         }
     }
 
+    public function blockStudent() {
+        if ($_SESSION['userType'] == 2) {
+            header("Location: /student.php");
+        }
+    }
+
+    public function blockProfessor() {
+        if ($_SESSION['userType'] == 1) {
+            header("Location: /professor.php");
+        }
+    }
+
     public function loginUser(User $u) {
         if (session_status() == PHP_SESSION_ACTIVE) {
             $_SESSION['userId'] = $u->getId();
