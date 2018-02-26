@@ -42,7 +42,7 @@ Class Session {
             $_SESSION['userLogin'] = $u->getLogin();
             $_SESSION['userPass'] = $u->getPass();
         } else {
-            echo 'Não é possível fazer o login!';
+            echo 'Unable to login!';
         }
     }
 

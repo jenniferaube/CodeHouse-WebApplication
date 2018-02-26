@@ -82,7 +82,7 @@ $(document).ready(function() {
         request.done(function(result) {
             if (result == "1") {
                 window.location = '/professor';
-            } if (result == "2") {
+            } else if (result == "2") {
                 window.location = '/student';
             } else {
                 showError(result);

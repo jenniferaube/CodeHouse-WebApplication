@@ -25,7 +25,7 @@
                         #professor page
                         echo '1';
                     } else {
-                        echo '2';
+                        #echo '0';
                         #admin page
                     }
                 } else {
