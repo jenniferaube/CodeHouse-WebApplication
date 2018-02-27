@@ -112,6 +112,7 @@
     <script src="assets/js/timeout.js"></script>
 
 
+	<?php include 'footer.php'; ?>
 </body>
 
 </html>
