@@ -61,7 +61,7 @@
             <button id="search" type="submit" class="btn btn-success">Search Map</button>
         </div>
     </div>
-
+    <?php include 'footer.php'; ?>
     <!-- Jquery@1.9.1 -->
     <script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
 

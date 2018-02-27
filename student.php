@@ -65,6 +65,7 @@
     <!--                            -->
 
     <!-- Jquery@1.9.1 -->
+    <?php include 'footer.php'; ?>
     <script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
 
     <script src="assets/js/history.js"></script>
