@@ -3,8 +3,8 @@
 
     $session = new Session();
     $session->blockPage();
+    $session->blockStudent();
     $session->blockProfessor();
-    $session->blockAdmin();
     $session->logoutUser();
 ?>
 
@@ -48,11 +48,11 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class=""><a class="icon" href="/student.php"><img src="/assets/img/home.png"></a></li>
+                    <li class=""><a class="icon" href="/professor.php"><img src="/assets/img/home.png"></a></li>
                 </ul>
                 <ul id="menuRight" class="nav navbar-nav navbar-right">
                     <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
-                    <li id="mapIcon" class=""><a class="icon" href="/student.php?logout=map"><img src="/assets/img/map.png"></a></li>
+                    <li id="mapIcon" class=""><a class="icon" href="/professor.php?logout=map"><img src="/assets/img/map.png"></a></li>
                     <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                     <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
                 </ul>
@@ -60,15 +60,13 @@
         </div>
     </nav>
 
-    <!--                            -->
-    <!--    Insert code here        -->
-    <!--                            -->
-    <!--                            -->
-
-    <!-- Jquery@1.9.1 -->
+<!--                            -->
+<!--    Insert code here        -->
+<!--                            -->
+<!--                            -->
     <?php include 'footer.php'; ?>
+    <!-- Jquery@1.9.1 -->
     <script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
-
     <script src="assets/js/history.js"></script>
     <script src="assets/js/timeout.js"></script>
 

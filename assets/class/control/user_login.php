@@ -14,19 +14,23 @@
     }
 
     if ($pass != null && $login != null)  {
-        try { 
+        try {
             $user = (new UserDAO())->login(new User($login, $pass));
             if ($user != NULL) {
                 if (Bcrypt::check($pass, $user->getPass())) {
-                    $session->loginUser($user);
-                    if ($user->getType() == 2) {
-                        echo '2';
-                    } elseif ($user->getType() == 1) {
-                        #professor page
-                        echo '1';
+                    if($user->getActivated()) { //if user is not activated it will show invalid user
+                        $session->loginUser($user);
+                        if ($user->getType() == 2) {
+                            echo '2';
+                        } elseif ($user->getType() == 1) {
+                            #professor page
+                            echo '1';
+                        } else {
+                            echo '0';
+                            #admin page
+                        }
                     } else {
-                        echo '1';
-                        #admin page
+                        echo "User not active";
                     }
                 } else {
                     echo "Invalid user or password";
@@ -35,7 +39,8 @@
                 echo "Invalid user or password";
             }
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            echo "Please contact database admin";
+//            echo $e->getMessage();
         }
     } else {
         echo "Fill in the requested fields correctly";

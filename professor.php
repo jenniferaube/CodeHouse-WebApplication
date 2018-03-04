@@ -4,6 +4,7 @@
     $session = new Session();
     $session->blockPage();
     $session->blockStudent();
+    $session->blockAdmin();
     $session->logoutUser();
 ?>
 

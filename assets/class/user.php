@@ -7,6 +7,7 @@ class User {
     private $lname;
     private $login;
     private $pass;
+    private $activated;
     private $type;
     
     function __construct(string $login, string $pass) {
@@ -40,6 +41,15 @@ class User {
 
     public function getPass() {
         return $this->pass;
+    }
+
+    public function getActivated() {
+        return $this->activated;
+    }
+
+    public function setActivated($activated)
+    {
+        $this->activated = $activated;
     }
 
     public function setId($id) {

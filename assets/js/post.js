@@ -63,7 +63,7 @@ $(function () {
         var serializedData = form.serialize();
 
         // Let's select and cache all the fields - ("input, select, button, textarea")
-        var inputs = form.find('input');
+        var inputs = form.find('input, button');
 
         // Let's disable the inputs for the duration of the Ajax request.
         // Note: we disable elements AFTER the form data has been serialized.
@@ -85,14 +85,17 @@ $(function () {
                 window.location = '/professor.php';
             } else if (result == "2") {
                 window.location = '/student.php';
-            } else {
+            } else if(result == "0"){
+                window.location = '/admin.php';
+            }else{
                 showError(result);
             }
         });
 
         request.fail(function (jqXHR, textStatus, errorThrown){
             // Log the error to the console
-            showError('ERROR - ' + errorThrown);
+            // showError('ERROR - ' + errorThrown);
+            showError('Database is not online');
         });
 9
         request.always(function () {
