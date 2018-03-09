@@ -38,7 +38,11 @@ Class Session {
             header("Location: /student.php");
         }
     }
-
+    public function blockAdmin() {
+        if ($_SESSION['userType'] == 0) {
+            header("Location: /admin.php");
+        }
+    }
     public function blockProfessor() {
         if ($_SESSION['userType'] == 1) {
             header("Location: /professor.php");

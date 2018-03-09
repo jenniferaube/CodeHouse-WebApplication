@@ -23,7 +23,7 @@ class UserDAO {
     }
 
     public function login(User $u) {
-        $query = 'SELECT id, first_name, last_name, email, password, type FROM user WHERE email = ?;';
+        $query = 'SELECT id, first_name, last_name, email, password, activated, type FROM user WHERE LOWER(email) = LOWER(?);';
 
         $conn = Connection::getConnection();
 
@@ -38,7 +38,7 @@ class UserDAO {
         $stmt->store_result();
 
         if ($stmt->num_rows == 1) {
-            $stmt->bind_result($id, $fname, $lname, $email, $pass, $type);
+            $stmt->bind_result($id, $fname, $lname, $email, $pass, $activated, $type);
             $stmt->fetch();
 
             $u->setId($id);
@@ -46,6 +46,7 @@ class UserDAO {
             $u->setlName($lname);
             $u->setLogin($email);
             $u->setPass($pass);
+            $u->setActivated($activated);
             $u->setType($type);
 
             $stmt->close();

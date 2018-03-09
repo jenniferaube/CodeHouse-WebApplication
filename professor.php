@@ -1,10 +1,12 @@
 <?php
-//    include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
-//
-//    $session = new Session();
-//    $session->blockPage();
-//    $session->blockStudent();
-//    $session->logoutUser();
+    include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
+
+    $session = new Session();
+    $session->blockPage();
+    $session->blockStudent();
+    $session->blockAdmin();
+    $session->logoutUser();
+
 ?>
 
 <!DOCTYPE html>
