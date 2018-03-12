@@ -1,0 +1,14 @@
+.container-formtable {
+    margin:100px;
+}
+input{
+    float:right;
+    size:20px;
+}
+#searchForm{
+    float:left;
+}
+.form2{
+    float:right;
+    display: contents;
+}

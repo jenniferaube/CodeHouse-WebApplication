@@ -1,0 +1,16 @@
+h2 {
+    color:red;
+    padding-top:100px;
+    padding-bottom: 50px;
+    text-align: center;
+ }
+#deactivate{
+    margin-left: 550px;
+    margin-right: 100px;
+}
+.popuptext #confirmation {
+    visibility: hidden;
+}
+.popuptext #cancel {
+    visibility: hidden;
+}

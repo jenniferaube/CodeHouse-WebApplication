@@ -80,14 +80,14 @@ Class Session {
 
     public function blockReLoggin() {
         if ($this->isLogged()) {
-            if ($_SESSION['userType'] == 2) {
-                header("Location: /student.php");
+            if ($_SESSION['userType'] == 0) {
+                header("Location: /admin.php");
             } elseif ($_SESSION['userType'] == 1) {
                 #professor page
                 header("Location: /professor.php");
             } else {
                 #admin page
-                header("Location: /");
+                header("Location: /admin.php");
             }
 
         }
