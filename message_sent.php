@@ -1,14 +1,3 @@
-<?php
-    include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
-
-    $session = new Session();
-    $session->blockPage();
-    if ($session->isLogged()) {
-        $session->destroy();
-    };
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,9 +11,10 @@
 
 
     <!-- Custom Style -->
+	<link rel="stlesheet" type="text/css" href="assets/css/style-messagesent.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-index.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/style-loggedout.css">
+	
 
 </head>
 <body onload="afterlogout()">
@@ -55,15 +45,17 @@
 
 
 
-<h1>Algonquin Appointment Book Kiosk</h1>
+   <div>
 
+		<h1>Algonquin Appointment Book Kiosk</h1>
 
-    <div class="block-highlight">
+		<div class="sent">
 		<p>
-			You have been loggedout of the session.<br/>
-			<a href="index.php"> Click here</a> to go to home page.
+			Your request for appointment with professor has been sent successfully. <br/>
+			Your professor will contact you to your algonquin-live email account in 24 hours.
 		</p>
     </div>
+</div>
 
 
     <?php include 'footer.php'; ?>

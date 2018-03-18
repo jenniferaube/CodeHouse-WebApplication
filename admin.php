@@ -2,10 +2,11 @@
     include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
     $session = new Session();
-    $session->blockPage();
+   /* $session->blockPage();
     $session->blockStudent();
     $session->blockProfessor();
-    $session->logoutUser();
+    $session->logoutUser();*/
+// above code is needed when admin needs to login directly to test code
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +30,7 @@
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-
+    <link rel="stylesheet" type="text/css" href="/assets/css/admin.css">
 
 </head>
 <body>
@@ -59,11 +60,26 @@
             </div><!--/.nav-collapse -->
         </div>
     </nav>
+<h1>Welcome Administrator</h1>
+    <div class="container-actions" style="position: absolute">
+<!--        <div class="action" >-->
+            <a href="adduser.php">
+                <button class="btn btn-success">Add a User</button>
+            </a>
+<!--        </div>-->
+<!--        <div class="action" >-->
+            <a href="finduser.php">
+                <button class="btn btn-success">Edit a User</button>
+            </a>
+<!--        </div>-->
+<!---->
+<!--        <div class="action">-->
+            <a href="finduser.php">
+                <button class="btn btn-success">De-Activate a User</button>
+            </a>
+<!--        </div>-->
+    </div>
 
-<!--                            -->
-<!--    Insert code here        -->
-<!--                            -->
-<!--                            -->
     <?php include 'footer.php'; ?>
     <!-- Jquery@1.9.1 -->
     <script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
