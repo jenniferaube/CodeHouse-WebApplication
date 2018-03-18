@@ -9,6 +9,10 @@ input{
     float:left;
 }
 .form2{
+    visibility: hidden;
     float:right;
     display: contents;
+}
+.form2.contents{
+    visibility: visible;
 }

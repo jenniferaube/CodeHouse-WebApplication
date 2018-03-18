@@ -28,7 +28,7 @@ $session->logoutUser();*/
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style-admin.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style-edituser.css">
 
 </head>
 <body>
@@ -56,9 +56,9 @@ $session->logoutUser();*/
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<div class="container-form" style="padding-top: 100px;">
+<div class="container-form" >
 
-    <form action="">
+    <form action="admin.php">
         <!--populate field with selected user to edit-->
         <div class="form-group">
             <label>First Name: </label>
@@ -81,11 +81,13 @@ $session->logoutUser();*/
             <input type="text">
         </div>
         <div class="form-group">
-            <button class="btn-success" type="submit">Save Changes</button>
+            <button class="btn-success" type="submit" onclick="snackbarFunction()">Save Changes</button>
+            <div id="snackbar">You have successfully saved changes to the user
+            </div>
         </div>
 
     </form>
-
+    <script src="\assets\js\snackbar.js"></script>
 </div>
 
 

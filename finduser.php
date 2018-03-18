@@ -82,7 +82,7 @@ $session->logoutUser();*/
         </div>
 
     </form>
-
+    <script src="assets/js/searchresults.js"></script>
 
     <div class="form2" id="searchTable">
         <p>Search results...</p>
@@ -101,7 +101,7 @@ $session->logoutUser();*/
         </table>
     </div>
 </div>
-<script src="assets/js/searchresults.js"></script>
+
 
 <?php include 'footer.php'; ?>
 </body>

@@ -1,6 +1,9 @@
-form{
-    margin-left:600px;
+.container-form{
+    padding-top: 150px;
+    margin-left:550px;
+
 }
+
 /*snackbar cited from https://www.w3schools.com/howto/howto_js_popup.asp*/
 #snackbar {
     visibility: hidden; /* Hidden by default. Visible on click */
@@ -14,7 +17,7 @@ form{
     position: fixed; /* Sit on top of the screen */
     z-index: 1; /* Add a z-index if needed */
     left: 50%; /* Center the snackbar */
-    bottom: 150px; /* 30px from the bottom */
+    bottom: 30px; /* 30px from the bottom */
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */

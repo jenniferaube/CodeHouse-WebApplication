@@ -27,7 +27,7 @@ $session->logoutUser();*/
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/style-deactivateuser.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style-deactivateuser.css">
 
 </head>
 <body>
@@ -60,15 +60,19 @@ $session->logoutUser();*/
 <h2>*Are you sure you wish to de-activate this user</h2>
 
         <a href="admin.php"> <!--show a pop up confirming deactivation then return to main menu-->
-            <button id="deactivate" class="btn btn-danger" onclick="confirmDeactivation()">De-Activate
+            <button id="deactivate" class="btn btn-danger" onclick="snackbarFunction()">De-Activate
 
             </button></a>
+<div id="snackbar" style="visibility:hidden;">You have successfully de-activated the user
+</div>
 
         <a href="admin.php"><!--show a pop up confirming no changes were made and return the main menu-->
-            <button class="btn btn-primary">Cancel
+            <button class="btn btn-primary" onclick="snackbarFunction()">Cancel
 
             </button></a>
-
+<div id="snackbar" style="visibility:hidden;">No changes were made
+</div>
+<script src="\assets\js\snackbar.js"></script>
 <?php include 'footer.php'; ?>
 </body>
 </html>

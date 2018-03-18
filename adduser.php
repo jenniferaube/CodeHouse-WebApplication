@@ -58,7 +58,7 @@ $session->logoutUser();*/
 </nav>
 <div class="container-form" style="padding-top: 100px;">
 
-    <form >
+    <form action="admin.php">
 
         <div class="form-group">
             <label>User Type:</label>
@@ -85,10 +85,16 @@ $session->logoutUser();*/
             <label>Username: </label>
             <input type="text">
         </div>
-        <div class="form-group"><!--add popup to confirm user has been added to database then return to main menu-->
-            <button class="btn-success" type="submit">Add User</button>
-        </div>
+        <div class="form-group">
 
+           <!--add popup to confirm user has been added to database then return to main menu-->
+            <button class="btn-success" type="submit" onclick="snackbarFunction()">Add User
+                </button>
+            <div id="snackbar">You have successfully added the user
+            </div>
+</div>
+        </div>
+<script src="\assets\js\snackbar.js"></script>
     </form>
 
 </div>

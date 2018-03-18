@@ -30,7 +30,7 @@
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/style-admin.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/admin.css">
 
 </head>
 <body>
@@ -61,23 +61,23 @@
         </div>
     </nav>
 <h1>Welcome Administrator</h1>
-    <div class="container-actions">
-        <div class="action">
+    <div class="container-actions" style="position: absolute">
+<!--        <div class="action" >-->
             <a href="adduser.php">
-                <button class="btn btn-primary">Add a User</button>
+                <button class="btn btn-success">Add a User</button>
             </a>
-        </div>
-        <div class="action" >
+<!--        </div>-->
+<!--        <div class="action" >-->
             <a href="finduser.php">
-                <button class="btn btn-primary">Edit a User</button>
+                <button class="btn btn-success">Edit a User</button>
             </a>
-        </div>
-
-        <div class="action">
+<!--        </div>-->
+<!---->
+<!--        <div class="action">-->
             <a href="finduser.php">
-                <button class="btn btn-primary">De-Activate a User</button>
+                <button class="btn btn-success">De-Activate a User</button>
             </a>
-        </div>
+<!--        </div>-->
     </div>
 
     <?php include 'footer.php'; ?>
