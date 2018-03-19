@@ -1,3 +1,9 @@
+<!--
+File: admin.php
+Created by: Jennifer Aube
+Date: March 10, 2018
+Last modified: March 19, 2018 by Jennifer Aube
+-->
 <?php
     include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
@@ -85,7 +91,7 @@
     <script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
     <script src="assets/js/history.js"></script>
     <script src="assets/js/timeout.js"></script>
-<script src="assets/js/after.js"></script>
+<script src="assets/js/searchresults.js"></script>
 
 </body>
 </html>

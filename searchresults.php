@@ -1,12 +1,18 @@
+<!--
+File: searchresults.php
+Created by: Jennifer Aube
+Date: March 10, 2018
+Last modified: March 19, 2018 by Jennifer Aube
+-->
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
-// above code is needed when admin needs to login directly to test code
+$session->logoutUser();
+
 $servername = "localhost";
 $username = "root";
 $password = "algonquin";
@@ -108,6 +114,7 @@ if($connection->connect_error){
                     if ($result->num_rows > 0) {
                         // output data of each row
                         while ($row = $result->fetch_assoc()) {
+                            $_SESSION['id'] = $row["id"];
                             ?>
 
                             <td><?php echo $row["first_name"] ?></td>
@@ -157,7 +164,7 @@ if($connection->connect_error){
 <!--</form>-->
 </div>
 
-<script src="assets/js/after.js"></script>
+<script src="assets/js/searchresults.js"></script>
 <?php
 
 

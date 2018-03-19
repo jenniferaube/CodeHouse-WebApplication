@@ -1,4 +1,9 @@
-
+<!--
+File: edituser.php
+Created by: Jennifer Aube
+Date: March 10, 2018
+Last modified: March 19, 2018 by Jennifer Aube
+-->
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
@@ -67,32 +72,33 @@ if($connection->connect_error){
 </nav>
 <div class="container-form" >
 
-    <form action="admin.php">
+    <form action="edituser.php" method="post">
         <?php
-        $id;
-$sql = "select * from user where id = $id";
+
+        $id = $_SESSION["id"];
+        $sql = "select * from user where id = $id";
         $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            
-        }
+
+        $row = $result->fetch_assoc();
+
         ?>
         <div class="form-group">
             <label>First Name: </label>
-            <input type="<?php echo $_POST["firstname"]; ?>">
+            <input name="firstname" type="text" value="<?php echo $row["first_name"]; ?>">
         </div>
         <div class="form-group">
             <label>Last Name: </label>
-            <input type="<?php echo $_POST["lastname"]; ?>">
+            <input name="lastname" type="text" value="<?php echo $row["last_name"]; ?>">
         </div>
         <div class="form-group">
             <label>Email: </label>
-            <input type="<?php echo $_POST["email"]; ?>" size="24">
+            <input name="email" type="email" size="24" value="<?php echo $row["email"]; ?>">
         </div>
         <div class="form-group">
             <label>Password: </label>
-            <input type="<?php echo $_POST["password"]; ?>"><!--make password field hidden-->
+            <input name="password" type="password" value="<?php echo $row["password"]; ?>"><!--make password field hidden-->
         </div>
-
+        <!--        add user type to edit-->
         <div class="form-group">
             <button class="btn-success" type="submit" onclick="snackbarFunction()">Save Changes</button>
             <div id="snackbar">You have successfully saved changes to the user
@@ -100,6 +106,22 @@ $sql = "select * from user where id = $id";
         </div>
 
     </form>
+    <?php
+    if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])||
+        isset($_POST['password'])) {
+        $fn = $_POST["firstname"];
+        $ln = $_POST["lastname"];
+        $em = $_POST["email"];
+        $pw = $_POST["password"];
+        $sql = "update user set first_name = '$fn', last_name = '$ln', email = '$em', password = '$pw' where id = $id";
+        $result = $connection->query($sql);
+        if ($connection->query($sql) === true) {
+            header("Location: admin.php");
+        } else {
+            echo "Error: " . $sql . "<br>" . $connection->error;
+        }
+    }
+    ?>
     <script src="\assets\js\snackbar.js"></script>
 </div>
 

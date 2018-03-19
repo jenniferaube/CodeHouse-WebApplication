@@ -1,12 +1,18 @@
+<!--
+File: finduser.php
+Created by: Jennifer Aube
+Date: March 10, 2018
+Last modified: March 19, 2018 by Jennifer Aube
+-->
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
-// above code is needed when admin needs to login directly to test code
+$session->logoutUser();
+
 
 $servername = "localhost";
 $username = "root";

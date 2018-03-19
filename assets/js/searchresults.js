@@ -1,4 +1,9 @@
-
+<!--
+File: searchresults.js
+Created by: Jennifer Aube
+Date: March 10, 2018
+Last modified: March 19, 2018 by Jennifer Aube
+-->
 function editClicked() {
     var table = document.getElementById("table");
     var rows = table.getElementsByTagName("tr");

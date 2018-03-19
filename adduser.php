@@ -1,12 +1,18 @@
+<!--
+File: adduser.php
+Created by: Jennifer Aube
+Date: March 10, 2018
+Last modified: March 19, 2018 by Jennifer Aube
+-->
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
-// above code is needed when admin needs to login directly, commented to test code
+$session->logoutUser();
+
 
 $servername = "localhost";
 $username = "root";
@@ -68,45 +74,38 @@ if($connection->connect_error){
 
 <form action="adduser.php" method="post">
 
-<div class="container-form" style="padding-top: 100px;">
+    <div class="container-form" style="padding-top: 100px;">
 
-        <div class="form-group">
+        <div class="checkbox-parent">
             <label>User Type:</label>
-            <label><input type="checkbox" id="1" checked name="usertype" value="professor">Professor</label>
-            <label><input type="checkbox" id="2" name="usertype" value="student">Student</label>
+            <label><input type="radio" id="1" data-toggle="toggle" checked name="usertype" value="professor" >Professor</label>
+            <label><input type="radio" id="2" data-toggle="toggle" name="usertype" value="student" >Student</label>
         </div>
         <div class="form-group">
             <label>First Name: </label>
-            <input type="text" name="firstname">
+            <input type="text" name="firstname" required>
         </div>
         <div class="form-group">
             <label>Last Name: </label>
-            <input type="text" name="lastname">
+            <input type="text" name="lastname" required>
         </div>
         <div class="form-group">
             <label>Email: </label>
-            <input type="email" name="emailaddress">
+            <input type="email" name="emailaddress" required>
         </div>
         <div class="form-group">
             <label>Password: </label>
-            <input type="password" name="passwrd">
+            <input type="password" name="passwrd" required>
         </div>
         <div class="form-group">
-            <label>Username: </label>
-            <input type="text" name="username">
+            <button class="btn-success" type="submit" >Add User</button>
         </div>
-        <div class="form-group">
 
-           <button class="btn-success" type="submit" >Add User
-                </button>
-        </div>
-</div>
-
-   </form>
+</form>
 <?php
 $errors = false;
 if(isset($_POST['usertype'])||isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['emailaddress'])||
-    isset($_POST['passwrd'])||isset($_POST['username'])) {
+    isset($_POST['passwrd'])) {
     if($_POST['usertype'] == "professor"){
         $ut = 1;
     }
@@ -124,15 +123,12 @@ if(isset($_POST['usertype'])||isset($_POST['firstname'])||isset($_POST['lastname
     }if($_POST['passwrd']==""){
         $errors = true;
     }
-    if($_POST['username']==""){
-        $errors = true;
-    }
+
     if(!$errors) {
         $fn = $_POST['firstname'];
         $ln = $_POST['lastname'];
         $em = $_POST['emailaddress'];
         $pw = $_POST['passwrd'];
-        $un = $_POST['username'];
 
         $sql = "insert into user values (default, '$fn', '$ln', '$em', '$pw', CURRENT_TIME, default, '$ut')";
         if ($connection->query($sql) === true) {
