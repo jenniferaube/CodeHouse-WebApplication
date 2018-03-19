@@ -30,7 +30,7 @@
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/admin.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/admin/admin.css">
 
 </head>
 <body>
@@ -64,18 +64,18 @@
     <div class="container-actions" style="position: absolute">
 <!--        <div class="action" >-->
             <a href="adduser.php">
-                <button class="btn btn-success">Add a User</button>
+                <button class="btn btn-success" name="add">Add a User</button>
             </a>
 <!--        </div>-->
 <!--        <div class="action" >-->
             <a href="finduser.php">
-                <button class="btn btn-success">Edit a User</button>
+                <button class="btn btn-success" name="1" value="1" id="finduser" ">Edit a User</button>
             </a>
 <!--        </div>-->
 <!---->
 <!--        <div class="action">-->
             <a href="finduser.php">
-                <button class="btn btn-success">De-Activate a User</button>
+                <button class="btn btn-success" name="2" value="2" id="finduser" ">De-Activate a User</button>
             </a>
 <!--        </div>-->
     </div>
@@ -85,6 +85,7 @@
     <script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
     <script src="assets/js/history.js"></script>
     <script src="assets/js/timeout.js"></script>
+<script src="assets/js/after.js"></script>
 
 </body>
 </html>

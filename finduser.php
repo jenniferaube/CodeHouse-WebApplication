@@ -7,6 +7,16 @@ $session->blockStudent();
 $session->blockProfessor();
 $session->logoutUser();*/
 // above code is needed when admin needs to login directly to test code
+
+$servername = "localhost";
+$username = "root";
+$password = "algonquin";
+$databasename = "codehouse";
+
+$connection = new mysqli($servername, $username, $password, $databasename);
+if($connection->connect_error){
+    die("Connection failed: ". $connection->connect_error);
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +38,7 @@ $session->logoutUser();*/
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style-finduser.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/admin/style-finduser.css">
 
 </head>
 <body>
@@ -58,49 +68,28 @@ $session->logoutUser();*/
 </nav>
 <div class="container-formtable" >
 
-    <form id="searchForm" method="post" >
+    <form id="searchForm" method="post" action="searchresults.php">
         <p>Use any one or many fields to search for a user</p>
 
-        <div class="form-group">
-            <label>Username: </label>
-            <input type="text" >
-        </div>
+
         <div class="form-group">
             <label>First Name: </label>
-            <input type="text" >
+            <input type="text" name="firstname">
         </div>
         <div class="form-group">
             <label>Last Name: </label>
-            <input type="text" >
+            <input type="text" name="lastname">
         </div>
         <div class="form-group">
             <label>Email: </label>
-            <input type="email" >
+            <input type="email" name="email">
         </div>
         <div class="form-group">
-            <button class="btn-success" type="submit" onClick="displaySearchResults()" id="displaySearchResults">Find User</button>
+            <button class="btn-success" type="submit">Search</button>
         </div>
 
     </form>
-    <script src="assets/js/searchresults.js"></script>
 
-    <div class="form2" id="searchTable">
-        <p>Search results...</p>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>UserName</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
-                <th>Usertype</th>
-            </tr>
-            </thead>
-
-
-        </table>
-    </div>
-</div>
 
 
 <?php include 'footer.php'; ?>

@@ -1,28 +1,13 @@
-
 <?php
-include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
-
-$session = new Session();
-/*$session->blockPage();
-$session->blockStudent();
-$session->blockProfessor();
-$session->logoutUser();*/
-// above code is needed when admin needs to login directly to test code
-$servername = "localhost";
-$username = "root";
-$password = "algonquin";
-$databasename = "codehouse";
-
-$connection = new mysqli($servername, $username, $password, $databasename);
-if($connection->connect_error){
-    die("Connection failed: ". $connection->connect_error);
-}
-?>
+/**
+ *
+ */?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--    <meta http-equiv="refresh" content="3;url=localhost:81/admin.php" />-->
     <title>Administrator</title>
 
     <!-- Jquery-UI@1.9.2 -->
@@ -37,8 +22,6 @@ if($connection->connect_error){
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/admin/style-edituser.css">
-
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -54,7 +37,7 @@ if($connection->connect_error){
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class=""><a class="icon" href="/admin.php"><img src="/assets/img/home.png"></a></li>
+                <li class=""><a class="icon" href="/professor.php"><img src="/assets/img/home.png"></a></li>
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
                 <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
@@ -65,46 +48,20 @@ if($connection->connect_error){
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<div class="container-form" >
-
-    <form action="admin.php">
-        <?php
-        $id;
-$sql = "select * from user where id = $id";
-        $result = $connection->query($sql);
-        if ($result->num_rows > 0) {
-            
-        }
-        ?>
-        <div class="form-group">
-            <label>First Name: </label>
-            <input type="<?php echo $_POST["firstname"]; ?>">
-        </div>
-        <div class="form-group">
-            <label>Last Name: </label>
-            <input type="<?php echo $_POST["lastname"]; ?>">
-        </div>
-        <div class="form-group">
-            <label>Email: </label>
-            <input type="<?php echo $_POST["email"]; ?>" size="24">
-        </div>
-        <div class="form-group">
-            <label>Password: </label>
-            <input type="<?php echo $_POST["password"]; ?>"><!--make password field hidden-->
-        </div>
-
-        <div class="form-group">
-            <button class="btn-success" type="submit" onclick="snackbarFunction()">Save Changes</button>
-            <div id="snackbar">You have successfully saved changes to the user
-            </div>
-        </div>
-
-    </form>
-    <script src="\assets\js\snackbar.js"></script>
+<h2 style="margin-top: 200px; text-align: center">The user has been successfully added!</h2>
+<div style="text-align: center">
+<p>You will be redirected to main page in <div id="counter">5</div> seconds</p>
 </div>
+<!--redirect page cited from https://stackoverflow.com/questions/3292038/redirect-website-after-certain-amount-of-time-->
+<script>
+    setInterval(function() {
+        var div = document.querySelector("#counter");
+        var count = div.textContent * 1 - 1;
+        div.textContent = count;
+        if (count <= 0) {
+            window.location.href="admin.php";
+        }
+    }, 1000);
 
-
-
-<?php include 'footer.php'; ?>
+//</script>
 </body>
-</html>

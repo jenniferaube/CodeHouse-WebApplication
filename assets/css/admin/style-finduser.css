@@ -1,5 +1,5 @@
 .container-formtable {
-    margin:100px;
+    margin:150px;
 }
 input{
     float:right;
@@ -13,6 +13,6 @@ input{
     float:right;
     display: contents;
 }
-.form2.contents{
+.form2.show{
     visibility: visible;
 }
