@@ -2,8 +2,7 @@
 
 class Connection {
 
-    private static $host = "thevault.myftp.org";
-//    private static $host = "localhost";
+    private static $host = "localhost";
     private static $port = "3306";
     private static $database = "codehouse";
     private static $user = "codehouse";
