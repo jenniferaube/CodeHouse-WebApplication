@@ -1,13 +1,15 @@
 <?php
 class course {
     private $course_id;
+    private $course_abbr;
     private $course_num;
     private $course_title;
     private $course_section;
     private $program_id;
     private $prof_id;
 
-    public function __construct($course_num, $course_title, $course_section, $program_id, $prof_id) {
+    public function __construct($course_abbr, $course_num, $course_title, $course_section, $program_id, $prof_id) {
+        $this->course_abbr = $course_abbr;
         $this->course_num = $course_num;
         $this->course_title =  $course_title;
         $this->course_section = $course_section;
@@ -15,6 +17,9 @@ class course {
         $this->prof_id = $prof_id;
     }
 
+    public function set_course_abbr($course_abbr) {
+        $this->course_abbr = $course_abbr;
+    }
     public function set_course_num($course_num) {
         $this->course_num = $course_num;
     }
@@ -33,6 +38,9 @@ class course {
 
     public function get_course_id() {
         return $this->course_id;
+    }
+    public function get_course_abbr() {
+        return $this->course_abbr;
     }
     public function get_course_num() {
         return $this->course_num;

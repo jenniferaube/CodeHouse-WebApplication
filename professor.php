@@ -2,10 +2,10 @@
     include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
     $session = new Session();
-    $session->blockPage();
-    $session->blockStudent();
-    $session->blockAdmin();
-    $session->logoutUser();
+//    $session->blockPage();
+//    $session->blockStudent();
+//    $session->blockAdmin();
+//    $session->logoutUser();
 
 ?>
 
@@ -16,7 +16,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Schedule</title>
+    <title>Professor</title>
 
     <!-- Jquery-UI@1.9.2 -->
     <link rel="stylesheet" type="text/css" href="resources/jquery-ui/css/jquery-ui.css">
@@ -62,71 +62,66 @@
                 eventLimit: true, // allow "more" link when too many events
                 eventColor: '#006341',
                 eventTextColor: '#FFFFFF',
-                events: [
-                    {
-                        title: 'Long Event',
-                        start: '2018-03-07',
-                        end: '2018-03-10'
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2018-03-09T16:00:00'
-                    },
-                    {
-                        id: 999,
-                        title: 'Repeating Event',
-                        start: '2018-03-16T16:00:00'
-                    },
-                    {
-                        title: 'Conference',
-                        start: '2018-03-11',
-                        end: '2018-03-13'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2018-03-12T10:30:00',
-                        end: '2018-03-12T12:30:00'
-                    },
-                    {
-                        title: 'Lunch',
-                        start: '2018-03-12T12:00:00'
-                    },
-                    {
-                        title: 'Meeting',
-                        start: '2018-03-12T14:30:00'
-                    },
-                    {
-                        title: 'Happy Hour',
-                        start: '2018-03-12T17:30:00'
-                    },
-                    {
-                        title: 'Dinner',
-                        start: '2018-03-12T20:00:00'
-                    },
-                    {
-                        title: 'Birthday Party',
-                        start: '2018-03-13T07:00:00',
-                        end: '2018-03-13T17:00:00'
-                    },
-                    {
-                        title: 'Click for Google',
-                        url: 'http://google.com/',
-                        start: '2018-03-28'
+                events: {
+                    url: 'initial_prof.php',
+                    type: 'POST',
+                    data: {
+                        prof_id: 2
                     }
-                ],
-                editable: true,
-                eventDrop: function(event, delta, revertFunc) {
-
-                    alert(event.title + " was dropped on " + event.start.format());
-
-                    if (!confirm("Are you sure about this change?")) {
-                        revertFunc();
+                },
+                eventClick:function(event)
+                {
+                    if(event.color == '#006341'){
+                        if(confirm("Are you sure to cancel?"))
+                        {
+                            var start_time = new Date(event.start).toISOString().slice(0, 19).replace('T', ' ');
+                            var end_time = new Date(event.end).toISOString().slice(0, 19).replace('T', ' ');
+                            $.ajax({
+                                url:"update_prof.php",
+                                type:"POST",
+                                data:{
+                                    id: event.id,
+                                    start: start_time,
+                                    end: end_time,
+                                    status: '0'
+                                },
+                                success:function()
+                                {
+                                    $('#calendar').fullCalendar('refetchEvents');
+                                    alert("Class Cancelled");
+                                },
+                                error:function(){
+                                    alert("Error occurs");
+                                }
+                            })
+                        }
+                    } else {
+                        if(confirm("Are you sure to restore?"))
+                        {
+                            var start_time = new Date(event.start).toISOString().slice(0, 19).replace('T', ' ');
+                            var end_time = new Date(event.end).toISOString().slice(0, 19).replace('T', ' ');
+                            $.ajax({
+                                url:"update_prof.php",
+                                type:"POST",
+                                data:{
+                                    id: event.id,
+                                    start: start_time,
+                                    end: end_time,
+                                    status: '1'
+                                },
+                                success:function()
+                                {
+                                    $('#calendar').fullCalendar('refetchEvents');
+                                    alert("Class Restored");
+                                },
+                                error:function(){
+                                    alert("Error occurs");
+                                }
+                            })
+                        }
                     }
-
                 }
             });
-
         });
     </script>
     <style>
@@ -175,7 +170,7 @@
 <!--    Insert code here        -->
 <!--                            -->
 <!--                            -->
-
+    <?php echo $_SESSION['userId']; ?>
     <?php include 'footer.php'; ?>
 
 
