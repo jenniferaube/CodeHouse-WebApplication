@@ -1,3 +1,35 @@
+<?php
+    include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
+    include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/sql/connection.php";
+
+    $session = new Session();
+    $session->blockPage();
+    $session->blockProfessor();
+    $session->blockAdmin();
+    $session->logoutUser();
+	
+	 $subject = "Algonquin Kiosk Appointment Request";
+	 $message = $_POST['message'];
+	 $date = $_POST['date'];
+	 $time = $_POST['time'];
+	 $professor =  explode('-',$_POST['prof']);
+	 $prof = $professor[0];
+	 $prof_email = $professor[1];
+
+	 $student =  $_SESSION['userLogin'];
+	 $student_name = $_SESSION['userfName'] . ' '. $_SESSION['userlName'];
+
+	$headers = "From: example@example.com";
+	
+	$txt_prof = 'An appointment has bee requested by student: '. $student_name. ' on '. $date .' at ' .$time. '. The reason specified: ' .$message;
+	$txt_stud = 'Following request was made by you: ' . $message.' to ' .$prof. ' Professor will reply back for confirmation.';
+	
+
+	mail($prof_email,$subject,$txt_prof,$headers);
+	mail($student, $subject, $txt_stud, $headers)
+	
+	
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,6 +85,8 @@
 		<p>
 			Your request for appointment with professor has been sent successfully. <br/>
 			Your professor will contact you to your algonquin-live email account in 24 hours.
+			<?php  echo $prof?>
+			<?php  echo $prof_email?>
 		</p>
     </div>
 </div>
