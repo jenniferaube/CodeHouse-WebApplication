@@ -110,6 +110,7 @@ if (isset($_POST['submit_btn'])) {
 ?>
 
 
+<!--Jquery script.   -->
 <script>
     $(document).ready(function () {
         $('#upload_file').change(
@@ -117,8 +118,8 @@ if (isset($_POST['submit_btn'])) {
                 //for testing, allow csv file to be validated
                 var fileExtension = ['csv'];
                 if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-                    alert("Only '.csv' formats are allowed.");
-                    $('#upload_file').attr("disabled", true);
+                    alert("Please choose a CSV file.");
+                    //$('#upload_file').attr("disabled", true);
                     $('#submit_btn').attr("disabled", true);
                 }
                 else {

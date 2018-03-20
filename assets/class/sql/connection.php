@@ -1,7 +1,6 @@
 <?php
 
 class Connection {
-
     private static $host = "localhost";
     private static $port = "3306";
     private static $database = "codehouse";

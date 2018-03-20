@@ -45,7 +45,7 @@
         </div>
     </nav>
 
-    <div id="outputSearch">Search for your room bellow</div>
+    <div id="outputSearch">Search for your room below</div>
 
     <div id="mapContainer">
         <iframe id="map" src="resources/map/map.html" frameborder="0" scrolling="no"></iframe>

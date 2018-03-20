@@ -6,5 +6,4 @@
       <path value="$PROJECT_DIR$/Test/vendor/fineuploader/php-traditional-server" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
 </project>

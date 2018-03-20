@@ -1,14 +1,35 @@
 <?php
     include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
+    include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/sql/connection.php";
 
     $session = new Session();
     $session->blockPage();
-    if ($session->isLogged()) {
-        $session->destroy();
-    };
+    $session->blockProfessor();
+    $session->blockAdmin();
+    $session->logoutUser();
+	
+	 $subject = "Algonquin Kiosk Appointment Request";
+	 $message = $_POST['message'];
+	 $date = $_POST['date'];
+	 $time = $_POST['time'];
+	 $professor =  explode('-',$_POST['prof']);
+	 $prof = $professor[0];
+	 $prof_email = $professor[1];
+
+	 $student =  $_SESSION['userLogin'];
+	 $student_name = $_SESSION['userfName'] . ' '. $_SESSION['userlName'];
+
+	$headers = "From: example@example.com";
+	
+	$txt_prof = 'An appointment has bee requested by student: '. $student_name. ' on '. $date .' at ' .$time. '. The reason specified: ' .$message;
+	$txt_stud = 'Following request was made by you: ' . $message.' to ' .$prof. ' Professor will reply back for confirmation.';
+	
+
+	mail($prof_email,$subject,$txt_prof,$headers);
+	mail($student, $subject, $txt_stud, $headers)
+	
+	
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,9 +43,10 @@
 
 
     <!-- Custom Style -->
+	<link rel="stlesheet" type="text/css" href="assets/css/style-messagesent.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-index.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/style-loggedout.css">
+	
 
 </head>
 <body onload="afterlogout()">
@@ -55,15 +77,19 @@
 
 
 
-<h1>Algonquin Appointment Book Kiosk</h1>
+   <div>
 
+		<h1>Algonquin Appointment Book Kiosk</h1>
 
-    <div class="block-highlight">
+		<div class="sent">
 		<p>
-			You have been loggedout of the session.<br/>
-			<a href="index.php"> Click here</a> to go to home page.
+			Your request for appointment with professor has been sent successfully. <br/>
+			Your professor will contact you to your algonquin-live email account in 24 hours.
+			<?php  echo $prof?>
+			<?php  echo $prof_email?>
 		</p>
     </div>
+</div>
 
 
     <?php include 'footer.php'; ?>
