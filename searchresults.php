@@ -8,10 +8,10 @@ Last modified: March 19, 2018 by Jennifer Aube
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
 $session = new Session();
-$session->blockPage();
+/*$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();
+$session->logoutUser();*/
 
 $servername = "localhost";
 $username = "root";
@@ -42,7 +42,7 @@ if($connection->connect_error){
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-<!--    <link rel="stylesheet" type="text/css" href="assets/css/admin/style-deactivateuser.css">-->
+    <link rel="stylesheet" type="text/css" href="./style-searchresults.css">
 
 </head>
 <body>
@@ -64,7 +64,7 @@ if($connection->connect_error){
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
                 <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
-                <li id="mapIcon" class=""><a class="icon" href="/professor.php?logout=map"><img src="/assets/img/map.png"></a></li>
+                <li id="mapIcon" class=""><a class="icon" href="/admin.php?logout=map"><img src="/assets/img/map.png"></a></li>
                 <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                 <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
             </ul>
@@ -72,7 +72,7 @@ if($connection->connect_error){
     </div>
 </nav>
 
-<div class="form2" id="searchTable" style="margin-top: 100px;margin-left: 10px;margin-right: 10px;">
+<div class="form2" id="searchTable">
     <p>Search results...</p>
     <?php
     if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])||
@@ -138,12 +138,12 @@ if($connection->connect_error){
                                 if ($row["type"] == 2) {
                                     echo "student";
                                 } ?></td>
-                            <td><!--<a href="edituser.php">-->
+                            <td><a href="edituser.php">
                                     <button onclick="editClicked()">Edit user</button>
-                                <!--</a>--></td></td>
-                            <td>
+                                </a></td></td>
+                            <td><a href="deactivateuser.php">
                                     <button onclick="deactivateClicked()">Deactivate user</button>
-                                </td>
+                                </a></td>
                             </tr>
                             <?php
                         }

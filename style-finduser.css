@@ -1,0 +1,25 @@
+p{
+    margin-top: 150px;
+    margin-left: 68px;
+}
+#findusers-form{
+    margin-left: 50px;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 360px;
+    padding: 20px;
+    /*position: relative;*/
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    align-content: center;
+
+}
+#findusers input {
+    float: right;
+}
+#searchbutton {
+    float:left;
+}
+#cancelbutton {
+    float: right;
+}

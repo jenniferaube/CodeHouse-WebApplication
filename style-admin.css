@@ -1,0 +1,17 @@
+h1 {
+    margin-top: 150px;
+    text-align: center;
+    margin-bottom: 100px;
+    font-size: 45px;
+}
+.container-adminbuttons {
+    margin-top: 50px;
+    text-align: center;
+
+}
+#add {
+    margin-right: 30px;
+}
+#edit {
+    margin-right: 30px;
+}

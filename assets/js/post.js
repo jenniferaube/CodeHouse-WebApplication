@@ -97,7 +97,7 @@ $(function () {
             // showError('ERROR - ' + errorThrown);
             showError('Database is not online');
         });
-9
+9;
         request.always(function () {
             // Reenable the inputs
             inputs.prop('disabled', false);
