@@ -31,8 +31,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/session.php";
 
 </head>
 <body>
-
 <!-- Fixed navbar -->
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -108,6 +108,7 @@ if (isset($_POST['submit_btn'])) {
     }
 }
 ?>
+
 
 <!--Jquery script.   -->
 <script>

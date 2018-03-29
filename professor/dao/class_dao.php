@@ -1,6 +1,6 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/sql/connection.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/professor/dto/class.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/professor/dto/class_dto.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/professor/dto/course.php";
 
 class class_dao {
@@ -23,12 +23,61 @@ class class_dao {
 
     public function select_all($professor_id) {
         $conn = Connection::getConnection();
-        $stmt = $conn->prepare('select * from class inner join course on class.course_id = course_id where prof_id = ?');
+        $stmt = $conn->prepare('select class.class_id, DATE_FORMAT(class.class_start_time, \'%Y-%m-%dT%H:%i:%s\'), DATE_FORMAT(class.class_end_time, \'%Y-%m-%dT%H:%i:%s\'), 
+                                               class.class_room, class.class_status, course.course_abbr, course.course_number, course.course_section
+                                       from class inner join course on class.course_id = course.course_id 
+                                       where prof_id = ?');
         $stmt->bind_param("i", $professor_id);
         $stmt->execute();
-        $results = $stmt->fetchAll();
+        $resultSet = $stmt->get_result();
+        $results = $resultSet->fetch_all();
         $stmt->close();
         Connection::closeConnection($conn);
         return $results;
+    }
+
+    public function select_by_time($start, $end) {
+        $conn = Connection::getConnection();
+        $stmt = $conn->prepare('select class_id from class where class_start_time = ? and class_end_time = ?');
+        $stmt->bind_param("ss", $start,$end);
+        $stmt->execute();
+        $resultSet = $stmt->get_result();
+        $results = $resultSet->fetch_all();
+        $stmt->close();
+        Connection::closeConnection($conn);
+        return $results;
+    }
+
+    public function update_class_by_id($id, $status) {
+        $conn = Connection::getConnection();
+        $stmt = $conn->prepare('update class set class_status = ? where class_id = ?');
+        $stmt->bind_param("si", $status, $id);
+        $stmt->execute();
+        $stmt->close();
+        Connection::closeConnection($conn);
+    }
+
+    public function  select_cancelled($status) {
+        $conn = Connection::getConnection();
+        $stmt = $conn->prepare('select class.class_start_time, class.class_end_time, class.class_room,
+                                       course.course_abbr, course.course_number, course.course_title, course.course_section
+                                       from class inner join course on class.course_id = course.course_id
+                                       where class_status = ? and date(class_start_time) = CURDATE()');
+        $stmt->bind_param("s", $status);
+        $stmt->execute();
+        $resultSet = $stmt->get_result();
+        $results = $resultSet->fetch_all();
+        $stmt->close();
+        Connection::closeConnection($conn);
+        return $results;
+    }
+
+    public function delete_class($course_id) {
+        $conn = Connection::getConnection();
+        $stmt = $conn->prepare('delete from class where course_id = ?');
+        $stmt->bind_param("i", $course_id);
+        $stmt->execute();
+        $stmt->close();
+        Connection::closeConnection($conn);
     }
 }

@@ -1,14 +1,29 @@
+<!--
+File: adduser.php
+Created by: Jennifer Aube
+Date: March 10, 2018
+Last modified: March 19, 2018 by Jennifer Aube
+-->
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
-// above code is needed when admin needs to login directly to test code
-?>
+$session->logoutUser();
 
+
+$servername = "localhost";
+$username = "root";
+$password = "algonquin";
+$databasename = "codehouse";
+
+$connection = new mysqli($servername, $username, $password, $databasename);
+if($connection->connect_error){
+    die("Connection failed: ". $connection->connect_error);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +43,7 @@ $session->logoutUser();*/
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/style-adduser.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/admin/style-adduser.css">
 
 </head>
 <body>
@@ -56,47 +71,77 @@ $session->logoutUser();*/
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<div class="container-form" style="padding-top: 100px;">
 
-    <form action="admin.php">
+<form action="adduser.php" method="post">
 
-        <div class="form-group">
+    <div class="container-form" style="padding-top: 100px;">
+
+        <div class="checkbox-parent">
             <label>User Type:</label>
-            <label><input type="checkbox" id="1" checked>Professor</label>
-            <label><input type="checkbox" id="2">Student</label>
+            <label><input type="radio" id="1" data-toggle="toggle" checked name="usertype" value="professor" >Professor</label>
+            <label><input type="radio" id="2" data-toggle="toggle" name="usertype" value="student" >Student</label>
         </div>
         <div class="form-group">
             <label>First Name: </label>
-            <input type="text" ">
+            <input type="text" name="firstname" required>
         </div>
         <div class="form-group">
             <label>Last Name: </label>
-            <input type="text">
+            <input type="text" name="lastname" required>
         </div>
         <div class="form-group">
             <label>Email: </label>
-            <input type="email">
+            <input type="email" name="emailaddress" required>
         </div>
         <div class="form-group">
             <label>Password: </label>
-            <input type="password" >
+            <input type="password" name="passwrd" required>
         </div>
         <div class="form-group">
-            <label>Username: </label>
-            <input type="text">
+            <button class="btn-success" type="submit" >Add User</button>
         </div>
-        <div class="form-group">
 
-           <!--add popup to confirm user has been added to database then return to main menu-->
-            <button class="btn-success" type="submit" onclick="snackbarFunction()">Add User
-                </button>
-            <div id="snackbar">You have successfully added the user
-            </div>
-</div>
-        </div>
-<script src="\assets\js\snackbar.js"></script>
-    </form>
+</form>
+<?php
+$errors = false;
+if(isset($_POST['usertype'])||isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['emailaddress'])||
+    isset($_POST['passwrd'])) {
+    if($_POST['usertype'] == "professor"){
+        $ut = 1;
+    }
+    if($_POST['usertype']=="student"){
+        $ut = 2;
+    }
+    if($_POST['firstname']==""){
+        $errors = true;
+    }
+    if($_POST['lastname']==""){
+        $errors = true;
+    }
+    if($_POST['emailaddress']==""){
+        $errors = true;
+    }if($_POST['passwrd']==""){
+        $errors = true;
+    }
 
+    if(!$errors) {
+        $fn = $_POST['firstname'];
+        $ln = $_POST['lastname'];
+        $em = $_POST['emailaddress'];
+        $pw = $_POST['passwrd'];
+
+        $sql = "insert into user values (default, '$fn', '$ln', '$em', '$pw', CURRENT_TIME, default, '$ut')";
+        if ($connection->query($sql) === true) {
+            echo "New record inserted";
+            header("Location: successful-useradded.php");
+        } else {
+            echo "Error: " . $sql . "<br>" . $connection->error;
+        }
+    }
+}
+
+$connection->close();
+?>
 </div>
 <?php include 'footer.php'; ?>
 </body>

@@ -1,12 +1,27 @@
+<!--
+File: deactivateuser.php
+Created by: Jennifer Aube
+Date: March 10, 2018
+Last modified: March 19, 2018 by Jennifer Aube
+-->
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
+$session->logoutUser();
 // above code is needed when admin needs to login directly to test code
+$servername = "localhost";
+$username = "root";
+$password = "algonquin";
+$databasename = "codehouse";
+
+$connection = new mysqli($servername, $username, $password, $databasename);
+if($connection->connect_error){
+    die("Connection failed: ". $connection->connect_error);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +42,7 @@ $session->logoutUser();*/
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style-deactivateuser.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/admin/style-deactivateuser.css">
 
 </head>
 <body>
@@ -58,21 +73,42 @@ $session->logoutUser();*/
 </nav>
 
 <h2>*Are you sure you wish to de-activate this user</h2>
+<?php
+$id = $_SESSION["id"];
+$sql = "select first_name, last_name, email from user where id = $id";
+$sql = "select * from user where id = $id";
+$result = $connection->query($sql);
+$row = $result->fetch_assoc();
+?>
 
-        <a href="admin.php"> <!--show a pop up confirming deactivation then return to main menu-->
-            <button id="deactivate" class="btn btn-danger" onclick="snackbarFunction()">De-Activate
+<p style="text-align: center; font-size: 25px; margin-bottom: 150px;"><?php echo $row["first_name"]?>  <?php echo $row["last_name"]?> , <?php echo $row["email"]?></p>
+<form action="deactivateuser.php" method="post">
+    <a href="admin.php">
+        <button name="deactivate" style="margin-left: 570px; margin-right: 100px;" type="submit" id="deactivate" class="btn btn-danger">De-Activate
+        </button></a>
+</form>
+<?php
+if(isset($_POST["deactivate"])){
+    $sql = "update user set activated = '0' where id = $id";
+    $result = $connection->query($sql);
+    if ($connection->query($sql) === true) {
+       header("Location: admin.php");
+    }
+    else {
+        echo "Error: " . $sql . "<br>" . $connection->error;
+    }
+}
+?>
+<a href="admin.php"><!--show a pop up confirming no changes were made and return the main menu-->
+    <button class="btn btn-primary" onclick="snackbarFunction()">Cancel
+        <!--show a pop up confirming no changes were made and return the main menu-->
+        <div id="snackbar" style="visibility:hidden;">No changes were made
+    </button></a>
 
-            </button></a>
-<div id="snackbar" style="visibility:hidden;">You have successfully de-activated the user
 </div>
 
-        <a href="admin.php"><!--show a pop up confirming no changes were made and return the main menu-->
-            <button class="btn btn-primary" onclick="snackbarFunction()">Cancel
-
-            </button></a>
-<div id="snackbar" style="visibility:hidden;">No changes were made
-</div>
 <script src="\assets\js\snackbar.js"></script>
+
 <?php include 'footer.php'; ?>
 </body>
 </html>

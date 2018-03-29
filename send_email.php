@@ -16,7 +16,7 @@ class send_email{
     private $studentName;
     private $profName;
 
-    function __construct($toStudent, $studentName, $profName, $toProf){
+    function __construct($toStudent, $studentName, $toProf, $profName){
         $this->toStudent = $toStudent;
         $this->toProf = $toProf;
         $this->studentName = $studentName;

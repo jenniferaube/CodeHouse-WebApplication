@@ -1,13 +1,27 @@
-
+<!--
+File: edituser.php
+Created by: Jennifer Aube
+Date: March 10, 2018
+Last modified: March 19, 2018 by Jennifer Aube
+-->
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
-// above code is needed when admin needs to login directly to test code
+$session->logoutUser();
+
+$servername = "localhost";
+$username = "root";
+$password = "algonquin";
+$databasename = "codehouse";
+
+$connection = new mysqli($servername, $username, $password, $databasename);
+if($connection->connect_error){
+    die("Connection failed: ". $connection->connect_error);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +42,7 @@ $session->logoutUser();*/
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style-edituser.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/admin/style-edituser.css">
 
 </head>
 <body>
@@ -58,28 +72,33 @@ $session->logoutUser();*/
 </nav>
 <div class="container-form" >
 
-    <form action="admin.php">
-        <!--populate field with selected user to edit-->
+    <form action="edituser.php" method="post">
+        <?php
+
+        $id = $_SESSION["id"];
+        $sql = "select * from user where id = $id";
+        $result = $connection->query($sql);
+
+        $row = $result->fetch_assoc();
+
+        ?>
         <div class="form-group">
             <label>First Name: </label>
-            <input type="text">
+            <input name="firstname" type="text" value="<?php echo $row["first_name"]; ?>">
         </div>
         <div class="form-group">
             <label>Last Name: </label>
-            <input type="text">
+            <input name="lastname" type="text" value="<?php echo $row["last_name"]; ?>">
         </div>
         <div class="form-group">
             <label>Email: </label>
-            <input type="email" size="24">
+            <input name="email" type="email" size="24" value="<?php echo $row["email"]; ?>">
         </div>
         <div class="form-group">
             <label>Password: </label>
-            <input type="password">
+            <input name="password" type="password" value="<?php echo $row["password"]; ?>"><!--make password field hidden-->
         </div>
-        <div class="form-group">
-            <label>Username: </label>
-            <input type="text">
-        </div>
+        <!--        add user type to edit-->
         <div class="form-group">
             <button class="btn-success" type="submit" onclick="snackbarFunction()">Save Changes</button>
             <div id="snackbar">You have successfully saved changes to the user
@@ -87,6 +106,22 @@ $session->logoutUser();*/
         </div>
 
     </form>
+    <?php
+    if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])||
+        isset($_POST['password'])) {
+        $fn = $_POST["firstname"];
+        $ln = $_POST["lastname"];
+        $em = $_POST["email"];
+        $pw = $_POST["password"];
+        $sql = "update user set first_name = '$fn', last_name = '$ln', email = '$em', password = '$pw' where id = $id";
+        $result = $connection->query($sql);
+        if ($connection->query($sql) === true) {
+            header("Location: admin.php");
+        } else {
+            echo "Error: " . $sql . "<br>" . $connection->error;
+        }
+    }
+    ?>
     <script src="\assets\js\snackbar.js"></script>
 </div>
 
