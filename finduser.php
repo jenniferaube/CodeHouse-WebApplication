@@ -75,7 +75,7 @@ if($connection->connect_error){
 </div>
     <p>Use any one or many fields to search for a user</p>
     <div id="findusers">
-        <form id="searchForm" method="post" action="searchresults.php">
+        <form id="searchForm" method="post" action="finduser.php">
             <div id="findusers-form">
                 <div class="form-group">
                     <label>First Name: </label>
@@ -100,7 +100,29 @@ if($connection->connect_error){
             </div>
         </form>
     </div>
-
+<?php
+$errors = false;
+if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])) {
+    if ($_POST['firstname'] == "" && $_POST['lastname'] == "" && $_POST['email'] == "") {
+        $errors = true;
+    }
+    if (!$errors) {
+        $fn = $_POST['firstname'];
+        $ln = $_POST['lastname'];
+        $em = $_POST['email'];
+        $_SESSION['firstname'] = $fn;
+        $_SESSION['lastname'] = $ln;
+        $_SESSION['email'] = $em;
+        header("Location: searchresults.php");
+    }
+    if ($errors) {
+        echo alert("Fill in at least one item to search for");
+    }
+}
+function alert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+?>
 
 
 <?php include 'footer.php'; ?>

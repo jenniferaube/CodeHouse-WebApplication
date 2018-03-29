@@ -81,7 +81,7 @@ $sql = "select * from user where id = $id";
 $result = $connection->query($sql);
 $row = $result->fetch_assoc();
 ?>
-
+<form method="post" action="deactivateuser.php">
 <p id="userinfo"><?php echo $row["first_name"]?>  <?php echo $row["last_name"]?>, <?php echo $row["email"]?></p>
 <div id="deactivatebuttons">
 
@@ -89,18 +89,7 @@ $row = $result->fetch_assoc();
         <button name="deactivate" type="submit" id="deactivate" class="btn btn-danger">De-Activate
         </button></a>
 
-<?php
-if(isset($_POST["deactivate"])){
-    $sql = "update user set activated = '0' where id = $id";
-    $result = $connection->query($sql);
-    if ($connection->query($sql) === true) {
-       header("Location: admin.php");
-    }
-    else {
-        echo "Error: " . $sql . "<br>" . $connection->error;
-    }
-}
-?>
+
 
 <a href="admin.php"><!--show a pop up confirming no changes were made and return the main menu-->
     <button class="btn btn-primary" onclick="snackbarFunction()">Cancel
@@ -110,7 +99,22 @@ if(isset($_POST["deactivate"])){
 
 
 </div>
-
+</form>
+<?php
+if(isset($_POST["deactivate"])){
+    $sql = "update user set activated = '0' where id = $id";
+    $result = $connection->query($sql);
+    if ($connection->query($sql) === true) {
+       header("Location: successful.php?success=0");
+    }
+    else {
+        echo "Error: " . $sql . "<br>" . $connection->error;
+    }
+}
+function alert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+?>
 <script src="assets\js\snackbar.js"></script>
 
 <?php include 'footer.php'; ?>

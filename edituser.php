@@ -126,6 +126,7 @@ if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])
         echo "Error: " . $sql . "<br>" . $connection->error;
     }
 }
+
 ?>
 <script src="\assets\js\snackbar.js"></script>
 </div>

@@ -48,7 +48,17 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<h2 style="margin-top: 200px; text-align: center">The user has been successfully added!</h2>
+<?php
+if ( isset($_GET['success']) && $_GET['success'] == 0 )
+{
+    $text = "de-activated";
+}
+if ( isset($_GET['success']) && $_GET['success'] == 1 )
+{
+    $text = "added";
+}
+?>
+<h2 style="margin-top: 200px; text-align: center">The user has been successfully <?php echo $text; ?>!</h2>
 <div style="text-align: center">
 <p>You will be redirected to main page in <div id="counter">5</div> seconds</p>
 </div>

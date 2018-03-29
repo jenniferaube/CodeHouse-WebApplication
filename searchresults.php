@@ -75,19 +75,20 @@ if($connection->connect_error){
 <div class="form2" id="searchTable">
     <p>Search results...</p>
     <?php
-    if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])||
-        isset($_POST['username'])) {
+    $fn = $_SESSION['firstname'];
+    $ln = $_SESSION['lastname'];
+    $em = $_SESSION['email'];
 
-    if (!$_POST['firstname'] == "") {
-        $fn = $_POST['firstname'];
+    if (!$_SESSION['firstname'] == "") {
+        $fn = $_SESSION['firstname'];
         $sql = "select * from user where first_name like '%$fn%'";
 
     }
-    if (!$_POST['lastname'] == "") {
+    if (!$_SESSION['lastname'] == "") {
         $ln = $_POST['lastname'];
         $sql = "select * from user where last_name like '%$ln%'";
     }
-    if (!$_POST['email'] == "") {
+    if (!$_SESSION['email'] == "") {
         $em = $_POST['emailaddress'];
         $sql = "select * from user where email like '%$em'";
     }
@@ -150,12 +151,6 @@ if($connection->connect_error){
                     } else {
                         echo "0 results";
                     }
-                    //header("Location: searchresults.php");
-                } else {
-                    echo "Error: " . $sql . "<br>" . $connection->error;
-                }
-
-
                 ?>
 
 

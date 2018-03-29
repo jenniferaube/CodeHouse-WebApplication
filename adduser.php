@@ -72,10 +72,10 @@ if($connection->connect_error){
     </div>
 </nav>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="/assets/js/passwordcheck.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+<!--<script src="/assets/js/passwordcheck.js"></script>-->
 
-
+<script src="/assets/class/lib/bcrypt.php"></script>
 <div class="container-formadduser">
     <div id="addingusers">
     <form action="adduser.php" method="post">
@@ -107,8 +107,7 @@ if($connection->connect_error){
             </div>
             <div class="form-group">
                 <label>Re-enter Password: </label>
-                <input id="form" type="password" name="confirm_password" id="confirm_password" onkeyup='check()' required>
-                <span id='message'></span>
+                <input id="form" type="password" name="confirm_password" id="confirm_password" required>
             </div>
         <div class="form-group">
             <a href="admin.php">
@@ -116,7 +115,9 @@ if($connection->connect_error){
             </a>
         </div>
             <div class="form-group">
+                <a href="successful.php">
                 <button id="addingbutton" class="btn-success" type="submit" >Add User</button>
+                </a>
             </div>
 
 
@@ -128,32 +129,7 @@ if($connection->connect_error){
                 </form>
             </div>
             <button id="uploadbutton" name="uploadbutton" class="btn-success" type="submit">Upload File</button>
-            <?php
-            if (isset($_POST['uploadbutton'])) {
-                $save_dir = "./file_upload/files/";
-                date_default_timezone_set('America/Toronto');
-                $temp = explode(".", $_FILES["upload_users"]["name"]);
-                $extension = end($temp);
-                $date = date('YmdHis');
-                $new_file_name = $date . '.' . $extension;
-                if (is_uploaded_file($_FILES["upload_users"]["tmp_name"])) {
-                    $dest = $save_dir . $new_file_name;
-                    if (move_uploaded_file($_FILES["upload_users"]["tmp_name"], $dest)) {
-                        echo "<script language='javascript'>";
-                        echo 'if(alert("Success to upload")){';
-                        echo 'window.location.reload();}';
-                        echo "</script>";
-                    } else {
-                        echo "<script language='javascript'>";
-                        echo 'if(alert("Fail to upload")){';
-                        echo 'window.location.reload();}';
-                        echo "</script>";
-                    }
-                } else {
-                    echo "fail1";
-                }
-            }
-            ?>
+
         </div>
 </div>
 </div>
@@ -179,6 +155,14 @@ if(isset($_POST['usertype'])||isset($_POST['firstname'])||isset($_POST['lastname
     }if($_POST['passwrd']==""){
         $errors = true;
     }
+    if($_POST['passwrd'] != $_POST['confirm_password']){
+        echo alert("Your passwords did not match.");
+        exit();
+    }
+    if($_POST['passwrd'] == $_POST['confirm_password']){
+        /*encrypt password*/
+        $encryptedpassword = hash($_POST['passwrd'], null);
+    }
 
     if(!$errors) {
         $fn = $_POST['firstname'];
@@ -188,17 +172,19 @@ if(isset($_POST['usertype'])||isset($_POST['firstname'])||isset($_POST['lastname
 
         $sql = "insert into user values (default, '$fn', '$ln', '$em', '$pw', CURRENT_TIME, default, '$ut')";
         if ($connection->query($sql) === true) {
-            echo "New record inserted";
-            header("Location: successful-useradded.php");
+            header("Location: successful.php?success=1");
         } else {
             echo "Error: " . $sql . "<br>" . $connection->error;
         }
     }
 }
-
+function alert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
 $connection->close();
 ?>
 </div>
+
 <?php include 'footer.php'; ?>
 </body>
 </html>
