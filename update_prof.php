@@ -3,7 +3,7 @@
  *File: update_prof.php
  * Author: Chao Gu
  * Course: CST8334 - 310
- * Ass: 3
+ * Project: Final project
  * Date: Mar, 2018
  * Professor: Anu Thomas, Howard Rosenblum
  * Description: RMI Server startup.
