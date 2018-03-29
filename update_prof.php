@@ -6,7 +6,6 @@
  * Project: Final project
  * Date: Mar, 2018
  * Professor: Anu Thomas, Howard Rosenblum
- * Description: RMI Server startup.
  */
 include_once $_SERVER['DOCUMENT_ROOT'] . "/professor/dao/class_dao.php";
 /*
