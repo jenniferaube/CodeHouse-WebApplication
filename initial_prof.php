@@ -39,20 +39,31 @@ if(isset($_POST["prof_id"])){
                 } else { //If it is an office hour, the background is #43B02A
                     $data[] = array(
                         'id' => $class[0],
-                        'title' => $class[5] . $class[6] . '-0' . $class[7] . '-Room:' . $class[3],
+                        'title' => "Office Hour" . '-Room:' . $class[3],
                         'start' => $class[1],
                         'end' => $class[2],
                         'color' => '#43B02A'
                     );
                 }
             } else { //If class status=0, it is canceled.
-                $data[] = array(
-                    'id'   => $class[0],
-                    'title'   => $class[5].$class[6].'-0'.$class[7].'-Room:'.$class[3],
-                    'start'   => $class[1],
-                    'end'   => $class[2],
-                    'color' => '#909390'
-                );
+                //If class is not a office hour
+                if($class[8]!=99999) {
+                    $data[] = array(
+                        'id' => $class[0],
+                        'title' => $class[5] . $class[6] . '-0' . $class[7] . '-Room:' . $class[3],
+                        'start' => $class[1],
+                        'end' => $class[2],
+                        'color' => '#909390'
+                    );
+                } else { //If it is a office hour
+                    $data[] = array(
+                        'id'   => $class[0],
+                        'title'   => "Office Hour".'-Room:'.$class[3],
+                        'start'   => $class[1],
+                        'end'   => $class[2],
+                        'color' => '#909390'
+                    );
+                }
             }
         } else { //If section number if greater than 100, no need to add leading 0
             if($class[4]!=0) {
@@ -68,20 +79,31 @@ if(isset($_POST["prof_id"])){
                 } else { //If it is an office hour, the background is #43B02A
                     $data[] = array(
                         'id' => $class[0],
-                        'title' => $class[5] . $class[6] . '-0' . $class[7] . '-Room:' . $class[3],
+                        'title' => "Office Hour" . '-Room:' . $class[3],
                         'start' => $class[1],
                         'end' => $class[2],
                         'color' => '#43B02A'
                     );
                 }
             } else { //If class status=0, it is canceled.
-                $data[] = array(
-                    'id'   => $class[0],
-                    'title'   => $class[5].$class[6].'-'.$class[7].'-Room:'.$class[3],
-                    'start'   => $class[1],
-                    'end'   => $class[2],
-                    'color' => '#909390'
-                );
+                //If class is not a office hour
+                if($class[8]!=99999) {
+                    $data[] = array(
+                        'id' => $class[0],
+                        'title' => $class[5] . $class[6] . '-0' . $class[7] . '-Room:' . $class[3],
+                        'start' => $class[1],
+                        'end' => $class[2],
+                        'color' => '#909390'
+                    );
+                } else {//If it is an office hour
+                    $data[] = array(
+                        'id'   => $class[0],
+                        'title'   => "Office Hour".'-Room:'.$class[3],
+                        'start'   => $class[1],
+                        'end'   => $class[2],
+                        'color' => '#909390'
+                    );
+                }
             }
         }
     }
