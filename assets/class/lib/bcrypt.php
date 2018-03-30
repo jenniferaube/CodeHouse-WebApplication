@@ -1,9 +1,8 @@
-<!--File: style-footer.css-->
-<!--Created by: Evandro Ramos-->
-<!--Date: February 23, 2018-->
-<!--Last modified: March 19, 2018 by Evandro Ramos-->
 <?php
-
+//File: style-footer.css
+//Created by: Evandro Ramos
+//Date: February 23, 2018
+//Last modified: March 19, 2018 by Evandro Ramos
 class Bcrypt {
     
     protected static $_saltPrefix = '2a';
@@ -39,15 +38,3 @@ class Bcrypt {
 	}
 
 }
-
-/*$senha = 'ola mundo';
-$hash = Bcrypt::hash($senha);
-
-$hash = '$2a$08$MTEyODMxMzc3MDU4N2IwZ.x06fAn.ALcBKSBTnEAUActOUeM3TBgO';
-if (Bcrypt::check("ola mundo", $hash)) {
-	echo 'Senha OK!';
-} else {
-	echo 'Senha incorreta!';
-}*/
-
-?>

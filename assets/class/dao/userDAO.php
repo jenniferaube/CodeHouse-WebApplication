@@ -1,8 +1,8 @@
-<!--File: style-footer.css-->
-<!--Created by: Evandro Ramos-->
-<!--Date: February 23, 2018-->
-<!--Last modified: March 19, 2018 by Evandro Ramos-->
 <?php
+//File: style-footer.css
+//Created by: Evandro Ramos
+//Date: February 23, 2018
+//Last modified: March 19, 2018 by Evandro Ramos
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/user.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
@@ -64,5 +64,3 @@ class UserDAO {
     }
 
 }
-
-?>
