@@ -565,8 +565,7 @@ function DetectSmartphone() {
 
     //Otherwise, return false.
     return false;
-};
-
+}
 //**************************
 // Detects if the current device is an Archos media player/Internet tablet.
 function DetectArchos() {
@@ -670,8 +669,7 @@ function DetectSonyPlaystation() {
         return true;
     else
         return false;
-};
-
+}
 //**************************
 // Detects if the current device is a Nintendo game device.
 function DetectNintendo() {
@@ -681,8 +679,7 @@ function DetectNintendo() {
         return true;
     else
         return false;
-};
-
+}
 //**************************
 // Detects if the current device is a Microsoft Xbox.
 function DetectXbox() {
@@ -690,8 +687,7 @@ function DetectXbox() {
         return true;
     else
         return false;
-};
-
+}
 //**************************
 // Detects if the current device is an Internet-capable game console.
 function DetectGameConsole() {
@@ -703,8 +699,7 @@ function DetectGameConsole() {
         return true;
     else
         return false;
-};
-
+}
 //**************************
 // Detects if the current device is an Amazon Kindle (eInk devices only).
 // Note: For the Kindle Fire, use the normal Android methods.
@@ -772,9 +767,7 @@ function DetectMobileQuick() {
         return true;
 
     return false;
-};
-
-
+}
 //**************************
 // Detects in a more comprehensive way if the current device is a mobile device.
 function DetectMobileLong() {
@@ -800,9 +793,7 @@ function DetectMobileLong() {
 
 
     return false;
-};
-
-
+}
 //*****************************
 // For Mobile Web Site Design
 //*****************************
@@ -820,8 +811,7 @@ function DetectTierTablet() {
         return true;
     else
         return false;
-};
-
+}
 //**************************
 // The quick way to detect for a tier of devices.
 //   This method detects for devices which can 
@@ -844,8 +834,7 @@ function DetectTierIphone() {
         return true;
     else
         return false;
-};
-
+}
 //**************************
 // The quick way to detect for a tier of devices.
 //   This method detects for devices which are likely to be 
@@ -880,8 +869,7 @@ function DetectTierRichCss() {
     }
     else
         return false;
-};
-
+}
 //**************************
 // The quick way to detect for a tier of devices.
 //   This method detects for all other types of phones,
@@ -900,9 +888,7 @@ function DetectTierOtherPhones() {
     }
     else
         return false;
-};
-
-
+}
 //**************************
 // Initialize Key Stored Values.
 function InitDeviceScan() {
@@ -915,7 +901,6 @@ function InitDeviceScan() {
     //Optional: Comment these out if you don't need them.
     isTierRichCss = DetectTierRichCss();
     isTierGenericMobile = DetectTierOtherPhones();
-};
-
+}
 //Now, run the initialization method.
-InitDeviceScan()
+InitDeviceScan();

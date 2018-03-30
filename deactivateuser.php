@@ -8,10 +8,10 @@ Last modified: March 19, 2018 by Jennifer Aube
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
 $session = new Session();
-$session->blockPage();
+/*$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();
+$session->logoutUser();*/
 // above code is needed when admin needs to login directly to test code
 $servername = "localhost";
 $username = "root";
@@ -43,10 +43,7 @@ if($connection->connect_error){
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
     <link rel="stylesheet" type="text/css" href="assets/css/admin/style-deactivateuser.css">
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of b222d2c... Merge branch 'master' of https://github.com/EvandroRamos/CodeHouse
 
 </head>
 <body>
@@ -68,7 +65,7 @@ if($connection->connect_error){
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
                 <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
-                <li id="mapIcon" class=""><a class="icon" href="/professor.php?logout=map"><img src="/assets/img/map.png"></a></li>
+                <li id="mapIcon" class=""><a class="icon" href="/admin.php?logout=map"><img src="/assets/img/map.png"></a></li>
                 <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                 <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
             </ul>
@@ -76,7 +73,7 @@ if($connection->connect_error){
     </div>
 </nav>
 
-<h2>*Are you sure you wish to de-activate this user</h2>
+<h1 id="header">*Are you sure you wish to de-activate this user</h1>
 <?php
 $id = $_SESSION["id"];
 $sql = "select first_name, last_name, email from user where id = $id";
@@ -85,12 +82,13 @@ $result = $connection->query($sql);
 $row = $result->fetch_assoc();
 ?>
 
-<p style="text-align: center; font-size: 25px; margin-bottom: 150px;"><?php echo $row["first_name"]?>  <?php echo $row["last_name"]?> , <?php echo $row["email"]?></p>
-<form action="deactivateuser.php" method="post">
+<p id="userinfo"><?php echo $row["first_name"]?>  <?php echo $row["last_name"]?>, <?php echo $row["email"]?></p>
+<div id="deactivatebuttons">
+
     <a href="admin.php">
-        <button name="deactivate" style="margin-left: 570px; margin-right: 100px;" type="submit" id="deactivate" class="btn btn-danger">De-Activate
+        <button name="deactivate" type="submit" id="deactivate" class="btn btn-danger">De-Activate
         </button></a>
-</form>
+
 <?php
 if(isset($_POST["deactivate"])){
     $sql = "update user set activated = '0' where id = $id";
@@ -103,15 +101,17 @@ if(isset($_POST["deactivate"])){
     }
 }
 ?>
+
 <a href="admin.php"><!--show a pop up confirming no changes were made and return the main menu-->
     <button class="btn btn-primary" onclick="snackbarFunction()">Cancel
         <!--show a pop up confirming no changes were made and return the main menu-->
-        <div id="snackbar" style="visibility:hidden;">No changes were made
+
     </button></a>
+
 
 </div>
 
-<script src="\assets\js\snackbar.js"></script>
+<script src="assets\js\snackbar.js"></script>
 
 <?php include 'footer.php'; ?>
 </body>

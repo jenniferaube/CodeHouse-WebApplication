@@ -1,10 +1,41 @@
 <?php
+/*
+ * File: file_upload.php
+ * Author: Qiuju Zhu
+ * Course: CST8334 - 310
+ * Project: Final project
+ * Date: Mar, 2018
+ * Professor: Anu Thomas, Howard Rosenblum
+ */
 include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/session.php";
-
 //$session = new Session();
 //$session->blockPage();
-//$session->blockStudent();
+//$session->blockProfessor();
 //$session->logoutUser();
+if (isset($_POST['submit_btn'])) {
+    $save_dir = "./file_upload/files/";
+    date_default_timezone_set('America/Toronto');
+    $temp = explode(".", $_FILES["upload_file"]["name"]);
+    $extension = end($temp);
+    $date = date('YmdHis');
+    $new_file_name = $date . '.' . $extension; //use timestamp to replace original file name
+    if (is_uploaded_file($_FILES["upload_file"]["tmp_name"])) {
+        $dest = $save_dir . $new_file_name;
+        if (move_uploaded_file($_FILES["upload_file"]["tmp_name"], $dest)) {
+            echo "<script language='javascript'>";
+            echo 'if(alert("Success to upload")){';
+            echo 'window.location.reload();}'; //reload page
+            echo "</script>";
+        } else {
+            echo "<script language='javascript'>";
+            echo 'if(alert("Fail to upload")){';
+            echo 'window.location.reload();}';
+            echo "</script>";
+        }
+    } else {
+        echo "fail1";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,9 +57,33 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/session.php";
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
 
-    <!-- File Upload Javascript -->
-    <!--    <script type="text/javascript" src="fileupload/resources/js/fileupload.js"></script>-->
-
+    <!--Jquery script.   -->
+    <script>
+        $(document).ready(function () {
+            $('#upload_file').change(
+                function () {
+                    //for testing, allow csv file to be validated
+                    var fileExtension = ['csv'];
+                    if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) { //check file extension
+                        alert("Please choose a CSV file.");
+                        //$('#upload_file').attr("disabled", true);
+                        $('#csvconfirm').dialog("open");
+                        $('#submit_btn').attr("disabled", true);
+                    }
+                    else {
+                        $('#upload_file').attr("disabled", false);
+                        $('#submit_btn').attr("disabled", false);
+                    }
+                })
+            $('#cancel_btn').click(
+                function() {
+                    this.form.reset();
+                    $('#upload_file').attr("disabled", false);
+                    $('#submit_btn').attr("disabled", false);
+                }
+            )
+        });
+    </script>
 </head>
 <body>
 <!-- Fixed navbar -->
@@ -69,7 +124,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/session.php";
                 <div class="form-group" style="position: relative; margin-top: 10%;">
                     <button type="button" class="btn" id="cancel_btn" style="width: 250px;">
                         <span class="glyphicon glyphicon-ban-circle"></span>
-                        <span>Cancel</span>
+                        <span>Reset</span>
                     </button>
                     <button type="submit" name="submit_btn" class="btn pull-right" style="width: 250px; background-color: #006341;"
                             id="submit_btn">
@@ -81,62 +136,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/session.php";
         </form>
     </div>
 </div>
-
-<?php
-if (isset($_POST['submit_btn'])) {
-    $save_dir = "./file_upload/files/";
-    date_default_timezone_set('America/Toronto');
-    $temp = explode(".", $_FILES["upload_file"]["name"]);
-    $extension = end($temp);
-    $date = date('YmdHis');
-    $new_file_name = $date . '.' . $extension;
-    if (is_uploaded_file($_FILES["upload_file"]["tmp_name"])) {
-        $dest = $save_dir . $new_file_name;
-        if (move_uploaded_file($_FILES["upload_file"]["tmp_name"], $dest)) {
-            echo "<script language='javascript'>";
-            echo 'if(alert("Success to upload")){';
-            echo 'window.location.reload();}';
-            echo "</script>";
-        } else {
-            echo "<script language='javascript'>";
-            echo 'if(alert("Fail to upload")){';
-            echo 'window.location.reload();}';
-            echo "</script>";
-        }
-    } else {
-        echo "fail1";
-    }
-}
-?>
-
-
-<!--Jquery script.   -->
-<script>
-    $(document).ready(function () {
-        $('#upload_file').change(
-            function () {
-                //for testing, allow csv file to be validated
-                var fileExtension = ['csv'];
-                if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-                    alert("Please choose a CSV file.");
-                    //$('#upload_file').attr("disabled", true);
-                    $('#submit_btn').attr("disabled", true);
-                }
-                else {
-                    $('#upload_file').attr("disabled", false);
-                    $('#submit_btn').attr("disabled", false);
-                }
-            })
-        $('#cancel_btn').click(
-            function() {
-                this.form.reset();
-                $('#upload_file').attr("disabled", false);
-                $('#submit_btn').attr("disabled", false);
-            }
-        )
-    });
-</script>
 <?php include 'footer.php'; ?>
-
 </body>
 </html>
