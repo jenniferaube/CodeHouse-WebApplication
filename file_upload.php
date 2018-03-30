@@ -67,7 +67,6 @@ if (isset($_POST['submit_btn'])) {
                     if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) { //check file extension
                         alert("Please choose a CSV file.");
                         //$('#upload_file').attr("disabled", true);
-                        $('#csvconfirm').dialog("open");
                         $('#submit_btn').attr("disabled", true);
                     }
                     else {
