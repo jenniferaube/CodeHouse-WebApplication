@@ -14,9 +14,10 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/session.php";
  * Prevent page redirect to other user page by using blockProfessor()
  */
 $session = new Session();
-//    $session->blockPage();
-//    $session->blockProfessor();
-//    $session->logoutUser();
+$session->blockPage();
+$session->blockStudent();
+$session->blockAdmin();
+$session->logoutUser();
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +82,7 @@ $session = new Session();
                     url: 'initial_prof.php', //JSON feed php file
                     type: 'POST',
                     data: {
-                        prof_id: 2
+                        prof_id: <?php echo $_SESSION['userId']; ?>
                     }
                 },
                 eventClick: function (event) {
@@ -167,7 +168,7 @@ $session = new Session();
                 <li class=""><a class="icon" href="/professor.php"><img src="/assets/img/home.png"></a></li>
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
-                <li><a><?php //echo $_SESSION['userId']; ?></a></li>
+                <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
                 <li id="mapIcon" class=""><a class="icon" href="/professor.php?logout=map"><img
                                 src="/assets/img/map.png"></a></li>
                 <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
