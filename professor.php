@@ -57,7 +57,11 @@ $session->logoutUser();
     <script src='professor/js/moment.min.js'></script>
     <script src='professor/js/jquery.min.js'></script>
     <script src='professor/js/fullcalendar.min.js'></script>
-
+    
+    <!--
+    The calendar below implements the open source API called full calendar, this AIP referenced as follows:
+    FullCalendar [Online]. Available: https://fullcalendar.io/.
+    -->
     <script>
         $(document).ready(function () {
             //Initialize the calendar
