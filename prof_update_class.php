@@ -1,6 +1,6 @@
 <?php
 /*
- * File: update_class.php
+ * File: prof_update_class.php
  * Author: Chao Gu
  * Course: CST8334 - 310
  * Project: Final project
