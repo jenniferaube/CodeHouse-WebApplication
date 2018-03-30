@@ -83,6 +83,9 @@ if (isset($_POST['submit_btn'])) {
                 }
             )
         });
+        function goBack() {
+            window.history.back();
+        }
     </script>
 </head>
 <body>
