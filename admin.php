@@ -35,7 +35,7 @@ Last modified: March 19, 2018 by Jennifer Aube
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-    <link rel="stylesheet" type="text/css" href="./style-admin.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/admin/style-admin.css">
 
 </head>
 <body>

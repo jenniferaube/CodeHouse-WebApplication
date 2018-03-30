@@ -42,7 +42,7 @@ if($connection->connect_error){
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-    <link rel="stylesheet" type="text/css" href="./style-edituser.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/admin/style-edituser.css">
 
 </head>
 <body>
