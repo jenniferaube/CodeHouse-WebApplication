@@ -1,0 +1,17 @@
+h1 {
+    margin-top: 120px;
+    color: red;
+    text-align: center;
+    margin-bottom: 50px;
+}
+#userinfo {
+    text-align: center;
+    font-size: 22px;
+}
+#deactivatebuttons {
+    margin-top: 50px;
+    margin-left: 570px;
+}
+#deactivate{
+    margin-right: 100px;
+}

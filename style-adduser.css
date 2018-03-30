@@ -1,0 +1,39 @@
+.container-formadduser {
+    margin-top: 100px;
+    margin-left: 20px;
+}
+#addingusers{
+    margin-left: 50px;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 360px;
+    padding: 20px;
+    position: relative;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+#uploadingusers {
+    position: absolute;
+    left: 820px;
+    top: 20px;
+    width: 400px;
+
+}
+#uploading {
+    margin-top: 100px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding:2px;
+}
+#uploadbutton {
+    float: right;
+}
+#form {
+    float: right;
+}
+#addingbutton {
+    float: left;
+}
+#cancelbutton {
+    float: right;
+}

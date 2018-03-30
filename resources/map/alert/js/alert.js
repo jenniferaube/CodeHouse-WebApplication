@@ -506,7 +506,7 @@ Changelog:
                     var value = settings.type == 'prompt' ? $('#smartAlertPrompt').val() : '';
                     close(id, value);
                 }
-            }, '.smartAlertButton')
+            }, '.smartAlertButton');
 
         // Center box on window resize
         $(window).on('resize', function() {
@@ -581,9 +581,9 @@ Changelog:
                     });
                 resetPie();
                 open = true;
-            };
+            }
             if (open)
-                close(show)
+                close(show);
             else
                 show();
         },

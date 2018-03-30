@@ -1,0 +1,20 @@
+.container-form {
+    margin-left: 550px;
+    margin-right: auto;
+    margin-top: 150px;
+    width: 360px;
+    padding: 20px;
+    /*position: relative;*/
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    align-content: center;
+}
+#editing input {
+    float: right;
+}
+#cancelbutton {
+  float: left;
+}
+#editingbutton {
+    float: right;
+}
