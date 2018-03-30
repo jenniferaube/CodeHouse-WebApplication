@@ -8,10 +8,10 @@ Last modified: March 19, 2018 by Jennifer Aube
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
+$session->logoutUser();
 
 $servername = "localhost";
 $username = "root";
@@ -63,7 +63,7 @@ if($connection->connect_error){
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
                 <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
-                <li id="mapIcon" class=""><a class="icon" href="/admin.php?logout=map"><img src="/assets/img/map.png"></a></li>
+                <li id="mapIcon" class=""><a class="icon" href="/professor.php?logout=map"><img src="/assets/img/map.png"></a></li>
                 <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                 <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
             </ul>
@@ -73,61 +73,56 @@ if($connection->connect_error){
 <div class="container-form" >
 
     <form action="edituser.php" method="post">
-        <div id="editing">
-            <?php
+        <?php
 
-            $id = $_SESSION["id"];
-            $sql = "select * from user where id = $id";
-            $result = $connection->query($sql);
+        $id = $_SESSION["id"];
+        $sql = "select * from user where id = $id";
+        $result = $connection->query($sql);
 
-            $row = $result->fetch_assoc();
+        $row = $result->fetch_assoc();
 
-            ?>
-            <div class="form-group">
-                <label>First Name: </label>
-                <input name="firstname" type="text" value="<?php echo $row["first_name"]; ?>">
+        ?>
+        <div class="form-group">
+            <label>First Name: </label>
+            <input name="firstname" type="text" value="<?php echo $row["first_name"]; ?>">
+        </div>
+        <div class="form-group">
+            <label>Last Name: </label>
+            <input name="lastname" type="text" value="<?php echo $row["last_name"]; ?>">
+        </div>
+        <div class="form-group">
+            <label>Email: </label>
+            <input name="email" type="email" size="24" value="<?php echo $row["email"]; ?>">
+        </div>
+        <div class="form-group">
+            <label>Password: </label>
+            <input name="password" type="password" value="<?php echo $row["password"]; ?>"><!--make password field hidden-->
+        </div>
+        <!--        add user type to edit-->
+        <div class="form-group">
+            <button class="btn-success" type="submit" onclick="snackbarFunction()">Save Changes</button>
+            <div id="snackbar">You have successfully saved changes to the user
             </div>
-            <div class="form-group">
-                <label>Last Name: </label>
-                <input name="lastname" type="text" value="<?php echo $row["last_name"]; ?>">
-            </div>
-            <div class="form-group">
-                <label>Email: </label>
-                <input name="email" type="email" value="<?php echo $row["email"]; ?>">
-            </div>
-            <div class="form-group">
-                <label>Password: </label>
-                <input name="password" type="password" value="<?php echo $row["password"]; ?>"><!--make password field hidden-->
-            </div>
-            <div class="form-group">
-                <button id="editingbutton" class="btn-success" type="submit" onclick="snackbarFunction()">Save Changes</button>
-            </div>
-            <div class="form-group">
-                <a href="admin.php">
-                    <button id="cancelbutton" class="btn-success" type="button">Cancel</button>
-                </a>
-            </div>
-</div>
+        </div>
+
     </form>
-</div>
-
-<?php
-if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])||
-    isset($_POST['password'])) {
-    $fn = $_POST["firstname"];
-    $ln = $_POST["lastname"];
-    $em = $_POST["email"];
-    $pw = $_POST["password"];
-    $sql = "update user set first_name = '$fn', last_name = '$ln', email = '$em', password = '$pw' where id = $id";
-    $result = $connection->query($sql);
-    if ($connection->query($sql) === true) {
-        header("Location: admin.php");
-    } else {
-        echo "Error: " . $sql . "<br>" . $connection->error;
+    <?php
+    if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])||
+        isset($_POST['password'])) {
+        $fn = $_POST["firstname"];
+        $ln = $_POST["lastname"];
+        $em = $_POST["email"];
+        $pw = $_POST["password"];
+        $sql = "update user set first_name = '$fn', last_name = '$ln', email = '$em', password = '$pw' where id = $id";
+        $result = $connection->query($sql);
+        if ($connection->query($sql) === true) {
+            header("Location: admin.php");
+        } else {
+            echo "Error: " . $sql . "<br>" . $connection->error;
+        }
     }
-}
-?>
-<script src="\assets\js\snackbar.js"></script>
+    ?>
+    <script src="\assets\js\snackbar.js"></script>
 </div>
 
 

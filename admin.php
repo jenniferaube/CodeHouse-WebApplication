@@ -8,10 +8,10 @@ Last modified: March 19, 2018 by Jennifer Aube
     include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
     $session = new Session();
-    /*$session->blockPage();
+    $session->blockPage();
     $session->blockStudent();
     $session->blockProfessor();
-    $session->logoutUser();*/
+    $session->logoutUser();
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +35,11 @@ Last modified: March 19, 2018 by Jennifer Aube
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="assets/css/admin/style-admin.css">
+=======
+    <link rel="stylesheet" type="text/css" href="/assets/css/admin/admin.css">
+>>>>>>> parent of b222d2c... Merge branch 'master' of https://github.com/EvandroRamos/CodeHouse
 
 </head>
 <body>
@@ -54,11 +58,11 @@ Last modified: March 19, 2018 by Jennifer Aube
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/home.png"></a></li>
+                    <li class=""><a class="icon" href="/professor.php"><img src="/assets/img/home.png"></a></li>
                 </ul>
                 <ul id="menuRight" class="nav navbar-nav navbar-right">
                     <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
-                    <li id="mapIcon" class=""><a class="icon" href="/admin.php?logout=map"><img src="/assets/img/map.png"></a></li>
+                    <li id="mapIcon" class=""><a class="icon" href="/professor.php?logout=map"><img src="/assets/img/map.png"></a></li>
                     <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                     <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
                 </ul>
@@ -66,15 +70,15 @@ Last modified: March 19, 2018 by Jennifer Aube
         </div>
     </nav>
 <h1>Welcome Administrator</h1>
-    <div class="container-adminbuttons">
+    <div class="container-actions" style="position: absolute">
 <!--        <div class="action" >-->
             <a href="adduser.php">
-                <button id="add" class="btn btn-success" name="add">Add a User</button>
+                <button class="btn btn-success" name="add">Add a User</button>
             </a>
 <!--        </div>-->
 <!--        <div class="action" >-->
             <a href="finduser.php">
-                <button id="edit" class="btn btn-success" name="1" value="1" id="finduser" ">Edit a User</button>
+                <button class="btn btn-success" name="1" value="1" id="finduser" ">Edit a User</button>
             </a>
 <!--        </div>-->
 <!---->

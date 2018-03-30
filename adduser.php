@@ -8,10 +8,10 @@ Last modified: March 19, 2018 by Jennifer Aube
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
+$session->logoutUser();
 
 
 $servername = "localhost";
@@ -43,7 +43,11 @@ if($connection->connect_error){
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="assets/css/admin/style-adduser.css">
+=======
+    <link rel="stylesheet" type="text/css" href="/assets/css/admin/style-adduser.css">
+>>>>>>> parent of b222d2c... Merge branch 'master' of https://github.com/EvandroRamos/CodeHouse
 
 </head>
 <body>
@@ -60,11 +64,11 @@ if($connection->connect_error){
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class=""><a class="icon" href="/admin.php"><img src="/assets/img/home.png"></a></li>
+                <li class=""><a class="icon" href="/professor.php"><img src="/assets/img/home.png"></a></li>
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
                 <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
-                <li id="mapIcon" class=""><a class="icon" href="/adduser.php?logout=map"><img src="/assets/img/map.png"></a></li>
+                <li id="mapIcon" class=""><a class="icon" href="/professor.php?logout=map"><img src="/assets/img/map.png"></a></li>
                 <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                 <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
             </ul>
@@ -72,92 +76,36 @@ if($connection->connect_error){
     </div>
 </nav>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="/assets/js/passwordcheck.js"></script>
+<form action="adduser.php" method="post">
 
+    <div class="container-form" style="padding-top: 100px;">
 
-<div class="container-formadduser">
-    <div id="addingusers">
-    <form action="adduser.php" method="post">
-
-            <div class="checkbox-parent">
-                <label>User Type:</label>
-                <label><input type="radio" id="1" data-toggle="toggle" checked name="usertype" value="professor" >Professor</label>
-                <label><input type="radio" id="2" data-toggle="toggle" name="usertype" value="student" >Student</label>
-            </div>
-            <div class="form-group">
-                <label>First Name: </label>
-                <input id="form" type="text" name="firstname" required>
-            </div>
-            <div class="form-group">
-                <label>Last Name: </label>
-                <input id="form" type="text" name="lastname" required>
-            </div>
-            <div class="form-group">
-                <label>Email: </label>
-                <input id="form" type="email" name="emailaddress" required>
-            </div>
-            <div class="form-group">
-                <label>Re-enter Email: </label>
-                <input id="form" type="email" name="emailaddress" required>
-            </div>
-            <div class="form-group">
-                <label>Password: </label>
-                <input id="form" type="password" name="passwrd" required>
-            </div>
-            <div class="form-group">
-                <label>Re-enter Password: </label>
-                <input id="form" type="password" name="confirm_password" id="confirm_password" onkeyup='check()' required>
-                <span id='message'></span>
-            </div>
+        <div class="checkbox-parent">
+            <label>User Type:</label>
+            <label><input type="radio" id="1" data-toggle="toggle" checked name="usertype" value="professor" >Professor</label>
+            <label><input type="radio" id="2" data-toggle="toggle" name="usertype" value="student" >Student</label>
+        </div>
         <div class="form-group">
-            <a href="admin.php">
-                <button id="cancelbutton" class="btn-success" type="button" >Cancel</button>
-            </a>
+            <label>First Name: </label>
+            <input type="text" name="firstname" required>
         </div>
-            <div class="form-group">
-                <button id="addingbutton" class="btn-success" type="submit" >Add User</button>
-            </div>
-
-
-        </form>
-        <div id="uploadingusers" >
-            <div id="uploading">
-                <form action="upload.php" id="upload_form" method="post" enctype="multipart/form-data">
-                        <input type="file" name="upload_users"  id="upload_users" placeholder="Choose file">
-                </form>
-            </div>
-            <button id="uploadbutton" name="uploadbutton" class="btn-success" type="submit">Upload File</button>
-            <?php
-            if (isset($_POST['uploadbutton'])) {
-                $save_dir = "./file_upload/files/";
-                date_default_timezone_set('America/Toronto');
-                $temp = explode(".", $_FILES["upload_users"]["name"]);
-                $extension = end($temp);
-                $date = date('YmdHis');
-                $new_file_name = $date . '.' . $extension;
-                if (is_uploaded_file($_FILES["upload_users"]["tmp_name"])) {
-                    $dest = $save_dir . $new_file_name;
-                    if (move_uploaded_file($_FILES["upload_users"]["tmp_name"], $dest)) {
-                        echo "<script language='javascript'>";
-                        echo 'if(alert("Success to upload")){';
-                        echo 'window.location.reload();}';
-                        echo "</script>";
-                    } else {
-                        echo "<script language='javascript'>";
-                        echo 'if(alert("Fail to upload")){';
-                        echo 'window.location.reload();}';
-                        echo "</script>";
-                    }
-                } else {
-                    echo "fail1";
-                }
-            }
-            ?>
+        <div class="form-group">
+            <label>Last Name: </label>
+            <input type="text" name="lastname" required>
         </div>
-</div>
-</div>
+        <div class="form-group">
+            <label>Email: </label>
+            <input type="email" name="emailaddress" required>
+        </div>
+        <div class="form-group">
+            <label>Password: </label>
+            <input type="password" name="passwrd" required>
+        </div>
+        <div class="form-group">
+            <button class="btn-success" type="submit" >Add User</button>
+        </div>
 
+</form>
 <?php
 $errors = false;
 if(isset($_POST['usertype'])||isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['emailaddress'])||
