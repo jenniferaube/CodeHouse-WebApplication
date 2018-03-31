@@ -1,4 +1,10 @@
 <!-- Fixed navbar -->
+
+<!--File: style-footer.css-->
+<!--Created by: Evandro Ramos-->
+<!--Date: February 23, 2018-->
+<!--Last modified: March 19, 2018 by Evandro Ramos-->
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">

@@ -1,3 +1,8 @@
+/*
+Created by: Evandro Ramos
+Date: February 23, 2018
+Last modified: March 19, 2018 by Evandro Ramos
+*/
 body {
     background: #fff url("../img/welcome.png") no-repeat fixed left bottom;
     background-size: 100%;
@@ -34,7 +39,7 @@ h4{
 }
 
 .container-actions .action {
-    margin: 0 210px 0 210px;
+    margin: 0 100px 0 100px;
     display: inline-block;
 }
 
