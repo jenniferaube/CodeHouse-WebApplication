@@ -6,20 +6,15 @@ Last modified: March 19, 2018 by Jennifer Aube
 -->
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
+include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
+$session->logoutUser();
 
-
-$servername = "localhost";
-$username = "root";
-$password = "algonquin";
-$databasename = "codehouse";
-
-$connection = new mysqli($servername, $username, $password, $databasename);
+$connection = Connection::getConnection();
 if($connection->connect_error){
     die("Connection failed: ". $connection->connect_error);
 }
@@ -64,7 +59,7 @@ if($connection->connect_error){
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
                 <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
-                <li id="mapIcon" class=""><a class="icon" href="/adduser.php?logout=map"><img src="/assets/img/map.png"></a></li>
+                <li id="mapIcon" class=""><a class="icon" href="/map.php"><img src="/assets/img/map.png"></a></li>
                 <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                 <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
             </ul>
@@ -72,8 +67,6 @@ if($connection->connect_error){
     </div>
 </nav>
 
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
-<!--<script src="/assets/js/passwordcheck.js"></script>-->
 
 <script src="/assets/class/lib/bcrypt.php"></script>
 <div class="container-formadduser">
@@ -99,7 +92,7 @@ if($connection->connect_error){
             </div>
             <div class="form-group">
                 <label>Re-enter Email: </label>
-                <input id="form" type="email" name="emailaddress" required>
+                <input id="form" type="email" name="confirm_email" required>
             </div>
             <div class="form-group">
                 <label>Password: </label>
@@ -116,12 +109,12 @@ if($connection->connect_error){
         </div>
             <div class="form-group">
                 <a href="successful.php">
-                <button id="addingbutton" class="btn-success" type="submit" >Add User</button>
+                <button id="addingbutton" class="btn-success" type="submit">Add User</button>
                 </a>
             </div>
 
 
-        </form>
+    </form>
         <div id="uploadingusers" >
             <div id="uploading">
                 <form action="upload.php" id="upload_form" method="post" enctype="multipart/form-data">
@@ -134,8 +127,10 @@ if($connection->connect_error){
 </div>
 </div>
 
+<script src="./snackbar.js"></script>
 <?php
 $errors = false;
+include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/lib/bcrypt.php";
 if(isset($_POST['usertype'])||isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['emailaddress'])||
     isset($_POST['passwrd'])) {
     if($_POST['usertype'] == "professor"){
@@ -155,35 +150,47 @@ if(isset($_POST['usertype'])||isset($_POST['firstname'])||isset($_POST['lastname
     }if($_POST['passwrd']==""){
         $errors = true;
     }
+    if($_POST['emailaddress'] != $_POST['confirm_email']){
+        echo alert("Your email address's did not match.");
+        exit();
+    }
+    if($_POST['emailaddress'] == $_POST['confirm_email']){
+
+        $em = $_POST['emailaddress'];
+
+    }
     if($_POST['passwrd'] != $_POST['confirm_password']){
-        echo alert("Your passwords did not match.");
+        echo alert("Your password's did not match.");
         exit();
     }
     if($_POST['passwrd'] == $_POST['confirm_password']){
         /*encrypt password*/
-        $encryptedpassword = hash($_POST['passwrd'], null);
+        $pw = $_POST['passwrd'];
+        $pass = Bcrypt::hash($pw);
     }
 
     if(!$errors) {
         $fn = $_POST['firstname'];
         $ln = $_POST['lastname'];
-        $em = $_POST['emailaddress'];
-        $pw = $_POST['passwrd'];
 
-        $sql = "insert into user values (default, '$fn', '$ln', '$em', '$pw', CURRENT_TIME, default, '$ut')";
+        $sql = "insert into user values (default, '$fn', '$ln', '$em', '$pass', CURRENT_TIME, default, '$ut')";
+        $result = $connection->query($sql);
         if ($connection->query($sql) === true) {
+           // header("Location: successful.php?success=1");
+            alert("user has been added");
+        }else{
+            //echo "Error: " . $sql . "<br>" . $connection->error;
+           // alert("User was not added to database");
             header("Location: successful.php?success=1");
-        } else {
-            echo "Error: " . $sql . "<br>" . $connection->error;
         }
     }
 }
 function alert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
-$connection->close();
+Connection::closeConnection($connection);
 ?>
-</div>
+
 
 <?php include 'footer.php'; ?>
 </body>

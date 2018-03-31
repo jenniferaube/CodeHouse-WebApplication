@@ -6,20 +6,14 @@ Last modified: March 19, 2018 by Jennifer Aube
 -->
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
-
+include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
+$session->logoutUser();
 
-
-$servername = "localhost";
-$username = "root";
-$password = "algonquin";
-$databasename = "codehouse";
-
-$connection = new mysqli($servername, $username, $password, $databasename);
+$connection = Connection::getConnection();
 if($connection->connect_error){
     die("Connection failed: ". $connection->connect_error);
 }
@@ -65,7 +59,7 @@ if($connection->connect_error){
                 </ul>
                 <ul id="menuRight" class="nav navbar-nav navbar-right">
                     <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
-                    <li id="mapIcon" class=""><a class="icon" href="/admin.php?logout=map"><img src="/assets/img/map.png"></a></li>
+                    <li id="mapIcon" class=""><a class="icon" href="/map.php"><img src="/assets/img/map.png"></a></li>
                     <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                     <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
                 </ul>
@@ -122,6 +116,7 @@ if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])
 function alert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
+Connection::closeConnection($connection);
 ?>
 
 

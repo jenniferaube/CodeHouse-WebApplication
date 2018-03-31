@@ -1,7 +1,17 @@
+<!--
+File: successful.php
+Created by: Jennifer Aube
+Date: March 10, 2018
+Last modified: March 31, 2018 by Jennifer Aube
+-->
 <?php
-/**
- *
- */?>
+include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
+$session = new Session();
+$session->blockPage();
+$session->blockStudent();
+$session->blockProfessor();
+$session->logoutUser();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,6 +66,10 @@ if ( isset($_GET['success']) && $_GET['success'] == 0 )
 if ( isset($_GET['success']) && $_GET['success'] == 1 )
 {
     $text = "added";
+}
+if ( isset($_GET['success']) && $_GET['success'] == 2 )
+{
+    $text = "changed";
 }
 ?>
 <h2 style="margin-top: 200px; text-align: center">The user has been successfully <?php echo $text; ?>!</h2>

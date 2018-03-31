@@ -1,3 +1,9 @@
+/*
+File: style-deactivateuser.css
+Created by: Jennifer Aube
+Date: March 10, 2018
+Last modified: March 31, 2018 by Jennifer Aube
+*/
 h1 {
     margin-top: 120px;
     color: red;
@@ -14,4 +20,24 @@ h1 {
 }
 #deactivate{
     margin-right: 100px;
+}
+/*snackbar css was taken from https://www.w3schools.com/howto/howto_js_snackbar.asp*/
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: darkgreen;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+}
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }

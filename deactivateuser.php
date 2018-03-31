@@ -1,24 +1,19 @@
-<!--
+/**
 File: deactivateuser.php
 Created by: Jennifer Aube
 Date: March 10, 2018
-Last modified: March 19, 2018 by Jennifer Aube
--->
+Last modified: March 31, 2018 by Jennifer Aube
+*/
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
+include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
-// above code is needed when admin needs to login directly to test code
-$servername = "localhost";
-$username = "root";
-$password = "algonquin";
-$databasename = "codehouse";
-
-$connection = new mysqli($servername, $username, $password, $databasename);
+$session->logoutUser();
+$connection = Connection::getConnection();
 if($connection->connect_error){
     die("Connection failed: ". $connection->connect_error);
 }
@@ -91,13 +86,11 @@ $row = $result->fetch_assoc();
 
 
 
-<a href="admin.php"><!--show a pop up confirming no changes were made and return the main menu-->
-    <button class="btn btn-primary" onclick="snackbarFunction()">Cancel
-        <!--show a pop up confirming no changes were made and return the main menu-->
+<a href="admin.php">
+    <button class="btn btn-primary" type="button" onclick="snackbar()">Cancel</button></a>
 
-    </button></a>
-
-
+<div id="snackbar">No changes were made</div>
+    <script src="./snackbar.js"></script>
 </div>
 </form>
 <?php
@@ -114,8 +107,10 @@ if(isset($_POST["deactivate"])){
 function alert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
+Connection::closeConnection($connection);
+
 ?>
-<script src="assets\js\snackbar.js"></script>
+
 
 <?php include 'footer.php'; ?>
 </body>

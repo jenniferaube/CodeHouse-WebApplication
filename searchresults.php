@@ -1,24 +1,20 @@
-<!--
+/**
 File: searchresults.php
 Created by: Jennifer Aube
 Date: March 10, 2018
 Last modified: March 19, 2018 by Jennifer Aube
--->
+*/
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
+include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
+$session->logoutUser();
 
-$servername = "localhost";
-$username = "root";
-$password = "algonquin";
-$databasename = "codehouse";
-
-$connection = new mysqli($servername, $username, $password, $databasename);
+$connection = Connection::getConnection();
 if($connection->connect_error){
     die("Connection failed: ". $connection->connect_error);
 }
@@ -93,7 +89,7 @@ if($connection->connect_error){
         $sql = "select * from user where email like '%$em'";
     }
     ?>
-<!--<form method="post"">-->
+
     <table class="table table-hover" id="table" onclick="rowClicked()">
         <thead>
         <tr>
@@ -107,11 +103,8 @@ if($connection->connect_error){
         </thead>
         <tr onclick="rowClicked()">
 
-<!--            <td> --><?php
+<?php
                 $result = $connection->query($sql);
-//                if ($connection->query($sql) === true) {
-//                    echo "record(s) found";
-//                    $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         // output data of each row
                         while ($row = $result->fetch_assoc()) {
@@ -156,15 +149,13 @@ if($connection->connect_error){
 
 
     </table>
-<!--</form>-->
+
 </div>
 
 <script src="assets/js/searchresults.js"></script>
+
 <?php
-
-
-$connection->close();
-?>
-<?php include 'footer.php'; ?>
+Connection::closeConnection($connection);
+include 'footer.php'; ?>
 </body>
 </html>
