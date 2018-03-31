@@ -1,9 +1,9 @@
-<!--
+/**
 File: edituser.php
 Created by: Jennifer Aube
 Date: March 10, 2018
 Last modified: March 31, 2018 by Jennifer Aube
--->
+*/
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
@@ -58,7 +58,7 @@ if($connection->connect_error){
                 <li class=""><a class="icon" href="/admin.php"><img src="/assets/img/home.png"></a></li>
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
-                <li><a></a></li>
+                <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
                 <li id="mapIcon" class=""><a class="icon" href="/map.php"><img src="/assets/img/map.png"></a></li>
                 <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                 <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->

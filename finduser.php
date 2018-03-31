@@ -1,9 +1,9 @@
-<!--
+/**
 File: finduser.php
 Created by: Jennifer Aube
 Date: March 10, 2018
 Last modified: March 19, 2018 by Jennifer Aube
--->
+*/
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";

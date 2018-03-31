@@ -1,12 +1,13 @@
-<!--
-File: adduser.php
-Created by: Jennifer Aube
-Date: March 10, 2018
-Last modified: March 19, 2018 by Jennifer Aube
--->
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Jennifer
+ * Date: 2018-03-31
+ * Time: 5:25 PM
+ */
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/lib/bcrypt.php";
 
 $session = new Session();
 $session->blockPage();
@@ -19,6 +20,7 @@ if($connection->connect_error){
     die("Connection failed: ". $connection->connect_error);
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +60,7 @@ if($connection->connect_error){
                 <li class=""><a class="icon" href="/admin.php"><img src="/assets/img/home.png"></a></li>
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
-                <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
+                <li><a><?php echo $_SESSION['userLogin'] ?></a></li>
                 <li id="mapIcon" class=""><a class="icon" href="/map.php"><img src="/assets/img/map.png"></a></li>
                 <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                 <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
@@ -67,11 +69,10 @@ if($connection->connect_error){
     </div>
 </nav>
 
-
 <script src="/assets/class/lib/bcrypt.php"></script>
 <div class="container-formadduser">
     <div id="addingusers">
-    <form action="adduser.php" method="post">
+        <form action="adduser.php" method="post">
 
             <div class="checkbox-parent">
                 <label>User Type:</label>
@@ -102,96 +103,84 @@ if($connection->connect_error){
                 <label>Re-enter Password: </label>
                 <input id="form" type="password" name="confirm_password" id="confirm_password" required>
             </div>
-        <div class="form-group">
-            <a href="admin.php">
-                <button id="cancelbutton" class="btn-success" type="button" >Cancel</button>
-            </a>
-        </div>
             <div class="form-group">
-                <a href="successful.php">
-                <button id="addingbutton" class="btn-success" type="submit">Add User</button>
+                <a href="admin.php">
+                    <button id="cancelbutton" class="btn-success" type="button" >Cancel</button>
+                </a>
+            </div>
+            <div class="form-group">
+                <a href="successful.php?success=1">
+                    <button id="addingbutton" class="btn-success" type="submit">Add User</button>
                 </a>
             </div>
 
+            <?php
+            $errors = false;
+            if(isset($_POST['usertype'])||isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['emailaddress'])||
+                isset($_POST['passwrd'])) {
+                if(isset($_POST['usertype']) == "professor"){
+                    $ut = 1;
+                }
+                if(isset($_POST['usertype'])=="student"){
+                    $ut = 2;
+                }
+                if(isset($_POST['firstname'])==""){
+                    $errors = true;
+                }
+                if(isset($_POST['lastname'])==""){
+                    $errors = true;
+                }
+                if(isset($_POST['emailaddress'])==""){
+                    $errors = true;
+                }
+                if(isset($_POST['passwrd'])==""){
+                    $errors = true;
+                }
+                if($_POST['emailaddress'] != $_POST['confirm_email']){
+                    echo alert("Your email address's did not match.");
+                    exit();
+                }
+                if($_POST['passwrd'] != $_POST['confirm_password']){
+                    echo alert("Your password's did not match.");
+                    exit();
+                }
+                if(!$errors && $_POST['passwrd'] == $_POST['confirm_password'] && $_POST['emailaddress'] == $_POST['confirm_email'] ) {
+                    $fn = $_POST['firstname'];
+                    $ln = $_POST['lastname'];
+                    $em = $_POST['emailaddress'];
+                    $pw = $_POST['passwrd'];
+                    $pass = Bcrypt::hash($pw);
 
-    </form>
+                    $sql = "insert into user values (default, '$fn', '$ln', '$em', '$pass', CURRENT_TIME, default, '$ut')";
+
+                    if ($connection->query($sql) === true) {
+                        //exit(header("Location: successful.php?success=1"));
+                        alert("user has been added");
+                    } else {
+                        alert("User was not added to database");
+                    }
+                }
+            }
+            function alert($msg) {
+                echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+            }
+
+            ?>
+
+        </form>
         <div id="uploadingusers" >
             <div id="uploading">
                 <form action="upload.php" id="upload_form" method="post" enctype="multipart/form-data">
-                        <input type="file" name="upload_users"  id="upload_users" placeholder="Choose file">
+                    <input type="file" name="upload_users"  id="upload_users" placeholder="Choose file">
                 </form>
             </div>
             <button id="uploadbutton" name="uploadbutton" class="btn-success" type="submit">Upload File</button>
 
         </div>
+    </div>
 </div>
-</div>
-
-<script src="./snackbar.js"></script>
 <?php
-$errors = false;
-include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/lib/bcrypt.php";
-if(isset($_POST['usertype'])||isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['emailaddress'])||
-    isset($_POST['passwrd'])) {
-    if($_POST['usertype'] == "professor"){
-        $ut = 1;
-    }
-    if($_POST['usertype']=="student"){
-        $ut = 2;
-    }
-    if($_POST['firstname']==""){
-        $errors = true;
-    }
-    if($_POST['lastname']==""){
-        $errors = true;
-    }
-    if($_POST['emailaddress']==""){
-        $errors = true;
-    }if($_POST['passwrd']==""){
-        $errors = true;
-    }
-    if($_POST['emailaddress'] != $_POST['confirm_email']){
-        echo alert("Your email address's did not match.");
-        exit();
-    }
-    if($_POST['emailaddress'] == $_POST['confirm_email']){
-
-        $em = $_POST['emailaddress'];
-
-    }
-    if($_POST['passwrd'] != $_POST['confirm_password']){
-        echo alert("Your password's did not match.");
-        exit();
-    }
-    if($_POST['passwrd'] == $_POST['confirm_password']){
-        /*encrypt password*/
-        $pw = $_POST['passwrd'];
-        $pass = Bcrypt::hash($pw);
-    }
-
-    if(!$errors) {
-        $fn = $_POST['firstname'];
-        $ln = $_POST['lastname'];
-
-        $sql = "insert into user values (default, '$fn', '$ln', '$em', '$pass', CURRENT_TIME, default, '$ut')";
-        $result = $connection->query($sql);
-        if ($connection->query($sql) === true) {
-           // header("Location: successful.php?success=1");
-            alert("user has been added");
-        }else{
-            //echo "Error: " . $sql . "<br>" . $connection->error;
-           // alert("User was not added to database");
-            header("Location: successful.php?success=1");
-        }
-    }
-}
-function alert($msg) {
-    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
-}
 Connection::closeConnection($connection);
-?>
-
-
-<?php include 'footer.php'; ?>
+include 'footer.php'; ?>
 </body>
 </html>

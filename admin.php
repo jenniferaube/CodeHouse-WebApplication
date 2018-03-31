@@ -1,9 +1,9 @@
-<!--
+/**
 File: admin.php
 Created by: Jennifer Aube
 Date: March 10, 2018
 Last modified: March 19, 2018 by Jennifer Aube
--->
+*/
 <?php
     include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
@@ -67,22 +67,15 @@ Last modified: March 19, 2018 by Jennifer Aube
     </nav>
 <h1>Welcome Administrator</h1>
     <div class="container-adminbuttons">
-<!--        <div class="action" >-->
             <a href="adduser.php">
                 <button id="add" class="btn btn-success" name="add">Add a User</button>
             </a>
-<!--        </div>-->
-<!--        <div class="action" >-->
             <a href="finduser.php">
                 <button id="edit" class="btn btn-success" name="1" value="1" id="finduser" ">Edit a User</button>
             </a>
-<!--        </div>-->
-<!---->
-<!--        <div class="action">-->
             <a href="finduser.php">
                 <button class="btn btn-success" name="2" value="2" id="finduser" ">De-Activate a User</button>
             </a>
-<!--        </div>-->
     </div>
 
     <?php include 'footer.php'; ?>
