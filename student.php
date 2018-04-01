@@ -71,7 +71,7 @@
 
                 <p class="lead">Please fill out the form and submit, you will receive an email confirmation within 24 hours.</p>
 
-                <form id="contact-form" method="post" action="" role="form">
+                <form id="contact-form" method="post" action="message_sent.php" role="form">
 
                     <div class="messages"></div>
 
@@ -83,12 +83,12 @@
                                     <label for="form_prof">Professor *</label>
                                     <?php
                                     $conn = Connection::getConnection();
-                                    $sql = 'select concat(first_name," ", last_name) as "Name" from user where type LIKE "1"';
+                                    $sql = 'select concat(first_name," ", last_name) as "Name", email from user where type LIKE "1" and activated like "1" ';
                                     $result = mysqli_query($conn, $sql);?>
                                     <input id="form_prof" type="text" list="professor_list" name="prof" class="form-control" placeholder="Find Professor *" required="required" data-error="Professor must exist.">
                                     <datalist id="professor_list">
                                     <?php while($row = mysqli_fetch_array($result)) {
-                                        ?> <option value="<?php echo $row['Name']; ?>"><?php echo $row['Name']; ?></option>
+                                        ?> <option value="<?php echo $row['Name']; ?> - <?php echo $row['email']; ?>"><?php echo $row['Name']; ?></option>
                                     <?php } ?>
                                     </datalist>
                                     <?php mysqli_close($conn); ?>
