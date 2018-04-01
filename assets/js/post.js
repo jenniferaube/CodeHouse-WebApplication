@@ -1,51 +1,8 @@
 $(function () {
-
+//Created by: Evandro Ramos
+//Date: February 23, 2018
+//Last modified: March 19, 2018 by Evandro Ramos
     var request;
-
-    // $('#add_form').submit(function(event) {
-    //      // Prevent default posting of form
-    //     event.preventDefault();
-    //
-    //     // Abort any pending request
-    //     if (request) {
-    //         request.abort();
-    //     }
-    //
-    //     // Setup some local variables
-    //     var form = $(this);
-    //
-    //     // Let's select and cache all the fields - ("input, select, button, textarea")
-    //     var inputs = form.find('input');
-    //
-    //     // Serialize the data in the form
-    //     var serializedData = form.serialize();
-    //
-    //     // Let's disable the inputs for the duration of the Ajax request.
-    //     // Note: we disable elements AFTER the form data has been serialized.
-    //     // Disabled form elements will not be serialized.
-    //     inputs.prop('disabled', true);
-    //
-    //     request = $.ajax({
-    //         method: 'POST',
-    //         url: '_control/user_add',
-    //         data: serializedData
-    //     });
-    //
-    //     request.done(function(data) {
-    //         showError(data);
-    //     });
-    //
-    //     request.fail(function (jqXHR, textStatus, errorThrown){
-    //         // Log the error to the console
-    //         showError('ERROR - ' + errorThrown);
-    //     });
-    //
-    //     request.always(function () {
-    //         // Reenable the inputs
-    //         inputs.prop('disabled', false);
-    //     });
-    // });
-
     $('#loginForm').submit(function(event) {
          // Prevent default posting of form
         event.preventDefault();
@@ -97,7 +54,7 @@ $(function () {
             // showError('ERROR - ' + errorThrown);
             showError('Database is not online');
         });
-9
+9;
         request.always(function () {
             // Reenable the inputs
             inputs.prop('disabled', false);

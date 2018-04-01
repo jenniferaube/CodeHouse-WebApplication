@@ -2,23 +2,30 @@
 File: style-finduser.css
 Created by: Jennifer Aube
 Date: March 10, 2018
-Last modified: March 19, 2018 by Jennifer Aube
+Last modified: March 31, 2018 by Jennifer Aube
 */
-.container-formtable {
-    margin:150px;
+p{
+    margin-top: 150px;
+    margin-left: 68px;
 }
-input{
-    float:right;
-    size:20px;
+#findusers-form{
+    margin-left: 50px;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 360px;
+    padding: 20px;
+    /*position: relative;*/
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    align-content: center;
+
 }
-#searchForm{
+#findusers input {
+    float: right;
+}
+#searchbutton {
     float:left;
 }
-.form2{
-    visibility: hidden;
-    float:right;
-    display: contents;
-}
-.form2.show{
-    visibility: visible;
+#cancelbutton {
+    float: right;
 }

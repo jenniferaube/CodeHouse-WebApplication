@@ -1,9 +1,6 @@
-// $(function () {
-//     if (!document.referrer.includes("login")) {
-//         $("#mapIcon").after('<li class=""><a class="icon" onclick="goBack()"><img src="assets/img/back.png"></a></li>');
-//     }
-// });
-
+//Created by: Evandro Ramos
+//Date: February 23, 2018
+//Last modified: March 19, 2018 by Evandro Ramos
 function goBack() {
     window.history.back();
 }

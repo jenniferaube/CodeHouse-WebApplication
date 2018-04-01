@@ -2,11 +2,45 @@
 File: style-edituser.css
 Created by: Jennifer Aube
 Date: March 10, 2018
-Last modified: March 19, 2018 by Jennifer Aube
+Last modified: March 31, 2018 by Jennifer Aube
 */
-.container-form{
-    padding-top: 150px;
-    margin-left:550px;
-
+.container-form {
+    margin-left: 550px;
+    margin-right: auto;
+    margin-top: 150px;
+    width: 360px;
+    padding: 20px;
+    /*position: relative;*/
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    align-content: center;
 }
-
+#editing input {
+    float: right;
+}
+#cancelbutton {
+  float: left;
+}
+#editingbutton {
+    float: right;
+}
+/*snackbar css was taken from https://www.w3schools.com/howto/howto_js_snackbar.asp*/
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: darkgreen;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+}
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}

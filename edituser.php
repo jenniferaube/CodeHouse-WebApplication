@@ -1,11 +1,12 @@
-<!--
+/**
 File: edituser.php
 Created by: Jennifer Aube
 Date: March 10, 2018
-Last modified: March 19, 2018 by Jennifer Aube
--->
+Last modified: March 31, 2018 by Jennifer Aube
+*/
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
+include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 
 $session = new Session();
 $session->blockPage();
@@ -13,12 +14,7 @@ $session->blockStudent();
 $session->blockProfessor();
 $session->logoutUser();
 
-$servername = "localhost";
-$username = "root";
-$password = "algonquin";
-$databasename = "codehouse";
-
-$connection = new mysqli($servername, $username, $password, $databasename);
+$connection = Connection::getConnection();
 if($connection->connect_error){
     die("Connection failed: ". $connection->connect_error);
 }
@@ -63,7 +59,7 @@ if($connection->connect_error){
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
                 <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
-                <li id="mapIcon" class=""><a class="icon" href="/professor.php?logout=map"><img src="/assets/img/map.png"></a></li>
+                <li id="mapIcon" class=""><a class="icon" href="/map.php"><img src="/assets/img/map.png"></a></li>
                 <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                 <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
             </ul>
@@ -73,60 +69,78 @@ if($connection->connect_error){
 <div class="container-form" >
 
     <form action="edituser.php" method="post">
-        <?php
+        <div id="editing">
+            <?php
+            include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/lib/bcrypt.php";
+            $id = $_SESSION["id"];
+            $sql = "select * from user where id = $id";
+            $result = $connection->query($sql);
 
-        $id = $_SESSION["id"];
-        $sql = "select * from user where id = $id";
-        $result = $connection->query($sql);
+            $row = $result->fetch_assoc();
 
-        $row = $result->fetch_assoc();
 
-        ?>
-        <div class="form-group">
-            <label>First Name: </label>
-            <input name="firstname" type="text" value="<?php echo $row["first_name"]; ?>">
-        </div>
-        <div class="form-group">
-            <label>Last Name: </label>
-            <input name="lastname" type="text" value="<?php echo $row["last_name"]; ?>">
-        </div>
-        <div class="form-group">
-            <label>Email: </label>
-            <input name="email" type="email" size="24" value="<?php echo $row["email"]; ?>">
-        </div>
-        <div class="form-group">
-            <label>Password: </label>
-            <input name="password" type="password" value="<?php echo $row["password"]; ?>"><!--make password field hidden-->
-        </div>
-        <!--        add user type to edit-->
-        <div class="form-group">
-            <button class="btn-success" type="submit" onclick="snackbarFunction()">Save Changes</button>
-            <div id="snackbar">You have successfully saved changes to the user
+            ?>
+            <div class="form-group">
+                <label>First Name: </label>
+                <input name="firstname" type="text" value="<?php echo $row["first_name"]; ?>">
             </div>
-        </div>
+            <div class="form-group">
+                <label>Last Name: </label>
+                <input name="lastname" type="text" value="<?php echo $row["last_name"]; ?>">
+            </div>
+            <div class="form-group">
+                <label>Email: </label>
+                <input name="email" type="email" value="<?php echo $row["email"]; ?>">
+            </div>
+            <div class="form-group">
+                <label>Password: </label>
+                <input name="password" type="password">
+            </div>
+            <div class="form-group">
+                <label>Re-enter Password: </label>
+                <input name="password" type="password">
+            </div>
+            <div class="form-group">
+                <button id="editingbutton" class="btn-success" type="submit" onclick="snackbarFunction()">Save Changes</button>
+            </div>
+            <div class="form-group">
+                <a href="admin.php">
+                    <button id="cancelbutton" class="btn-success" type="button" onclick="snackbar()">Cancel</button>
+                </a>
+            </div>
 
+            <div id="snackbar">No changes were made</div>
+            <script src="./snackbar.js"></script>
+</div>
     </form>
-    <?php
-    if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])||
-        isset($_POST['password'])) {
-        $fn = $_POST["firstname"];
-        $ln = $_POST["lastname"];
-        $em = $_POST["email"];
-        $pw = $_POST["password"];
-        $sql = "update user set first_name = '$fn', last_name = '$ln', email = '$em', password = '$pw' where id = $id";
-        $result = $connection->query($sql);
-        if ($connection->query($sql) === true) {
-            header("Location: admin.php");
-        } else {
-            echo "Error: " . $sql . "<br>" . $connection->error;
-        }
-    }
-    ?>
-    <script src="\assets\js\snackbar.js"></script>
 </div>
 
+<?php
+$changes = false;
 
-
+if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])||
+    isset($_POST['password'])) {
+    $fn = $_POST["firstname"];
+    $ln = $_POST["lastname"];
+    $em = $_POST["email"];
+    if(isset($_POST['password']) != ""){
+        $pw = $_POST["password"];
+        $pass = Bcrypt::hash($pw);
+        $sql = "update user set first_name = '$fn', last_name = '$ln', email = '$em', password = '$pass' where id = $id";
+    }
+    else {
+        $sql = "update user set first_name = '$fn', last_name = '$ln', email = '$em' where id = $id";
+    }
+    $result = $connection->query($sql);
+    if ($connection->query($sql) === true) {
+         header("Location: successful.php?success=2");
+    } else {
+        echo "Error: " . $sql . "<br>" . $connection->error;
+    }
+}
+Connection::closeConnection($connection);
+?>
+</div>
 <?php include 'footer.php'; ?>
 </body>
 </html>

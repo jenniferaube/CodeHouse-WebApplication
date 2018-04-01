@@ -1,11 +1,12 @@
-<!--
+/**
 File: searchresults.php
 Created by: Jennifer Aube
 Date: March 10, 2018
 Last modified: March 19, 2018 by Jennifer Aube
--->
+*/
 <?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
+include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 
 $session = new Session();
 $session->blockPage();
@@ -13,12 +14,7 @@ $session->blockStudent();
 $session->blockProfessor();
 $session->logoutUser();
 
-$servername = "localhost";
-$username = "root";
-$password = "algonquin";
-$databasename = "codehouse";
-
-$connection = new mysqli($servername, $username, $password, $databasename);
+$connection = Connection::getConnection();
 if($connection->connect_error){
     die("Connection failed: ". $connection->connect_error);
 }
@@ -42,7 +38,7 @@ if($connection->connect_error){
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
-<!--    <link rel="stylesheet" type="text/css" href="assets/css/admin/style-deactivateuser.css">-->
+    <link rel="stylesheet" type="text/css" href="assets/css/admin/style-searchresults.css">
 
 </head>
 <body>
@@ -64,7 +60,7 @@ if($connection->connect_error){
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
                 <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
-                <li id="mapIcon" class=""><a class="icon" href="/professor.php?logout=map"><img src="/assets/img/map.png"></a></li>
+                <li id="mapIcon" class=""><a class="icon" href="/admin.php?logout=map"><img src="/assets/img/map.png"></a></li>
                 <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                 <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
             </ul>
@@ -72,27 +68,28 @@ if($connection->connect_error){
     </div>
 </nav>
 
-<div class="form2" id="searchTable" style="margin-top: 100px;margin-left: 10px;margin-right: 10px;">
+<div class="form2" id="searchTable">
     <p>Search results...</p>
     <?php
-    if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])||
-        isset($_POST['username'])) {
+    $fn = $_SESSION['firstname'];
+    $ln = $_SESSION['lastname'];
+    $em = $_SESSION['email'];
 
-    if (!$_POST['firstname'] == "") {
-        $fn = $_POST['firstname'];
+    if (!$_SESSION['firstname'] == "") {
+        $fn = $_SESSION['firstname'];
         $sql = "select * from user where first_name like '%$fn%'";
 
     }
-    if (!$_POST['lastname'] == "") {
+    if (!$_SESSION['lastname'] == "") {
         $ln = $_POST['lastname'];
         $sql = "select * from user where last_name like '%$ln%'";
     }
-    if (!$_POST['email'] == "") {
+    if (!$_SESSION['email'] == "") {
         $em = $_POST['emailaddress'];
         $sql = "select * from user where email like '%$em'";
     }
     ?>
-<!--<form method="post"">-->
+
     <table class="table table-hover" id="table" onclick="rowClicked()">
         <thead>
         <tr>
@@ -106,11 +103,8 @@ if($connection->connect_error){
         </thead>
         <tr onclick="rowClicked()">
 
-<!--            <td> --><?php
+<?php
                 $result = $connection->query($sql);
-//                if ($connection->query($sql) === true) {
-//                    echo "record(s) found";
-//                    $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         // output data of each row
                         while ($row = $result->fetch_assoc()) {
@@ -138,38 +132,30 @@ if($connection->connect_error){
                                 if ($row["type"] == 2) {
                                     echo "student";
                                 } ?></td>
-                            <td><!--<a href="edituser.php">-->
+                            <td><a href="edituser.php">
                                     <button onclick="editClicked()">Edit user</button>
-                                <!--</a>--></td></td>
-                            <td>
+                                </a></td></td>
+                            <td><a href="deactivateuser.php">
                                     <button onclick="deactivateClicked()">Deactivate user</button>
-                                </td>
+                                </a></td>
                             </tr>
                             <?php
                         }
                     } else {
                         echo "0 results";
                     }
-                    //header("Location: searchresults.php");
-                } else {
-                    echo "Error: " . $sql . "<br>" . $connection->error;
-                }
-
-
                 ?>
 
 
 
     </table>
-<!--</form>-->
+
 </div>
 
 <script src="assets/js/searchresults.js"></script>
+
 <?php
-
-
-$connection->close();
-?>
-<?php include 'footer.php'; ?>
+Connection::closeConnection($connection);
+include 'footer.php'; ?>
 </body>
 </html>

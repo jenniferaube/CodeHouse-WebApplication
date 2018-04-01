@@ -2,36 +2,42 @@
 File: style-deactivateuser.css
 Created by: Jennifer Aube
 Date: March 10, 2018
-Last modified: March 19, 2018 by Jennifer Aube
+Last modified: March 31, 2018 by Jennifer Aube
 */
-h2 {
-    color:red;
-    padding-top:100px;
-    padding-bottom: 50px;
+h1 {
+    margin-top: 120px;
+    color: red;
     text-align: center;
- }
+    margin-bottom: 50px;
+}
+#userinfo {
+    text-align: center;
+    font-size: 22px;
+}
+#deactivatebuttons {
+    margin-top: 50px;
+    margin-left: 570px;
+}
 #deactivate{
-    margin-left: 520px;
     margin-right: 100px;
 }
-/*snackbar cited from https://www.w3schools.com/howto/howto_js_popup.asp*/
+/*snackbar css was taken from https://www.w3schools.com/howto/howto_js_snackbar.asp*/
 #snackbar {
-    visibility: hidden; /* Hidden by default. Visible on click */
-    min-width: 250px; /* Set a default minimum width */
-    margin-left: -125px; /* Divide value of min-width by 2 */
-    background-color: coral; /* Black background color */
-    color: #fff; /* White text color */
-    text-align: center; /* Centered text */
-    border-radius: 2px; /* Rounded borders */
-    padding: 16px; /* Padding */
-    position: fixed; /* Sit on top of the screen */
-    z-index: 1; /* Add a z-index if needed */
-    left: 50%; /* Center the snackbar */
-    bottom: 50px; /* 30px from the bottom */
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: darkgreen;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
 }
-
-/* Show the snackbar when clicking on a button (class added with JavaScript) */
 #snackbar.show {
-    visibility: visible; /* Show the snackbar */
-
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }

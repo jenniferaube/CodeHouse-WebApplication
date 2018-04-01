@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -23,17 +22,17 @@
         <title>Algonquin College - Room Finder</title>
 
         <script type="text/javascript">
-            var main = document.createElement('link')
-            main.setAttribute("rel", "stylesheet")
-            main.setAttribute("type", "text/css")
-            main.setAttribute("href", "App_Themes/e-learning/css/template.css")
-            main.setAttribute("media", "screen")
+            var main = document.createElement('link');
+            main.setAttribute("rel", "stylesheet");
+            main.setAttribute("type", "text/css");
+            main.setAttribute("href", "App_Themes/e-learning/css/template.css");
+            main.setAttribute("media", "screen");
 
-            var mobile = document.createElement('link')
-            mobile.setAttribute("rel", "stylesheet")
-            mobile.setAttribute("type", "text/css")
-            mobile.setAttribute("href", "App_Themes/e-learning/css/mobile.css")
-            mobile.setAttribute("media", "screen")
+            var mobile = document.createElement('link');
+            mobile.setAttribute("rel", "stylesheet");
+            mobile.setAttribute("type", "text/css");
+            mobile.setAttribute("href", "App_Themes/e-learning/css/mobile.css");
+            mobile.setAttribute("media", "screen");
 
             if (DetectTierIphone()) {
                 if (typeof main != "undefined")
@@ -406,8 +405,8 @@
             }
 
             function zoom(factor) {
-                var xDiff = map.extent.xmax - map.extent.xmin
-                var yDiff = map.extent.ymax - map.extent.ymin
+                var xDiff = map.extent.xmax - map.extent.xmin;
+                var yDiff = map.extent.ymax - map.extent.ymin;
                 var shiftx = xDiff - (xDiff * factor);
                 var shifty = yDiff - (yDiff * factor);
 
