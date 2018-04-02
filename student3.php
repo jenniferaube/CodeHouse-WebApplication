@@ -26,6 +26,15 @@ $session->logoutUser();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Schedule</title>
 
+    <!-- Jquery@1.9.1 -->
+    <script type="text/javascript" src="resources/jquery/js/jquery.js"></script>
+    <!-- moment -->
+    <script type="text/javascript" src="resources/moment/moment-with-locales.js"></script>
+    <!-- Bootstrap@3.3.7 -->
+    <script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+
+    <!--bootstrap-datetimepicker -->
+    <script type="text/javascript" src="resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
     <!-- Jquery-UI@1.9.2 -->
     <link rel="stylesheet" type="text/css" href="resources/jquery-ui/css/jquery-ui.css">
 
@@ -86,10 +95,17 @@ $session->logoutUser();
                 <div class="controls">
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="form_time">Time *</label>
-                                <input id="form_time" type="time" name="time" class="form-control" placeholder="Please select a time *" required="required" data-error="A time must be selected.">
+                                <input id="form_time" type="text" name="time" class="form-control input-lg" placeholder="Please select a time *" required="required" data-error="A time must be selected.">
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#form_time').datetimepicker({
+                                            format: 'LT'
+                                        })
+                                    });
+                                </script>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
@@ -113,9 +129,9 @@ $session->logoutUser();
     </div>
 </div>
 
-<!-- Jquery@1.9.1 -->
+
 <?php include 'footer.php'; ?>
-<script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
+
 
 <script src="assets/js/history.js"></script>
 <script src="assets/js/timeout.js"></script>

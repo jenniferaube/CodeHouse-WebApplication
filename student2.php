@@ -25,14 +25,27 @@ $session->logoutUser();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Schedule</title>
 
+    <!-- Jquery@1.9.1 -->
+    <script type="text/javascript" src="resources/jquery/js/jquery.js"></script>
+    <!-- moment -->
+    <script type="text/javascript" src="resources/moment/moment-with-locales.js"></script>
+    <!-- Bootstrap@3.3.7 -->
+    <script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+
+    <!--bootstrap-datetimepicker -->
+    <script type="text/javascript" src="resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+
     <!-- Jquery-UI@1.9.2 -->
     <link rel="stylesheet" type="text/css" href="resources/jquery-ui/css/jquery-ui.css">
 
     <!-- Bootstrap@3.3.7 -->
     <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
 
-    <!-- bootstrap-datepicker-->
-    <link rel="stylesheet" type="text/css" href="resources/bootstrap-datepicker/css/bootstrap-datepicker3.css">
+    <!-- bootstrap-datepicker
+    <link rel="stylesheet" type="text/css" href="resources/bootstrap-datepicker/css/bootstrap-datepicker.css">-->
+
+    <!-- bootstrap-datetimepicker -->
+    <link rel="stylesheet" type="text/css" href="resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
 
     <!-- Mottie Keyboard -->
     <link rel="stylesheet" type="text/css" href="resources/mottie-keyboard/css/keyboard.css">
@@ -88,17 +101,21 @@ $session->logoutUser();
                 <div class="controls">
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="datepicker">Date *</label>
-                                <div class='input-group date' id='datepicker'>
-                                    <input type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
+                                <label for="datetimepicker">Date *</label>
+                                    <input type='text' id='datetimepicker' name="datetimepicker" class="form-control input-lg" required="required" placeholder="Select a Date"
+                                           data-error="A date must be selected."/>
+
+
                                 <script type="text/javascript">
-                                    $('#datepicker').datepicker();
+                                    $(function () {
+                                        $('#datetimepicker').datetimepicker({
+                                            daysOfWeekDisabled: [0,6],
+                                            format: 'L',
+                                            defaultDate: ""
+                                        })
+                                    });
                                 </script>
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -127,12 +144,7 @@ $session->logoutUser();
     </div>
 </div>
 
-<!-- Jquery@1.9.1 -->
-<script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
-<!-- Bootstrap@3.3.7 -->
-<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
-<!-- bootstrap-datepicker -->
-<script type="text/javascript" src="resources/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
 
 <?php include 'footer.php'; ?>
 
