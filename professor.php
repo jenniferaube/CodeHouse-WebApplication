@@ -184,7 +184,7 @@ $session->logoutUser();
 
 
 
-<div class="pull-right" style="position: relative;margin-right: 80px;">
+<div class="pull-right" style="position: relative;margin-right: 40px;">
     <div class="row">
         <button id="btn_upload_file" style="color:#FFF; background-color: #006341;">Upload Schedule File</button>
     </div>
