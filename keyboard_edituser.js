@@ -48,7 +48,7 @@ $(function () {
                 // input & preview
                 // "label-default" for a darker background
                 // "light" for white text
-                input: 'form-control input-sm dark',
+                input: 'form-control input-xs dark',
                 // keyboard container
                 container: 'center-block well',
                 // default state
@@ -107,7 +107,7 @@ $(function () {
                 // input & preview
                 // "label-default" for a darker background
                 // "light" for white text
-                input: 'form-control input-sm dark',
+                input: 'form-control input-xs dark',
                 // keyboard container
                 container: 'center-block well',
                 // default state
@@ -166,7 +166,7 @@ $(function () {
                 // input & preview
                 // "label-default" for a darker background
                 // "light" for white text
-                input: 'form-control input-sm dark',
+                input: 'form-control input-xs dark',
                 // keyboard container
                 container: 'center-block well',
                 // default state
@@ -225,7 +225,7 @@ $(function () {
                 // input & preview
                 // "label-default" for a darker background
                 // "light" for white text
-                input: 'form-control input-sm dark',
+                input: 'form-control input-xs dark',
                 // keyboard container
                 container: 'center-block well',
                 // default state
@@ -284,7 +284,7 @@ $(function () {
                 // input & preview
                 // "label-default" for a darker background
                 // "light" for white text
-                input: 'form-control input-sm dark',
+                input: 'form-control input-xs dark',
                 // keyboard container
                 container: 'center-block well',
                 // default state

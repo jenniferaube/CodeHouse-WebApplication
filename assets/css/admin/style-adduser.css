@@ -5,8 +5,31 @@ Date: March 10, 2018
 Last modified: March 30, 2018 by Jennifer Aube
 */
 .container-formadduser {
-    margin-top: 100px;
+    margin-top: 60px;
     margin-left: 20px;
+
+}
+.addoneuser{
+    width: 200%;
+
+}
+#keyboard-fname{
+    height:5%;
+}
+#keyboard-lname{
+    height:5%;
+}
+#keyboard-email{
+    height:5%;
+}
+#keyboard-confirmemail{
+    height:5%;
+}
+#keyboard-pwd{
+    height:5%;
+}
+#keyboard-confirmpwd{
+    height:5%;
 }
 #addingusers{
     margin-left: 50px;
@@ -22,14 +45,15 @@ Last modified: March 30, 2018 by Jennifer Aube
     position: absolute;
     left: 820px;
     top: 20px;
-    width: 400px;
+    width: 500px;
+    height:15%;
 
 }
 #uploading {
     margin-top: 100px;
     border: 1px solid black;
     border-radius: 5px;
-    padding:2px;
+    padding:4px;
 }
 #uploadbutton {
     float: right;

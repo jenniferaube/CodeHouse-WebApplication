@@ -91,7 +91,7 @@ $row = $result->fetch_assoc();
     <button class="btn btn-primary" type="button" onclick="snackbar()">Cancel</button></a>
 
 <div id="snackbar">No changes were made</div>
-    <script src="./snackbar.js"></script>
+    <script src="assets/js/snackbar.js"></script>
 </div>
 </form>
 <?php

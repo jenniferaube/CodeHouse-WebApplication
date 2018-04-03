@@ -1,4 +1,6 @@
+
 <?php
+ob_start();
 /*
 File: adduser.php
 Created by: Jennifer Aube
@@ -10,10 +12,10 @@ include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/lib/bcrypt.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
+$session->logoutUser();
 
 $connection = Connection::getConnection();
 if($connection->connect_error){
@@ -119,7 +121,7 @@ if (isset($_POST['uploadbutton'])) {
 <div class="container-formadduser">
     <div id="addingusers">
         <form action="adduser.php" method="post">
-
+<div class="addoneuser">
             <div class="checkbox-parent">
                 <label>User Type:</label>
                 <label><input type="radio" id="1" data-toggle="toggle" checked name="usertype" value="professor" >Professor</label>
@@ -151,12 +153,12 @@ if (isset($_POST['uploadbutton'])) {
             </div>
             <div class="form-group">
                 <a href="admin.php">
-                    <button id="cancelbutton" class="btn-success" type="button" >Cancel</button>
+                    <button id="cancelbutton" class="btn btn-success btn-xs" type="button" >Cancel</button>
                 </a>
             </div>
             <div class="form-group">
                 <a href="successful.php?success=1">
-                    <button id="addingbutton" class="btn-success" type="submit">Add User</button>
+                    <button id="addingbutton" class="btn btn-success btn-xs" type="submit">Add User</button>
                 </a>
             </div>
 
@@ -200,8 +202,8 @@ if (isset($_POST['uploadbutton'])) {
                     $sql = "insert into user values (default, '$fn', '$ln', '$em', '$pass', CURRENT_TIME, default, '$ut')";
 
                     if ($connection->query($sql) === true) {
-                        //exit(header("Location: successful.php?success=1")); //doesnt work
-                        alert("User has been added");
+                        header("Location: successful.php?success=1"); //doesnt work
+                        //alert("User has been added");
                     } else {
                         alert("Database error: User was not added to database");
                     }
@@ -234,16 +236,17 @@ if (isset($_POST['uploadbutton'])) {
                     window.history.back();
                 }
             </script>
+</div>
         </form>
         <form method="post" enctype="multipart/form-data" action="">
         <div id="uploadingusers" >
             <div id="uploading">
                 <form action="upload.php" id="upload_form" method="post" enctype="multipart/form-data" action="<?php $_SERVER['PHP_SELF'] ?>">
-                    <input type="file" name="upload_users"  id="upload_users" placeholder="Choose file">
+                    <input type="file" name="upload_users" id="upload_users" placeholder="Choose file">
                 </form>
             </div>
 
-            <button id="uploadbutton" name="uploadbutton" class="btn-success" type="submit">Upload File</button>
+            <button id="uploadbutton" name="uploadbutton" class="btn btn-success btn-xs" type="submit">Upload File</button>
 
         </div>
         </form>

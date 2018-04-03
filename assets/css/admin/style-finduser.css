@@ -6,19 +6,30 @@ Last modified: March 31, 2018 by Jennifer Aube
 */
 p{
     margin-top: 150px;
-    margin-left: 68px;
+    margin-left: 71px;
 }
 #findusers-form{
     margin-left: 50px;
     margin-right: auto;
     margin-top: 20px;
-    width: 360px;
-    padding: 20px;
+    width: 50%;
+
+    padding: 25px;
     /*position: relative;*/
     -webkit-border-radius: 15px;
     border-radius: 15px;
     align-content: center;
 
+}
+#keyboard-fname{
+    height: 2%;
+}
+#keyboard-lname{
+    height: 5%;
+}
+#keyboard-email{
+    margin-bottom: 5px;
+    height: 5%;
 }
 #findusers input {
     float: right;

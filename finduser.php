@@ -6,18 +6,20 @@ Created by: Jennifer Aube
 Date: March 10, 2018
 Last modified: March 19, 2018 by Jennifer Aube
 */
+ob_start();
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
+$session->logoutUser();
 
 $connection = Connection::getConnection();
 if($connection->connect_error){
     die("Connection failed: ". $connection->connect_error);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -85,11 +87,11 @@ if($connection->connect_error){
                     <input id="keyboard-email" type="email" name="email">
                 </div>
                 <div class="form-group">
-                    <button id="searchbutton" class="btn-success" type="submit">Search</button>
+                    <button id="searchbutton" class="btn btn-success btn-xs" type="submit">Search</button>
                 </div>
                 <div class="form-group">
                     <a href="admin.php">
-                        <button id="cancelbutton" class="btn-success" type="button">Cancel</button>
+                        <button id="cancelbutton" class="btn btn-success btn-xs" type="button">Cancel</button>
                     </a>
                 </div>
             </div>
@@ -109,7 +111,7 @@ if($connection->connect_error){
 <script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
 
 <!-- Custom Javascript -->
-<script type="text/javascript" src="assets/js/keyboard-login.js"></script>
+<script type="text/javascript" src="./keyboard_finduser.js"></script>
 <script src="assets/js/history.js"></script>
 <script src="assets/js/post.js"></script>
 <script src="assets/js/timeout.js"></script>

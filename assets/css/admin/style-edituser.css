@@ -15,6 +15,25 @@ Last modified: March 31, 2018 by Jennifer Aube
     border-radius: 15px;
     align-content: center;
 }
+#editing{
+    width: 150%;
+}
+#keyboard-fname{
+    height: 5%;
+}
+#keyboard-lname{
+    height: 5%;
+}
+#keyboard-email{
+    height: 5%;
+}
+#keyboard-pwd{
+    height: 5%;
+}
+#keyboard-confirmpwd{
+    height: 5%;
+    margin-bottom: 5px;
+}
 #editing input {
     float: right;
 }

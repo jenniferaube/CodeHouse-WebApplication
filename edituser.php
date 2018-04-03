@@ -10,10 +10,10 @@ include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
+$session->logoutUser();
 
 $connection = Connection::getConnection();
 if($connection->connect_error){
@@ -76,10 +76,7 @@ if($connection->connect_error){
             $id = $_SESSION["id"];
             $sql = "select * from user where id = $id";
             $result = $connection->query($sql);
-
             $row = $result->fetch_assoc();
-
-
             ?>
             <div class="form-group">
                 <label>First Name: </label>
@@ -102,16 +99,16 @@ if($connection->connect_error){
                 <input id="keyboard-confirmpwd" name="confirm-password" type="password">
             </div>
             <div class="form-group">
-                <button id="editingbutton" class="btn-success" type="submit" onclick="snackbarFunction()">Save Changes</button>
+                <button id="editingbutton" class="btn btn-success btn-xs" type="submit" onclick="snackbarFunction()">Save Changes</button>
             </div>
             <div class="form-group">
                 <a href="admin.php">
-                    <button id="cancelbutton" class="btn-success" type="button" onclick="snackbar()">Cancel</button>
+                    <button id="cancelbutton" class="btn btn-success btn-xs" type="button" onclick="snackbar()">Cancel</button>
                 </a>
             </div>
 
             <div id="snackbar">No changes were made</div>
-            <script src="./snackbar.js"></script>
+            <script src="assets/js/snackbar.js"></script>
         </div>
     </form>
 </div>
@@ -130,7 +127,7 @@ if($connection->connect_error){
 <script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
 
 <!-- Custom Javascript -->
-<script type="text/javascript" src="assets/js/keyboard-login.js"></script>
+<script type="text/javascript" src="./keyboard_edituser.js"></script>
 <script src="assets/js/history.js"></script>
 <script src="assets/js/post.js"></script>
 <script src="assets/js/timeout.js"></script>
@@ -159,7 +156,7 @@ if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])
     if ($connection->query($sql) === true) {
          header("Location: successful.php?success=2");
     } else {
-        alert("Database error, user has not been changed");
+        alert("Error, user has not been changed");
     }
 
 

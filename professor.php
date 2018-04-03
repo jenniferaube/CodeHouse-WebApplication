@@ -14,10 +14,10 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/session.php";
  * Prevent page redirect to other user page by using blockProfessor()
  */
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockAdmin();
-$session->logoutUser();*/
+$session->logoutUser();
 ?>
 
 <!DOCTYPE html>
