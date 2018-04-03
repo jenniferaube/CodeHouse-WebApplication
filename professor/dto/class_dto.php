@@ -1,5 +1,16 @@
 <?php
+<<<<<<< HEAD
 
+=======
+/*
+ * File: class_dto.php
+ * Author: Chao Gu
+ * Course: CST8334 - 310
+ * Project: Final project
+ * Date: Mar, 2018
+ * Professor: Anu Thomas, Howard Rosenblum
+ */
+>>>>>>> 529bc08c3d05c5ed1d677831e31f019581f6774b
 class class_dto {
     private $class_id;
     private $class_start_time;

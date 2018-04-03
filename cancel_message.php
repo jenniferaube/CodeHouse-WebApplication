@@ -65,7 +65,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/professor/dao/class_dao.php";
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class=""><a class="icon" href="/student.php"><img src="/assets/img/home.png"></a></li>
+                <li class=""><a class="icon" href=""><img src="/assets/img/home.png"></a></li>
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
                 <li id="mapIcon" class=""><a class="icon" href="/student.php?logout=map"><img src="/assets/img/map.png"></a>

@@ -1,6 +1,6 @@
 <?php
     include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
-    include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/sql/connection.php";
+    include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/dao/appointment_DAO.php";
 
     $session = new Session();
     $session->blockPage();
@@ -69,9 +69,9 @@
 
                 <h1>Request Appointment</h1>
 
-                <p class="lead">Please fill out the form and submit, you will receive an email confirmation within 24 hours.</p>
+                <p class="lead">Please select the professor you wish to contact.</p>
 
-                <form id="contact-form" method="post" action="message_sent.php" role="form">
+                <form id="contact-form" method="post" action="student2.php" role="form">
 
                     <div class="messages"></div>
 
@@ -79,58 +79,46 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <!-- Temporary list population -->
                                     <label for="form_prof">Professor *</label>
+                                    <select id="form_prof" name="prof" class="form-control form-control-lg" required="required" data-error="Professor must exist.">
+                                        <option value="" selected disabled>Choose Professor</option>
                                     <?php
                                     $conn = Connection::getConnection();
-                                    $sql = 'select concat(first_name," ", last_name) as "Name", email from user where type LIKE "1" and activated like "1" ';
-                                    $result = mysqli_query($conn, $sql);?>
-                                    <input id="form_prof" type="text" list="professor_list" name="prof" class="form-control" placeholder="Find Professor *" required="required" data-error="Professor must exist.">
-                                    <datalist id="professor_list">
-                                    <?php while($row = mysqli_fetch_array($result)) {
-                                        ?> <option value="<?php echo $row['Name']; ?> - <?php echo $row['email']; ?>"><?php echo $row['Name']; ?></option>
+                                    $student = $_SESSION['userLogin'];
+                                    $sql = "SELECT DISTINCT concat(prof.first_name,' ', prof.last_name) as 'Name', prof.email 
+                                      FROM ( SELECT c.course_id, u.first_name, u.last_name, u.email
+                                          FROM user u
+                                          INNER JOIN professor p ON u.id = p.prof_id
+                                          INNER JOIN course c ON c.prof_id = p.prof_id) prof
+                                      INNER JOIN 
+                                        ( SELECT c.course_id
+                                          FROM user u
+                                          INNER JOIN student s ON s.student_id = u.id
+                                          INNER JOIN program p ON p.program_id = s.program_id
+                                          INNER JOIN course c ON c.program_id = p.program_id
+                                          WHERE u.email LIKE '$student') stu 
+                                      ON prof.course_id = stu.course_id;";
+                                    $result = mysqli_query($conn, $sql);
+                                    while($row =  mysqli_fetch_array($result)) {
+                                        ?><option> <?php echo $row['Name']; ?> - <?php echo $row['email']; ?></option>
                                     <?php } ?>
-                                    </datalist>
-                                    <?php mysqli_close($conn); ?>
+                                    </select>
                                     <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="form_date">Date *</label>
-                                    <input id="form_date" type="date" name="date" class="form-control" placeholder="Please select a date *" required="required" data-error="Valid date format is required.">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="form_time">Time *</label>
-                                    <input id="form_time" type="time" name="time" class="form-control" placeholder="Please select a time *" required="required" data-error="A time must be selected.">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                        </div>
 
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="form_message">Message *</label>
-                                    <textarea id="form_message" name="message" class="form-control" placeholder="Reason for Appointment *" rows="4" required="required" data-error="Reason required."></textarea>
-                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <input type="submit" class="btn btn-success btn-send" value="Send Request">
-                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p class="text-muted"><strong>*</strong> These fields are required.</p>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="submit" class="btn btn-success btn-send" value="Next">
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="text-muted"><strong>*</strong> These fields are required.</p>
+                                </div>
+                            </div>
                     </div>
 
                 </form>
