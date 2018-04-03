@@ -1,4 +1,12 @@
 <?php
+/*
+ * File: student_dao.php
+ * Author: Qiuju Zhu
+ * Course: CST8334 - 310
+ * Project: Final project
+ * Date: Mar, 2018
+ * Professor: Anu Thomas, Howard Rosenblum
+ */
 include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/sql/connection.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/professor/dto/student.php";
 
