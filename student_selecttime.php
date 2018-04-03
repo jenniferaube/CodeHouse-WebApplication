@@ -97,19 +97,34 @@ $session->logoutUser();
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="form_time">Time *</label>
-                                <input id="form_time" type="text" name="time" class="form-control input-lg" placeholder="Please select a time" required="required" data-error="A time must be selected.">
-                                <script type="text/javascript">
-                                    $(function () {
-                                        $('#form_time').datetimepicker({
-                                            format: 'LT'
-                                        })
-                                    });
-                                </script>
+						
+                                <label for="form_time">Time*</label>
+								
+								 <select id="form_time" name="time" class="form-control form-control-lg" required="required" data-error="Time slot must be available.">
+                                        <option value="" selected disabled>Select Time </option>
+                                    <?php
+                                    $conn = Connection::getConnection();
+									list($month, $day, $year) = explode("/", $_POST["datetimepicker"]);
+                                    $student = $_SESSION['userLogin'];
+									$prof = $_POST['PROFID'];
+									$datetimepicker = $_POST["datetimepicker"];
+									$final_date = "$year"."-"."$month"."-"."$day"."%";
+									//Format is yyyy-mm-dd in database.
+                                    $sql = "select class_start_time as time from class where class_start_time like '$final_date%' and course_id in
+									(select course_id from course where prof_id ='$prof' and course_id like '9999%');";
+                                    $result = mysqli_query($conn, $sql);
+									
+                                    while($row =  mysqli_fetch_array($result)) {
+                                        ?><option> <?php echo $row['time']; ?></option>
+                                    <?php } ?> 
+                                    </select>
+									
+                                
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
                     </div>
+					<p class="lead">Please type in your reason for requesting appointment.</p>
 					    <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">

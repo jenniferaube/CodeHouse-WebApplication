@@ -14,6 +14,7 @@ $session->blockPage();
 $session->blockProfessor();
 $session->blockAdmin();
 $session->logoutUser();
+
 ?>
 
 <!DOCTYPE html>
@@ -92,14 +93,46 @@ $session->logoutUser();
 
             <h1>Request Appointment</h1>
 
-            <p class="lead">Please select an available date, within 5 days, minimum 24 hours notice.</p>
+            <p class="lead">Please select the professor you wish to contact.</p>
 
             <form id="contact-form" method="post" action="student3.php" role="form">
 
                 <div class="messages"></div>
 
                 <div class="controls">
+				<div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="form_prof">Professor *</label>
+                                    <select id="form_prof" name="prof" class="form-control form-control-lg" required="required" data-error="Professor must exist.">
+                                        <option value="" selected disabled>Choose Professor</option>
+                                    <?php
+                                    $conn = Connection::getConnection();
+                                    $student = $_SESSION['userLogin'];
+                                    $sql = "SELECT DISTINCT concat(prof.first_name,' ', prof.last_name) as 'Name', prof.email 
+                                      FROM ( SELECT c.course_id, u.first_name, u.last_name, u.email
+                                          FROM user u
+                                          INNER JOIN professor p ON u.id = p.prof_id
+                                          INNER JOIN course c ON c.prof_id = p.prof_id) prof
+                                      INNER JOIN 
+                                        ( SELECT c.course_id
+                                          FROM user u
+                                          INNER JOIN student s ON s.student_id = u.id
+                                          INNER JOIN program p ON p.program_id = s.program_id
+                                          INNER JOIN course c ON c.program_id = p.program_id
+                                          WHERE u.email LIKE '$student') stu 
+                                      ON prof.course_id = stu.course_id;";
+                                    $result = mysqli_query($conn, $sql);
+                                    while($row =  mysqli_fetch_array($result)) {
+                                        ?><option> <?php echo $row['Name']; ?> - <?php echo $row['email']; ?></option>
+                                    <?php } ?>
+                                    </select>
+                                    <div class="help-block with-errors"></div>
 
+                                </div>
+                            </div>
+                        </div>
+<p class="lead">Please select an available date, within 5 days, minimum 24 hours notice.</p>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
