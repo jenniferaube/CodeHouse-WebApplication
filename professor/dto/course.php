@@ -1,4 +1,12 @@
 <?php
+/*
+ * File: course.php
+ * Author: Chao Gu
+ * Course: CST8334 - 310
+ * Project: Final project
+ * Date: Mar, 2018
+ * Professor: Anu Thomas, Howard Rosenblum
+ */
 class course {
     private $course_id;
     private $course_abbr;
