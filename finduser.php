@@ -1,17 +1,18 @@
-/**
+
+<?php
+/*
 File: finduser.php
 Created by: Jennifer Aube
 Date: March 10, 2018
 Last modified: March 19, 2018 by Jennifer Aube
 */
-<?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 $session = new Session();
-$session->blockPage();
+/*$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();
+$session->logoutUser();*/
 
 $connection = Connection::getConnection();
 if($connection->connect_error){
@@ -72,16 +73,16 @@ if($connection->connect_error){
         <form id="searchForm" method="post" action="finduser.php">
             <div id="findusers-form">
                 <div class="form-group">
-                    <label>First Name: </label>
-                    <input type="text" name="firstname">
+                    <label for="keyboard-text">First Name: </label>
+                    <input id="keyboard-fname" type="text" name="firstname">
                 </div>
                 <div class="form-group">
-                    <label>Last Name: </label>
-                    <input type="text" name="lastname">
+                    <label for="keyboard-text">Last Name: </label>
+                    <input id="keyboard-lname" type="text" name="lastname">
                 </div>
                 <div class="form-group">
-                    <label>Email: </label>
-                    <input type="email" name="email">
+                    <label for="keyboard-text">Email: </label>
+                    <input id="keyboard-email" type="email" name="email">
                 </div>
                 <div class="form-group">
                     <button id="searchbutton" class="btn-success" type="submit">Search</button>
@@ -94,6 +95,24 @@ if($connection->connect_error){
             </div>
         </form>
     </div>
+<script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
+
+<!-- Jquery-UI@1.9.2 -->
+<script type="text/javascript" src="resources/jquery-ui/js/jquery-ui.js"></script>
+
+<!-- Mottie Keyboard -->
+<script type="text/javascript" src="resources/mottie-keyboard/js/jquery.keyboard.js"></script>
+<script type="text/javascript" src="resources/mottie-keyboard/js/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="resources/mottie-keyboard/js/jquery.keyboard.extension-typing.min.js"></script>
+
+<!-- Bootstrap@3.3.7 -->
+<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+
+<!-- Custom Javascript -->
+<script type="text/javascript" src="assets/js/keyboard-login.js"></script>
+<script src="assets/js/history.js"></script>
+<script src="assets/js/post.js"></script>
+<script src="assets/js/timeout.js"></script>
 <?php
 $errors = false;
 if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])) {

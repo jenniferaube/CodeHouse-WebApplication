@@ -34,7 +34,7 @@ Last modified: March 30, 2018 by Jennifer Aube
 #uploadbutton {
     float: right;
 }
-#form {
+.form {
     float: right;
 }
 #addingbutton {

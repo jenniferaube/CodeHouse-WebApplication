@@ -1,4 +1,5 @@
 <?php
+
 class class_dto {
     private $class_id;
     private $class_start_time;

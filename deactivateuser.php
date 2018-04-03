@@ -1,10 +1,11 @@
-/**
+
+<?php
+/*
 File: deactivateuser.php
 Created by: Jennifer Aube
 Date: March 10, 2018
 Last modified: March 31, 2018 by Jennifer Aube
 */
-<?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 
@@ -101,7 +102,7 @@ if(isset($_POST["deactivate"])){
        header("Location: successful.php?success=0");
     }
     else {
-        echo "Error: " . $sql . "<br>" . $connection->error;
+        alert("Database error: user was not deactivated");
     }
 }
 function alert($msg) {

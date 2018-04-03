@@ -1,18 +1,19 @@
-/**
+
+<?php
+/*
 File: edituser.php
 Created by: Jennifer Aube
 Date: March 10, 2018
 Last modified: March 31, 2018 by Jennifer Aube
 */
-<?php
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 
 $session = new Session();
-$session->blockPage();
+/*$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();
+$session->logoutUser();*/
 
 $connection = Connection::getConnection();
 if($connection->connect_error){
@@ -82,23 +83,23 @@ if($connection->connect_error){
             ?>
             <div class="form-group">
                 <label>First Name: </label>
-                <input name="firstname" type="text" value="<?php echo $row["first_name"]; ?>">
+                <input id="keyboard-fname" name="firstname" type="text" value="<?php echo $row["first_name"]; ?>">
             </div>
             <div class="form-group">
                 <label>Last Name: </label>
-                <input name="lastname" type="text" value="<?php echo $row["last_name"]; ?>">
+                <input id="keyboard-lname" name="lastname" type="text" value="<?php echo $row["last_name"]; ?>">
             </div>
             <div class="form-group">
                 <label>Email: </label>
-                <input name="email" type="email" value="<?php echo $row["email"]; ?>">
+                <input id="keyboard-email" name="email" type="email" value="<?php echo $row["email"]; ?>">
             </div>
             <div class="form-group">
                 <label>Password: </label>
-                <input name="password" type="password">
+                <input id="keyboard-pwd" name="password" type="password">
             </div>
             <div class="form-group">
                 <label>Re-enter Password: </label>
-                <input name="password" type="password">
+                <input id="keyboard-confirmpwd" name="confirm-password" type="password">
             </div>
             <div class="form-group">
                 <button id="editingbutton" class="btn-success" type="submit" onclick="snackbarFunction()">Save Changes</button>
@@ -111,10 +112,28 @@ if($connection->connect_error){
 
             <div id="snackbar">No changes were made</div>
             <script src="./snackbar.js"></script>
-</div>
+        </div>
     </form>
 </div>
 
+<script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
+
+<!-- Jquery-UI@1.9.2 -->
+<script type="text/javascript" src="resources/jquery-ui/js/jquery-ui.js"></script>
+
+<!-- Mottie Keyboard -->
+<script type="text/javascript" src="resources/mottie-keyboard/js/jquery.keyboard.js"></script>
+<script type="text/javascript" src="resources/mottie-keyboard/js/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="resources/mottie-keyboard/js/jquery.keyboard.extension-typing.min.js"></script>
+
+<!-- Bootstrap@3.3.7 -->
+<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+
+<!-- Custom Javascript -->
+<script type="text/javascript" src="assets/js/keyboard-login.js"></script>
+<script src="assets/js/history.js"></script>
+<script src="assets/js/post.js"></script>
+<script src="assets/js/timeout.js"></script>
 <?php
 $changes = false;
 
@@ -124,9 +143,14 @@ if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])
     $ln = $_POST["lastname"];
     $em = $_POST["email"];
     if(isset($_POST['password']) != ""){
-        $pw = $_POST["password"];
-        $pass = Bcrypt::hash($pw);
-        $sql = "update user set first_name = '$fn', last_name = '$ln', email = '$em', password = '$pass' where id = $id";
+        if(isset($_POST['password']) == $_POST['confirm-password']){
+            $pw = $_POST["password"];
+            $pass = Bcrypt::hash($pw);
+            $sql = "update user set first_name = '$fn', last_name = '$ln', email = '$em', password = '$pass' where id = $id";
+        }
+        else{
+           alert("Both password do not match");
+        }
     }
     else {
         $sql = "update user set first_name = '$fn', last_name = '$ln', email = '$em' where id = $id";
@@ -135,8 +159,13 @@ if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])
     if ($connection->query($sql) === true) {
          header("Location: successful.php?success=2");
     } else {
-        echo "Error: " . $sql . "<br>" . $connection->error;
+        alert("Database error, user has not been changed");
     }
+
+
+}
+function alert($msg) {
+    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
 Connection::closeConnection($connection);
 ?>
