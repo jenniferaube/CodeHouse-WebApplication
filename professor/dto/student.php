@@ -1,5 +1,12 @@
 <?php
-
+/*
+ * File: student.php
+ * Author: Chao Gu
+ * Course: CST8334 - 310
+ * Project: Final project
+ * Date: Mar, 2018
+ * Professor: Anu Thomas, Howard Rosenblum
+ */
 class student
 {
     private $student_id;

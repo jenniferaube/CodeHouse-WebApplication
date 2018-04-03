@@ -1,4 +1,12 @@
 <?php
+/*
+ * File: class_dto.php
+ * Author: Chao Gu
+ * Course: CST8334 - 310
+ * Project: Final project
+ * Date: Mar, 2018
+ * Professor: Anu Thomas, Howard Rosenblum
+ */
 class class_dto {
     private $class_id;
     private $class_start_time;
