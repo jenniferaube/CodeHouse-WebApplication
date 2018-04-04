@@ -88,7 +88,7 @@ $session->logoutUser();
 
             <p class="lead">Please select an appointment time.</p>
 
-            <form id="contact-form" method="post" action="student4.php" role="form">
+            <form id="contact-form" method="post" action="message_sent.php" role="form">
 
                 <div class="messages"></div>
 
@@ -106,18 +106,26 @@ $session->logoutUser();
                                     $conn = Connection::getConnection();
 									list($month, $day, $year) = explode("/", $_POST["datetimepicker"]);
                                     $student = $_SESSION['userLogin'];
-									$prof = $_POST['PROFID'];
+									$prof = $_POST['form_prof'];
+									
 									$datetimepicker = $_POST["datetimepicker"];
 									$final_date = "$year"."-"."$month"."-"."$day"."%";
 									//Format is yyyy-mm-dd in database.
-                                    $sql = "select class_start_time as time from class where class_start_time like '$final_date%' and course_id in
+                                    $sql = "select distinct class_start_time as office from class where class_start_time like '$final_date' and course_id in
 									(select course_id from course where prof_id ='$prof' and course_id like '9999%');";
                                     $result = mysqli_query($conn, $sql);
 									
                                     while($row =  mysqli_fetch_array($result)) {
-                                        ?><option> <?php echo $row['time']; ?></option>
+                                        ?><option> <?php echo $row['office']; ?></option>
                                     <?php } ?> 
                                     </select>
+									<?php 
+									
+									$sql = "select u.email as mail from user u where u.id = '$prof';";
+									$result = mysqli_query($conn, $sql);
+									 
+									$_SESSION['selected_prof'] = mysqli_fetch_array($result)['mail'];
+									?>
 									
                                 
                                 <div class="help-block with-errors"></div>
