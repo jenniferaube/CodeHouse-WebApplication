@@ -1,4 +1,9 @@
 <?php
+	require 'PHPMailer/src/PHPMailer.php';
+	require 'PHPMailer/src/Exception.php';
+	require 'PHPMailer/src/SMTP.php';
+	
+	$mail = new PHPMailer\PHPMailer\PHPMailer();
     include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
     include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/sql/connection.php";
 
@@ -7,29 +12,42 @@
     $session->blockProfessor();
     $session->blockAdmin();
     $session->logoutUser();
+
 	
 	 $subject = "Algonquin Kiosk Appointment Request";
 	 $message = $_POST['message'];
-	 $date = $_POST['date'];
+	 
 	 $time = $_POST['time'];
-	 $professor =  explode('-',$_POST['prof']);
-	 $prof = $professor[0];
-	 $prof_email = $professor[1];
+	 
+	 $prof_email = $_SESSION['selected_prof'];
 
 	 $student =  $_SESSION['userLogin'];
 	 $student_name = $_SESSION['userfName'] . ' '. $_SESSION['userlName'];
+	
+	$password = "GoHabsGo!";
+	$from = "ictkiosk@algonquincollege.com";
+	//ictkiosk@algonquincollege.com-- GoHabsGo!
 
-	$headers = "From: example@example.com";
+	$txt_prof = "Hello, \r\n An appointment has been requested by student: ". $student_name. " on " .$time. ".\r\n The reason specified: " .$message.". \r\n Please reach out to the student at:".$student;
+	$txt_stud = "Hello, \r\n Following request was made by you: \r\n" . $message." to your professor.\r\n Professor will reply back for confirmation.";
 	
-	$txt_prof = 'An appointment has bee requested by student: '. $student_name. ' on '. $date .' at ' .$time. '. The reason specified: ' .$message;
-	$txt_stud = 'Following request was made by you: ' . $message.' to ' .$prof. ' Professor will reply back for confirmation.';
-	
-
-	mail($prof_email,$subject,$txt_prof,$headers);
-	mail($student, $subject, $txt_stud, $headers)
-	
-	
-?>
+  $mail->Host = "smtp.office365.com";
+  $mail->Port = 587;
+  $mail->Username = $from;
+  $mail->Password = $password;
+  $mail->SMTPDebug = 0;
+  $mail->IsSMTP(); // Use SMTP
+  $mail->CharSet = 'UTF-8';
+  $mail->SMTPSecure = 'STARTTLS';
+  $mail->SMTPAuth = true; 
+  //Sending the actual email
+  $mail->setFrom($from, 'Kiosk System');
+  $mail->addAddress($prof_email, 'Professor');     // Add a recipient
+  $mail->isHTML(false);                                  // Set email format to HTML
+  $mail->Subject = 'Algonquin Kiosk Appointment Request';
+  $mail->Body = $txt_prof;
+  ?>
+ 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,50 +67,65 @@
 	
 
 </head>
-<body onload="afterlogout()">
+<body onload='afterlogout()'>
 	<!-- Custom Javascript -->
 	<script src="assets/js/timeout.js"></script>
 
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/" ><img src="/assets/img/ac-icon.png"></a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-                <ul id="menuRight" class="nav navbar-nav navbar-right">
-                    <li id="mapIcon" class=""><a class="icon" href="/map.php"><img src="/assets/img/map.png"></a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/logged_out.php" ><img src="/assets/img/ac-icon.png"></a>
         </div>
-    </nav>
-
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class=""><a class="icon" href="/student.php"><img src="/assets/img/home.png"></a></li>
+            </ul>
+            <ul id="menuRight" class="nav navbar-nav navbar-right">
+                <li><a><?php echo $_SESSION["userLogin"]; ?>'</a></li>
+                <li id="mapIcon" class=""><a class="icon" href="/student.php?logout=map"><img src="/assets/img/map.png"></a></li>
+                <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
+                <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
 
 
    <div>
 
 		<h1>Algonquin Appointment Book Kiosk</h1>
 
-		<div class="sent">
-		<p>
-			Your request for appointment with professor has been sent successfully. <br/>
-			Your professor will contact you to your algonquin-live email account in 24 hours.
-			<?php  echo $prof?>
-			<?php  echo $prof_email?>
-		</p>
+		<div class="info-block">
+		<h4>
+		<?php
+		 try{
+				$mail->send();
+				echo "Your request for appointment with professor has been sent successfully. \r\n
+			Your professor will contact you to your algonquin-live email account in 24 hours.";
+    
+			} catch(Exception $e){
+				//Something went bad
+				echo "Please contact your administrator. ";
+			}
+			$mail->ClearAllRecipients();
+			$mail->Body = $txt_stud;
+			$mail->addAddress($student, 'Professor');
+			$mail->send();
+			?>
+			
+		</h4>
     </div>
 </div>
 
 
-    <?php include 'footer.php'; ?>
+  <?phpinclude "footer.php";.?>
 
 </body>
 </html>

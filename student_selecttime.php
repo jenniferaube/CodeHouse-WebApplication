@@ -2,9 +2,10 @@
 /**
  * Created by PhpStorm.
  * User: Zach
- * Date: 3/31/2018
- * Time: 10:45 PM
+ * Date: 4/1/2018
+ * Time: 7:42 AM
  */
+
 
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/dao/appointment_DAO.php";
@@ -34,18 +35,11 @@ $session->logoutUser();
 
     <!--bootstrap-datetimepicker -->
     <script type="text/javascript" src="resources/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
-
     <!-- Jquery-UI@1.9.2 -->
     <link rel="stylesheet" type="text/css" href="resources/jquery-ui/css/jquery-ui.css">
 
     <!-- Bootstrap@3.3.7 -->
     <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
-
-    <!-- bootstrap-datepicker
-    <link rel="stylesheet" type="text/css" href="resources/bootstrap-datepicker/css/bootstrap-datepicker.css">-->
-
-    <!-- bootstrap-datetimepicker -->
-    <link rel="stylesheet" type="text/css" href="resources/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
 
     <!-- Mottie Keyboard -->
     <link rel="stylesheet" type="text/css" href="resources/mottie-keyboard/css/keyboard.css">
@@ -92,9 +86,9 @@ $session->logoutUser();
 
             <h1>Request Appointment</h1>
 
-            <p class="lead">Please select an available date, within 5 days, minimum 24 hours notice.</p>
+            <p class="lead">Please select an appointment time.</p>
 
-            <form id="contact-form" method="post" action="student3.php" role="form">
+            <form id="contact-form" method="post" action="message_sent.php" role="form">
 
                 <div class="messages"></div>
 
@@ -103,33 +97,55 @@ $session->logoutUser();
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="datetimepicker">Date *</label>
-                                    <input type='text' id='datetimepicker' name="datetimepicker" class="form-control input-lg" required="required" placeholder="Select a Date"
-                                           data-error="A date must be selected."/>
-
-
-                                <script type="text/javascript">
-                                    $(function () {
-                                        $('#datetimepicker').datetimepicker({
-                                            daysOfWeekDisabled: [0,6],
-                                            format: 'L',
-                                            defaultDate: ""
-                                        })
-                                    });
-                                </script>
+						
+                                <label for="form_time">Time*</label>
+								
+								 <select id="form_time" name="time" class="form-control form-control-lg" required="required" data-error="Time slot must be available.">
+                                        <option value="" selected disabled>Select Time </option>
+                                    <?php
+                                    $conn = Connection::getConnection();
+									list($month, $day, $year) = explode("/", $_POST["datetimepicker"]);
+                                    $student = $_SESSION['userLogin'];
+									$prof = $_POST['form_prof'];
+									
+									$datetimepicker = $_POST["datetimepicker"];
+									$final_date = "$year"."-"."$month"."-"."$day"."%";
+									//Format is yyyy-mm-dd in database.
+                                    $sql = "select distinct class_start_time as office from class where class_start_time like '$final_date' and course_id in
+									(select course_id from course where prof_id ='$prof' and course_id like '9999%');";
+                                    $result = mysqli_query($conn, $sql);
+									
+                                    while($row =  mysqli_fetch_array($result)) {
+                                        ?><option> <?php echo $row['office']; ?></option>
+                                    <?php } ?> 
+                                    </select>
+									<?php 
+									
+									$sql = "select u.email as mail from user u where u.id = '$prof';";
+									$result = mysqli_query($conn, $sql);
+									 
+									$_SESSION['selected_prof'] = mysqli_fetch_array($result)['mail'];
+									?>
+									
+                                
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
-
                     </div>
-
-
-                    <div class="row">
-
+					<p class="lead">Please type in your reason for requesting appointment.</p>
+					    <div class="row">
                         <div class="col-md-12">
-                            <input type="submit" class="btn btn-success btn-send" value="Next">
+                            <div class="form-group">
+                                <label for="form_message">Message *</label>
+                                <textarea id="form_message" name="message" class="form-control" placeholder="Reason for Appointment" rows="4" required="required" data-error="Reason required."></textarea>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-success btn-send" value="Send Request">
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-md-12">
                             <p class="text-muted"><strong>*</strong> These fields are required.</p>
@@ -145,8 +161,8 @@ $session->logoutUser();
 </div>
 
 
-
 <?php include 'footer.php'; ?>
+
 
 <script src="assets/js/history.js"></script>
 <script src="assets/js/timeout.js"></script>
