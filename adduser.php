@@ -14,10 +14,10 @@ include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/lib/bcrypt.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
+$session->logoutUser();
 
 $connection = Connection::getConnection();
 if($connection->connect_error){

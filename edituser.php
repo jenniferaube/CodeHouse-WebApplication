@@ -7,16 +7,16 @@ ob_start();
 File: edituser.php
 Created by: Jennifer Aube
 Date: March 10, 2018
-Last modified: March 31, 2018 by Jennifer Aube
+Last modified: April 04, 2018 by Jennifer Aube
 */
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
+$session->logoutUser();
 
 $connection = Connection::getConnection();
 if($connection->connect_error){

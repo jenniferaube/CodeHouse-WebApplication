@@ -12,10 +12,10 @@ ob_start();
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 $session = new Session();
-/*$session->blockPage();
+$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();*/
+$session->logoutUser();
 
 $connection = Connection::getConnection();
 if($connection->connect_error){
