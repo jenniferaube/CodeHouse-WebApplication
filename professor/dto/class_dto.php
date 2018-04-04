@@ -1,8 +1,5 @@
 <?php
-<<<<<<< HEAD
 
-=======
->>>>>>> b498500202ee6058c6b3f3fc7cda66dc781fdc9e
 /*
  * File: class_dto.php
  * Author: Chao Gu

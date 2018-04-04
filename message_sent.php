@@ -1,7 +1,9 @@
 <?php
-	require 'PHPMailer.php';
+	require 'PHPMailer/src/PHPMailer.php';
+	require 'PHPMailer/src/Exception.php';
+	require 'PHPMailer/src/SMTP.php';
 	
-	$mail = new PHPMailer();
+	$mail = new PHPMailer\PHPMailer\PHPMailer();
     include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
     include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/sql/connection.php";
 
@@ -21,45 +23,31 @@
 
 	 $student =  $_SESSION['userLogin'];
 	 $student_name = $_SESSION['userfName'] . ' '. $_SESSION['userlName'];
-	 $host = "mail.example.com";
-	$username = "ictKiosk@algonquincollege.com";
+	
 	$password = "GoHabsGo!";
-	$from = "ictKiosk@algonquincollege.com";
+	$from = "ictkiosk@algonquincollege.com";
+	//ictkiosk@algonquincollege.com-- GoHabsGo!
+
+	$txt_prof = "Hello, \r\n An appointment has been requested by student: ". $student_name. " on " .$time. ".\r\n The reason specified: " .$message.". \r\n Please reach out to the student at:".$student;
+	$txt_stud = "Hello, \r\n Following request was made by you: \r\n" . $message." to your professor.\r\n Professor will reply back for confirmation.";
 	
-
-
-	$txt_prof = 'An appointment has bee requested by student: '. $student_name. ' on' .$time. 'The reason specified: ' .$message.'Please reach out to the student at:'.$student;
-	$txt_stud = 'Following request was made by you: ' . $message.' to your professor. Professor will reply back for confirmation.';
-	
-
-  $mail->IsSMTP();
-  $mail->SMTPAuth = true;
   $mail->Host = "smtp.office365.com";
   $mail->Port = 587;
-  $mail->Username = $username;
+  $mail->Username = $from;
   $mail->Password = $password;
-  $mail->SMTPDebug = 1;
+  $mail->SMTPDebug = 0;
+  $mail->IsSMTP(); // Use SMTP
+  $mail->CharSet = 'UTF-8';
+  $mail->SMTPSecure = 'STARTTLS';
+  $mail->SMTPAuth = true; 
   //Sending the actual email
-  $mail->setFrom($username, 'Kiosk System');
+  $mail->setFrom($from, 'Kiosk System');
   $mail->addAddress($prof_email, 'Professor');     // Add a recipient
   $mail->isHTML(false);                                  // Set email format to HTML
   $mail->Subject = 'Algonquin Kiosk Appointment Request';
   $mail->Body = $txt_prof;
-
-  if(!$mail->send()) {
-    echo 'Message could not be sent. ';
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
-    exit;
-  }
-	
-	
-	$mail = $smtp->send($to, $headers, $txt_prof);
-
-	//$a = mail('bhat0074@algonquinlive.com',$subject,$txt_prof,$headers);
-	//$b = mail('bhatth@algonquincollege.com', $subject, $txt_stud,$headers);
-	
-	echo $a;
-?>
+  ?>
+ 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,7 +67,7 @@
 	
 
 </head>
-<body onload="afterlogout()">
+<body onload='afterlogout()'>
 	<!-- Custom Javascript -->
 	<script src="assets/js/timeout.js"></script>
 
@@ -100,7 +88,7 @@
                 <li class=""><a class="icon" href="/student.php"><img src="/assets/img/home.png"></a></li>
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
-                <li><a><?php echo $_SESSION['userLogin']; ?></a></li>
+                <li><a><?php echo $_SESSION["userLogin"]; ?>'</a></li>
                 <li id="mapIcon" class=""><a class="icon" href="/student.php?logout=map"><img src="/assets/img/map.png"></a></li>
                 <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                 <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
@@ -114,17 +102,30 @@
 
 		<h1>Algonquin Appointment Book Kiosk</h1>
 
-		<div class="sent">
-		<p>
-			Your request for appointment with professor has been sent successfully. <br/>
-			Your professor will contact you to your algonquin-live email account in 24 hours.
+		<div class="info-block">
+		<h4>
+		<?php
+		 try{
+				$mail->send();
+				echo "Your request for appointment with professor has been sent successfully. \r\n
+			Your professor will contact you to your algonquin-live email account in 24 hours.";
+    
+			} catch(Exception $e){
+				//Something went bad
+				echo "Please contact your administrator. ";
+			}
+			$mail->ClearAllRecipients();
+			$mail->Body = $txt_stud;
+			$mail->addAddress($student, 'Professor');
+			$mail->send();
+			?>
 			
-		</p>
+		</h4>
     </div>
 </div>
 
 
-    <?php include 'footer.php'; ?>
+  <?phpinclude "footer.php";.?>
 
 </body>
 </html>
