@@ -6,7 +6,10 @@ Last modified: March 31, 2018 by Jennifer Aube
 */
 p{
     margin-top: 150px;
-    margin-left: 71px;
+    margin-left: 525px;
+}
+#findusers{
+    margin-left: 450px;
 }
 #findusers-form{
     margin-left: 50px;
