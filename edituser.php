@@ -1,5 +1,8 @@
 
 <?php
+/*the following code (ob_start()) was taking from https://github.com/skyronic/crudkit/issues/40
+it fixes issues with the header warning*/
+ob_start();
 /*
 File: edituser.php
 Created by: Jennifer Aube
@@ -10,10 +13,10 @@ include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/sql/connection.php";
 
 $session = new Session();
-$session->blockPage();
+/*$session->blockPage();
 $session->blockStudent();
 $session->blockProfessor();
-$session->logoutUser();
+$session->logoutUser();*/
 
 $connection = Connection::getConnection();
 if($connection->connect_error){
@@ -79,23 +82,23 @@ if($connection->connect_error){
             $row = $result->fetch_assoc();
             ?>
             <div class="form-group">
-                <label>First Name: </label>
+                <label for="keyboard-fname">First Name: </label>
                 <input id="keyboard-fname" name="firstname" type="text" value="<?php echo $row["first_name"]; ?>">
             </div>
             <div class="form-group">
-                <label>Last Name: </label>
+                <label for="keyboard-lname">Last Name: </label>
                 <input id="keyboard-lname" name="lastname" type="text" value="<?php echo $row["last_name"]; ?>">
             </div>
             <div class="form-group">
-                <label>Email: </label>
+                <label for="keyboard-email">Email: </label>
                 <input id="keyboard-email" name="email" type="email" value="<?php echo $row["email"]; ?>">
             </div>
             <div class="form-group">
-                <label>Password: </label>
+                <label for="keyboard-pwd">Password: </label>
                 <input id="keyboard-pwd" name="password" type="password">
             </div>
             <div class="form-group">
-                <label>Re-enter Password: </label>
+                <label for="keyboard-confirmpwd">Re-enter Password: </label>
                 <input id="keyboard-confirmpwd" name="confirm-password" type="password">
             </div>
             <div class="form-group">
@@ -139,8 +142,9 @@ if(isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['email'])
     $fn = $_POST["firstname"];
     $ln = $_POST["lastname"];
     $em = $_POST["email"];
-    if(isset($_POST['password']) != ""){
-        if(isset($_POST['password']) == $_POST['confirm-password']){
+    //$sql = "update user set first_name = '$fn', last_name = '$ln', email = '$em' where id = $id";
+    if($_POST['password'] != ""){
+        if($_POST['password'] == $_POST['confirm-password']){
             $pw = $_POST["password"];
             $pass = Bcrypt::hash($pw);
             $sql = "update user set first_name = '$fn', last_name = '$ln', email = '$em', password = '$pass' where id = $id";

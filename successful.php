@@ -76,7 +76,7 @@ if ( isset($_GET['success']) && $_GET['success'] == 2 )
 <div style="text-align: center">
 <p>You will be redirected to main page in <div id="counter">5</div> seconds</p>
 </div>
-<!--redirect page cited from https://stackoverflow.com/questions/3292038/redirect-website-after-certain-amount-of-time-->
+<!--redirect countdown cited from https://stackoverflow.com/questions/3292038/redirect-website-after-certain-amount-of-time-->
 <script>
     setInterval(function() {
         var div = document.querySelector("#counter");
