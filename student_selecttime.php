@@ -75,108 +75,113 @@ $session->logoutUser();
 </nav>
 
 <div class="container">
-    <div class="row">
+	
+		<div class="row">
 
-        <div class="col-lg-8 col-lg-offset-2">
+			<div class="col-lg-8 col-lg-offset-2">
 
-            <h1>Request Appointment</h1>
+				<h1>Request Appointment</h1>
 
-            <p class="lead">Please select an appointment time.</p>
-			<!--Script to disable resubmission. -->
-			<script>
-    $(document).ready(function () {
+				<p class="lead">Please select an appointment time.</p>
+				<!--Script to disable resubmission. -->
+				<script>
+					$(document).ready(function () {
 
-        $("#contact-form").submit(function (e) {
+						$("#contact-form").submit(function (e) {
 
 
-            //disable the submit button
-            $("#btn-submit").attr("disabled", true);
+							//disable the submit button
+							$("#btn-submit").attr("disabled", true);
 
-            //disable a normal button
-            $("#btn-submit").attr("disabled", true);
+							//disable a normal button
+							$("#btn-submit").attr("disabled", true);
 
-            return true;
+							return true;
 
-        });
-    });
-</script>
+						});
+					});
+				</script>
 
-            <form id="contact-form" method="post" action="message_sent.php" role="form">
 
-                <div class="messages"></div>
+				<form id="contact-form" method="post" action="message_sent.php" role="form">
 
-                <div class="controls">
+					<div class="messages"></div>
 
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
+					<div class="controls">
+
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="form-group">
+							
+									<label for="form_time">Time*</label>
+									
+									 <select id="form_time" name="time" class="form-control form-control-lg" required="required" data-error="Time slot must be available.">
+											<option value="" selected disabled>Select Time </option>
+										<?php
+										$conn = Connection::getConnection();
+										list($month, $day, $year) = explode("/", $_POST["datetimepicker"]);
+										$student = $_SESSION['userLogin'];
+										$prof = $_POST['form_prof'];
+										
+										$datetimepicker = $_POST["datetimepicker"];
+										$final_date = "$year"."-"."$month"."-"."$day"."%";
+										//Format is yyyy-mm-dd in database.
+										$sql = "select distinct class_start_time as office from class where class_start_time like '$final_date' and course_id in
+										(select course_id from course where prof_id ='$prof' and course_id like '9999%');";
+										$result = mysqli_query($conn, $sql);
+										
+										while($row =  mysqli_fetch_array($result)) {
+											?><option> <?php echo $row['office']; ?></option>
+										<?php } ?> 
+										</select>
+										<?php 
+										
+										$sql = "select u.email as mail from user u where u.id = '$prof';";
+										$result = mysqli_query($conn, $sql);
+										 
+										$_SESSION['selected_prof'] = mysqli_fetch_array($result)['mail'];
+										?>
+										
+									
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+						</div>
+						<p class="lead">Please type in your reason for requesting appointment.</p>
+							<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="form_message">Message *</label>
+									<textarea id="form_message" name="message" class="form-control" placeholder="Reason for Appointment" rows="3" required="required" data-error="Reason required."></textarea>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<input id="btn-submit" type="submit" class="btn btn-success btn-send" value="Send Request">
+							</div>
+						</div>
 						
-                                <label for="form_time">Time*</label>
-								
-								 <select id="form_time" name="time" class="form-control form-control-lg" required="required" data-error="Time slot must be available.">
-                                        <option value="" selected disabled>Select Time </option>
-                                    <?php
-                                    $conn = Connection::getConnection();
-									list($month, $day, $year) = explode("/", $_POST["datetimepicker"]);
-                                    $student = $_SESSION['userLogin'];
-									$prof = $_POST['form_prof'];
-									
-									$datetimepicker = $_POST["datetimepicker"];
-									$final_date = "$year"."-"."$month"."-"."$day"."%";
-									//Format is yyyy-mm-dd in database.
-                                    $sql = "select distinct class_start_time as office from class where class_start_time like '$final_date' and course_id in
-									(select course_id from course where prof_id ='$prof' and course_id like '9999%');";
-                                    $result = mysqli_query($conn, $sql);
-									
-                                    while($row =  mysqli_fetch_array($result)) {
-                                        ?><option> <?php echo $row['office']; ?></option>
-                                    <?php } ?> 
-                                    </select>
-									<?php 
-									
-									$sql = "select u.email as mail from user u where u.id = '$prof';";
-									$result = mysqli_query($conn, $sql);
-									 
-									$_SESSION['selected_prof'] = mysqli_fetch_array($result)['mail'];
-									?>
-									
-                                
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                    </div>
-					<p class="lead">Please type in your reason for requesting appointment.</p>
-					    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="form_message">Message *</label>
-                                <textarea id="form_message" name="message" class="form-control" placeholder="Reason for Appointment" rows="4" required="required" data-error="Reason required."></textarea>
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <input id="btn-submit" type="submit" class="btn btn-success btn-send" value="Send Request">
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p class="text-muted"><strong>*</strong> These fields are required.</p>
-                        </div>
-                    </div>
-                </div>
+						<div class="row">
+							<div class="col-md-12">
+								<p class="text-muted"><strong>*</strong> These fields are required.</p>
+							</div>
+						</div>
+					</div>
 
-            </form>
+				</form>
 
-        </div>
+			</div>
 
-    </div>
+		</div>
+	
 </div>
 
 
 <?php include 'footer.php'; ?>
-
-
+<script type="text/javascript" src="resources/mottie-keyboard/js/jquery.keyboard.js"></script>
+<script type="text/javascript" src="resources/mottie-keyboard/js/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="resources/mottie-keyboard/js/jquery.keyboard.extension-typing.min.js"></script>
+<script type="text/javascript" src="assets/js/keyboard-student.js"></script>
 <script src="assets/js/history.js"></script>
 
 </body>

@@ -126,7 +126,7 @@
 			
 		</h4>
 		<h4>
-		Please <a href="/student.php">click here</a> to book another appointment.
+		Please <a href="/student.php" style="color: #aaaaaa;">click here</a> to book another appointment.
 		</h4>
     </div>
 </div>
