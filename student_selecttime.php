@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Zach
- * Date: 4/1/2018
- * Time: 7:42 AM
- */
-
 
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/dao/appointment_DAO.php";
@@ -51,7 +44,9 @@ $session->logoutUser();
 
 
 </head>
-<body>
+<body onload='autologout()'>
+	<!-- Custom Javascript -->
+	<script src="assets/js/timeout.js"></script>
 
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -87,6 +82,24 @@ $session->logoutUser();
             <h1>Request Appointment</h1>
 
             <p class="lead">Please select an appointment time.</p>
+			<!--Script to disable resubmission. -->
+			<script>
+    $(document).ready(function () {
+
+        $("#contact-form").submit(function (e) {
+
+
+            //disable the submit button
+            $("#btn-submit").attr("disabled", true);
+
+            //disable a normal button
+            $("#btn-submit").attr("disabled", true);
+
+            return true;
+
+        });
+    });
+</script>
 
             <form id="contact-form" method="post" action="message_sent.php" role="form">
 
@@ -142,7 +155,7 @@ $session->logoutUser();
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <input type="submit" class="btn btn-success btn-send" value="Send Request">
+                            <input id="btn-submit" type="submit" class="btn btn-success btn-send" value="Send Request">
                         </div>
                     </div>
                     
@@ -165,6 +178,5 @@ $session->logoutUser();
 
 
 <script src="assets/js/history.js"></script>
-<script src="assets/js/timeout.js"></script>
 
 </body>

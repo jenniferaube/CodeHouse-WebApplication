@@ -13,7 +13,7 @@ $session = new Session();
 $session->blockPage();
 $session->blockProfessor();
 $session->blockAdmin();
-//$session->logoutUser();
+$session->logoutUser();
 
 ?>
 
@@ -59,7 +59,9 @@ $session->blockAdmin();
 
 
 </head>
-<body>
+<body onload='autologout()'>
+	<!-- Custom Javascript -->
+	<script src="assets/js/timeout.js"></script>
 
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -183,6 +185,5 @@ $session->blockAdmin();
 <?php include 'footer.php'; ?>
 
 <script src="assets/js/history.js"></script>
-<script src="assets/js/timeout.js"></script>
 
 </body>
