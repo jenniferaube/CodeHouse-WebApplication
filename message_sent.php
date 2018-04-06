@@ -92,7 +92,7 @@
                 <li class=""><a class="icon" href="/student.php"><img src="/assets/img/home.png"></a></li>
             </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
-                <li><a><?php echo $_SESSION["userLogin"]; ?>'</a></li>
+                <li><a><?php echo $_SESSION["userLogin"]; ?></a></li>
                 <li id="mapIcon" class=""><a class="icon" href="/student.php?logout=map"><img src="/assets/img/map.png"></a></li>
                 <li class=""><a class="icon" href="/logged_out.php"><img src="/assets/img/off.png"></a></li>
                 <!--<li class=""><a class="icon" href="#"><img src="assets/img/forward.png"></a></li>-->
