@@ -59,7 +59,7 @@ $session->logoutUser();
 
 
 </head>
-<body onload='autologout()'>
+<body>
 	<!-- Custom Javascript -->
 	<script src="assets/js/timeout.js"></script>
 
