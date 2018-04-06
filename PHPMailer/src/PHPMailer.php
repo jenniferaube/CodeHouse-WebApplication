@@ -27,6 +27,7 @@ namespace PHPMailer\PHPMailer;
  * @author  Jim Jagielski (jimjag) <jimjag@gmail.com>
  * @author  Andy Prevost (codeworxtech) <codeworxtech@users.sourceforge.net>
  * @author  Brent R. Matzelle (original founder)
+ * @author Hiran Nilesh Bhatt (CodeHouse)
  */
 class PHPMailer
 {

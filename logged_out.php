@@ -1,4 +1,7 @@
 <?php
+//Created by: Hiral Nilesh Bhatt
+//Date: March 31, 2018
+//Last modified: April 2, 2018 by Hiral Nilesh Bhatt
     include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 
     $session = new Session();

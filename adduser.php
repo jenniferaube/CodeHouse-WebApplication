@@ -122,135 +122,132 @@ if (isset($_POST['uploadbutton'])) {
 <script src="/assets/class/lib/bcrypt.php"></script>
 <div class="container-formadduser">
     <div id="addingusers">
-        <form action="adduser.php" method="post">
-<div class="addoneuser">
-            <div class="checkbox-parent">
-                <label>User Type:</label>
-                <label><input type="radio" id="1" data-toggle="toggle" checked name="usertype" value="professor" >Professor</label>
-                <label><input type="radio" id="2" data-toggle="toggle" name="usertype" value="student" >Student</label>
-            </div>
-            <div class="form-group">
-                <label for="keyboard-text">First Name: </label>
-                <input id="keyboard-fname" class="form" type="text" name="firstname" required>
-            </div>
-            <div class="form-group">
-                <label for="keyboard-text">Last Name: </label>
-                <input id="keyboard-lname" class="form" type="text" name="lastname" required>
-            </div>
-            <div class="form-group">
-                <label for="keyboard-text">Email: </label>
-                <input id="keyboard-email" class="form" type="email" name="emailaddress" required>
-            </div>
-            <div class="form-group">
-                <label for="keyboard-text">Re-enter Email: </label>
-                <input id="keyboard-confirmemail" class="form" type="email" name="confirm_email" required>
-            </div>
-            <div class="form-group">
-                <label for="keyboard-pwd">Password: </label>
-                <input id="keyboard-pwd" class="form" type="password" name="passwrd" required>
-            </div>
-            <div class="form-group">
-                <label for="keyboard-pwd">Re-enter Password: </label>
-                <input id="keyboard-confirmpwd" class="form" type="password" name="confirm_password" id="confirm_password" required>
-            </div>
-            <div class="form-group">
-                <a href="admin.php">
-                    <button id="cancelbutton" class="btn btn-success btn-xs" type="button" >Cancel</button>
-                </a>
-            </div>
-            <div class="form-group">
-                <a href="successful.php?success=1">
-                    <button id="addingbutton" class="btn btn-success btn-xs" type="submit">Add User</button>
-                </a>
-            </div>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+            <div class="addoneuser">
+                <div class="checkbox-parent">
+                    <label>User Type:</label>
+                    <label><input type="radio" id="1" data-toggle="toggle" checked name="usertype" value="professor" >Professor</label>
+                    <label><input type="radio" id="2" data-toggle="toggle" name="usertype" value="student" >Student</label>
+                </div>
+                <div class="form-group">
+                    <label for="keyboard-text">First Name: </label>
+                    <input id="keyboard-fname" class="form" type="text" name="firstname" required>
+                </div>
+                <div class="form-group">
+                    <label for="keyboard-text">Last Name: </label>
+                    <input id="keyboard-lname" class="form" type="text" name="lastname" required>
+                </div>
+                <div class="form-group">
+                    <label for="keyboard-text">Email: </label>
+                    <input id="keyboard-email" class="form" type="email" name="emailaddress" required>
+                </div>
+                <div class="form-group">
+                    <label for="keyboard-text">Re-enter Email: </label>
+                    <input id="keyboard-confirmemail" class="form" type="email" name="confirm_email" required>
+                </div>
+                <div class="form-group">
+                    <label for="keyboard-pwd">Password: </label>
+                    <input id="keyboard-pwd" class="form" type="password" name="passwrd" required>
+                </div>
+                <div class="form-group">
+                    <label for="keyboard-pwd">Re-enter Password: </label>
+                    <input id="keyboard-confirmpwd" class="form" type="password" name="confirm_password" id="confirm_password" required>
+                </div>
+                <div class="form-group">
+                    <a href="admin.php">
+                        <button id="cancelbutton" class="btn btn-success btn-xs" type="button" >Cancel</button>
+                    </a>
+                </div>
+                <div class="form-group">
+                    <a href="successful.php?success=1">
+                        <button id="addingbutton" class="btn btn-success btn-xs" type="submit">Add User</button>
+                    </a>
+                </div>
 
-            <?php
-            $errors = false;
-            if(isset($_POST['usertype'])||isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['emailaddress'])||
-                isset($_POST['passwrd'])) {
-                if(isset($_POST['usertype']) == "professor"){
-                    $ut = 1;
-                }
-                if(isset($_POST['usertype'])=="student"){
-                    $ut = 2;
-                }
-                if(isset($_POST['firstname'])==""){
-                    $errors = true;
-                }
-                if(isset($_POST['lastname'])==""){
-                    $errors = true;
-                }
-                if(isset($_POST['emailaddress'])==""){
-                    $errors = true;
-                }
-                if(isset($_POST['passwrd'])==""){
-                    $errors = true;
-                }
-                if($_POST['emailaddress'] != $_POST['confirm_email']){
-                    echo alert("Your email address's did not match.");
-                    exit();
-                }
-                if($_POST['passwrd'] != $_POST['confirm_password']){
-                    echo alert("Your password's did not match.");
-                    exit();
-                }
-                if(!$errors && $_POST['passwrd'] == $_POST['confirm_password'] && $_POST['emailaddress'] == $_POST['confirm_email'] ) {
-                    $fn = $_POST['firstname'];
-                    $ln = $_POST['lastname'];
-                    $em = $_POST['emailaddress'];
-                    $pw = $_POST['passwrd'];
-                    $pass = Bcrypt::hash($pw);
+                <?php
+                $errors = false;
+                if(isset($_POST['usertype'])||isset($_POST['firstname'])||isset($_POST['lastname'])||isset($_POST['emailaddress'])||
+                    isset($_POST['passwrd'])) {
+                    if(isset($_POST['usertype']) == "professor"){
+                        $ut = 1;
+                    }
+                    if(isset($_POST['usertype'])=="student"){
+                        $ut = 2;
+                    }
+                    if(isset($_POST['firstname'])==""){
+                        $errors = true;
+                    }
+                    if(isset($_POST['lastname'])==""){
+                        $errors = true;
+                    }
+                    if(isset($_POST['emailaddress'])==""){
+                        $errors = true;
+                    }
+                    if(isset($_POST['passwrd'])==""){
+                        $errors = true;
+                    }
+                    if($_POST['emailaddress'] != $_POST['confirm_email']){
+                        echo alert("Your email address's did not match.");
+                    }
+                    if($_POST['passwrd'] != $_POST['confirm_password']){
+                        echo alert("Your password's did not match.");
+                    }
+                    if(!$errors && $_POST['passwrd'] == $_POST['confirm_password'] && $_POST['emailaddress'] == $_POST['confirm_email'] ) {
+                        $fn = $_POST['firstname'];
+                        $ln = $_POST['lastname'];
+                        $em = $_POST['emailaddress'];
+                        $pw = $_POST['passwrd'];
+                        $pass = Bcrypt::hash($pw);
 
-                    $sql = "insert into user values (default, '$fn', '$ln', '$em', '$pass', CURRENT_TIME, default, '$ut')";
+                        $sql = "insert into user values (default, '$fn', '$ln', '$em', '$pass', CURRENT_TIME, default, '$ut')";
 
-                    if ($connection->query($sql) === true) {
-                        header("Location: successful.php?success=1"); //doesnt work
-                        //alert("User has been added");
-                    } else {
-                        alert("Database error: User was not added to database");
+                        if ($connection->query($sql) === true) {
+                            header("Location: successful.php?success=1");
+                        } else {
+                            alert("Database error: User was not added to database");
+                        }
                     }
                 }
-            }
-            function alert($msg) {
-                echo '<script type="text/javascript">alert("' . $msg . '")</script>';
-            }
-
-            ?>
-            <!--following script modified from file_upload.php-->
-            <script>
-                $(document).ready(function () {
-                    $('#upload_users').change(
-                        function () {
-                            //for testing, allow csv file to be validated
-                            var fileExtension = ['csv'];
-                            if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) { //check file extension
-                                alert("Please choose a CSV file.");
-                                $('#uploadbutton').attr("disabled", true);
-                            }
-                            else {
-                                $('#upload_users').attr("disabled", false);
-                                $('#uploadbutton').attr("disabled", false);
-                            }
-                        })
-
-                });
-                function goBack() {
-                    window.history.back();
+                function alert($msg) {
+                    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
                 }
-            </script>
-</div>
-        </form>
-        <form method="post" enctype="multipart/form-data" action="">
-        <div id="uploadingusers" >
-            <div id="uploading">
-                <form action="upload.php" id="upload_form" method="post" enctype="multipart/form-data" action="<?php $_SERVER['PHP_SELF'] ?>">
-                    <input type="file" name="upload_users" id="upload_users" placeholder="Choose file">
-                </form>
+
+                ?>
+                <!--following script modified from file_upload.php-->
+                <script>
+                    $(document).ready(function () {
+                        $('#upload_users').change(
+                            function () {
+                                //for testing, allow csv file to be validated
+                                var fileExtension = ['csv'];
+                                if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) { //check file extension
+                                    alert("Please choose a CSV file.");
+                                    $('#uploadbutton').attr("disabled", true);
+                                }
+                                else {
+                                    $('#upload_users').attr("disabled", false);
+                                    $('#uploadbutton').attr("disabled", false);
+                                }
+                            })
+
+                    });
+                    function goBack() {
+                        window.history.back();
+                    }
+                </script>
             </div>
+        </form>
+        <form method="post" enctype="multipart/form-data" action="<?php $_SERVER["PHP_SELF"] ?>">
+            <div id="uploadingusers" >
+                <div id="uploading">
+                    <form action="upload.php" id="upload_form" method="post" enctype="multipart/form-data" action="<?php $_SERVER['PHP_SELF'] ?>">
+                        <input type="file" name="upload_users" id="upload_users" placeholder="Choose file">
+                    </form>
+                </div>
 
-            <button id="uploadbutton" name="uploadbutton" class="btn btn-success btn-xs" type="submit">Upload File</button>
+                <button id="uploadbutton" name="uploadbutton" class="btn btn-success btn-xs" type="submit">Upload File</button>
 
-        </div>
+            </div>
         </form>
     </div>
 </div>
