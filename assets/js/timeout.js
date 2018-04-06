@@ -1,6 +1,8 @@
+// Created by: Hiral Nilesh Bhatt
+// Date: February 26, 2018
+// Last modified: February 26, 2018 by Hiral Nilesh Bhatt
 function idleTimer() {
     var t;
-    //window.onload = resetTimer;
     window.onmousemove = resetTimer; // catches mouse movements
     window.onmousedown = resetTimer; // catches mouse movements
     window.onclick = resetTimer;     // catches mouse clicks
@@ -28,7 +30,7 @@ function tohome() {
 }
 
 function afterlogout() {
-    setTimeout(tohome, 10000);  // time is in milliseconds (1000 is 1 second)
+    setTimeout(tohome, 6000);  // time is in milliseconds (1000 is 1 second)
 }
 
 

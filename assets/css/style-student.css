@@ -9,17 +9,6 @@ body {
     width: 200px;
 }
 
-.search-container {
-    margin: 20px auto 0 auto;
-    width: 922px;
-    font-size: 3em;
-    color: #00713d;
-    text-align: center;
-}
-
-.search-container input {
-    margin: 0 auto;
-}
 
 .well {
     background-color: rgb(19, 139, 19);
@@ -32,10 +21,6 @@ body {
     top: 2px;
 }
 
-.search-container .form-control {
-    height: 50px;
-    font-size: 0.8em;
-}
 
 .btn {
     font-size: 26px;
@@ -78,3 +63,4 @@ body {
 .icon {
     cursor: pointer;
 }
+

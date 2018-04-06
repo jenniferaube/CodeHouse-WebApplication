@@ -1,17 +1,23 @@
 <?php
-	require 'PHPMailer/src/PHPMailer.php';
-	require 'PHPMailer/src/Exception.php';
-	require 'PHPMailer/src/SMTP.php';
-	
-	$mail = new PHPMailer\PHPMailer\PHPMailer();
-    include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
+//Created by: Hiral Nilesh Bhatt
+//Date: March 31, 2018
+//Last modified: April 2, 2018 by Hiral Nilesh Bhatt
+	include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
     include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/sql/connection.php";
-
+	include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/dao/appointment_DAO.php";
     $session = new Session();
     $session->blockPage();
     $session->blockProfessor();
     $session->blockAdmin();
     $session->logoutUser();
+	
+	require 'PHPMailer/src/PHPMailer.php';
+	require 'PHPMailer/src/Exception.php';
+	require 'PHPMailer/src/SMTP.php';
+	
+	$mail = new PHPMailer\PHPMailer\PHPMailer();
+    
+
 
 	
 	 $subject = "Algonquin Kiosk Appointment Request";
@@ -67,7 +73,7 @@
 	
 
 </head>
-<body onload='afterlogout()'>
+<body onload='autologout()'>
 	<!-- Custom Javascript -->
 	<script src="assets/js/timeout.js"></script>
 
@@ -121,11 +127,14 @@
 			?>
 			
 		</h4>
+		<h4>
+		Please <a href="/student.php" style="color: #aaaaaa;">click here</a> to book another appointment.
+		</h4>
     </div>
 </div>
 
 
-  <?phpinclude "footer.php";.?>
+    <?php include 'footer.php'; ?>
 
 </body>
 </html>

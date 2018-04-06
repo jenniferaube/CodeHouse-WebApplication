@@ -13,7 +13,7 @@ $session = new Session();
 $session->blockPage();
 $session->blockProfessor();
 $session->blockAdmin();
-//$session->logoutUser();
+$session->logoutUser();
 
 ?>
 
@@ -60,6 +60,8 @@ $session->blockAdmin();
 
 </head>
 <body>
+	<!-- Custom Javascript -->
+	<script src="assets/js/timeout.js"></script>
 
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -108,6 +110,9 @@ $session->blockAdmin();
                                     <select id="form_prof" name="form_prof" class="form-control form-control-lg" required="required" data-error="Professor must exist.">
                                         <option value="" selected disabled>Choose Professor</option>
                                     <?php
+//                                    Created by: Hiral Nilesh Bhatt
+//                                    Date: March 31, 2018
+//                                    Last modified: April 2, 2018 by Hiral Nilesh Bhatt
                                     $conn = Connection::getConnection();
                                     $student = $_SESSION['userLogin'];
 									
@@ -134,7 +139,9 @@ $session->blockAdmin();
                                 <label for="datetimepicker">Date *</label>
                                     <input type='text' id='datetimepicker' name="datetimepicker" class="form-control input-lg" required="required" placeholder="Select a Date"
                                            data-error="A date must be selected."/>
-
+<!--                                Created by: Hiral Nilesh Bhatt-->
+<!--                                Date: March 31, 2018-->
+<!--                                Last modified: April 2, 2018 by Hiral Nilesh Bhatt-->
                                 <script type="text/javascript">
                                     $(function () {
 										var date = new Date();
@@ -183,6 +190,5 @@ $session->blockAdmin();
 <?php include 'footer.php'; ?>
 
 <script src="assets/js/history.js"></script>
-<script src="assets/js/timeout.js"></script>
 
 </body>

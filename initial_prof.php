@@ -71,7 +71,7 @@ if(isset($_POST["prof_id"])){
                 if($class[8]!=99999) {
                     $data[] = array(
                         'id' => $class[0],
-                        'title' => $class[5] . $class[6] . '-0' . $class[7] . '-Room:' . $class[3],
+                        'title' => $class[5] . $class[6] . '-' . $class[7] . '-Room:' . $class[3],
                         'start' => $class[1],
                         'end' => $class[2],
                         'color' => '#006341'
@@ -90,7 +90,7 @@ if(isset($_POST["prof_id"])){
                 if($class[8]!=99999) {
                     $data[] = array(
                         'id' => $class[0],
-                        'title' => $class[5] . $class[6] . '-0' . $class[7] . '-Room:' . $class[3],
+                        'title' => $class[5] . $class[6] . '-' . $class[7] . '-Room:' . $class[3],
                         'start' => $class[1],
                         'end' => $class[2],
                         'color' => '#909390'
