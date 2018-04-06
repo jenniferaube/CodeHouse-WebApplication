@@ -1,3 +1,6 @@
+// Created by: Hiral Nilesh Bhatt
+// Date: February 26, 2018
+// Last modified: February 26, 2018 by Hiral Nilesh Bhatt
 function idleTimer() {
     var t;
     window.onmousemove = resetTimer; // catches mouse movements
