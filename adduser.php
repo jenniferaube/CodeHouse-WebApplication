@@ -87,6 +87,8 @@ if (isset($_POST['uploadbutton'])) {
     <!-- Mottie Keyboard -->
     <link rel="stylesheet" type="text/css" href="resources/mottie-keyboard/css/keyboard.css">
 
+    <link rel="stylesheet" type="text/css" href="resources/bootstrap/css/bootstrap.min.css">
+
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/style-map.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style-navbar.css">
@@ -240,9 +242,9 @@ if (isset($_POST['uploadbutton'])) {
         <form method="post" enctype="multipart/form-data" action="<?php $_SERVER["PHP_SELF"] ?>">
             <div id="uploadingusers" >
                 <div id="uploading">
-                    <form action="upload.php" id="upload_form" method="post" enctype="multipart/form-data" action="<?php $_SERVER['PHP_SELF'] ?>">
+<!--                    <form action="upload.php" id="upload_form" method="post" enctype="multipart/form-data" action="--><?php //$_SERVER['PHP_SELF'] ?><!--">-->
                         <input type="file" name="upload_users" id="upload_users" placeholder="Choose file">
-                    </form>
+<!--                    </form>-->
                 </div>
 
                 <button id="uploadbutton" name="uploadbutton" class="btn btn-success btn-xs" type="submit">Upload File</button>
