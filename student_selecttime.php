@@ -179,19 +179,19 @@ $session->logoutUser();
 
 <?php include 'footer.php'; ?>
 
-    <!-- Jquery@1.9.1 -->
-    <script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
+<!-- Jquery@1.9.1 -->
+<script type="text/javascript" src="resources/jquery/js/jquery.min.js"></script>
 
-    <!-- Jquery-UI@1.9.2 -->
-    <script type="text/javascript" src="resources/jquery-ui/js/jquery-ui.js"></script>
+<!-- Jquery-UI@1.9.2 -->
+<script type="text/javascript" src="resources/jquery-ui/js/jquery-ui.js"></script>
 
-    <!-- Mottie Keyboard -->
-    <script type="text/javascript" src="resources/mottie-keyboard/js/jquery.keyboard.js"></script>
-    <script type="text/javascript" src="resources/mottie-keyboard/js/jquery.mousewheel.min.js"></script>
-    <script type="text/javascript" src="resources/mottie-keyboard/js/jquery.keyboard.extension-typing.min.js"></script>
+<!-- Mottie Keyboard -->
+<script type="text/javascript" src="resources/mottie-keyboard/js/jquery.keyboard.js"></script>
+<script type="text/javascript" src="resources/mottie-keyboard/js/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="resources/mottie-keyboard/js/jquery.keyboard.extension-typing.min.js"></script>
 
-    <!-- Bootstrap@3.3.7 -->
-    <script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
+<!-- Bootstrap@3.3.7 -->
+<script type="text/javascript" src="resources/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="assets/js/keyboard-student.js"></script>
 <script src="assets/js/history.js"></script>
 
