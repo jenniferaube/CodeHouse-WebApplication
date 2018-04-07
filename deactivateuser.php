@@ -113,7 +113,9 @@ function alert($msg) {
 Connection::closeConnection($connection);
 
 ?>
-
+<script src="assets/js/history.js"></script>
+<script src="assets/js/post.js"></script>
+<script src="assets/js/timeout.js"></script>
 
 <?php include 'footer.php'; ?>
 </body>
