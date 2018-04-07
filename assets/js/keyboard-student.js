@@ -7,26 +7,26 @@ $(function () {
 
             display: {
                 'bksp': '\u2190',
-                'enter': 'return',
+                'enter': 'Enter',
                 'normal': 'ABC',
                 'meta1': '.?123',
                 'meta2': '#+=',
-                'accept': 'Enter'
+                'accept': 'Accept'
             },
 
             layout: 'custom',
             customLayout: {
                 'normal': [
                     'q w e r t y u i o p {bksp}',
-                    'a s d f g h j k l',
+                    'a s d f g h j k l {enter}',
                     'z x c v b n m @ .',
-                    '{meta1}  _ - {accept}'
+                    '{meta1} {space} _ - {accept}'
                 ],
                 'shift': [
                     'Q W E R T Y U I O P {bksp}',
-                    'A S D F G H J K L',
+                    'A S D F G H J K L {enter}',
                     '{s} Z X C V B N M @ . {s}',
-                    '{meta1}  _ - {accept}'
+                    '{meta1} {space} _ - {accept}'
                 ],
                 'meta1': [
                     '1 2 3 4 5 6 7 8 9 0 {bksp}',
