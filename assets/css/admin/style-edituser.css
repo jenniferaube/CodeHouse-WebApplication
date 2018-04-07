@@ -5,7 +5,8 @@ Date: March 10, 2018
 Last modified: March 31, 2018 by Jennifer Aube
 */
 .container-form {
-    margin-left: 550px;
+    /*margin: auto;*/
+    margin-left: 450px;
     margin-right: auto;
     margin-top: 150px;
     width: 360px;

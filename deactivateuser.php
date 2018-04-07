@@ -77,6 +77,7 @@ $sql = "select * from user where id = $id";
 $result = $connection->query($sql);
 $row = $result->fetch_assoc();
 ?>
+<div id="deactivateuser">
 <form method="post" action="deactivateuser.php">
 <p id="userinfo"><?php echo $row["first_name"]?>  <?php echo $row["last_name"]?>, <?php echo $row["email"]?></p>
 <div id="deactivatebuttons">
@@ -94,6 +95,7 @@ $row = $result->fetch_assoc();
     <script src="assets/js/snackbar.js"></script>
 </div>
 </form>
+</div>
 <?php
 if(isset($_POST["deactivate"])){
     $sql = "update user set activated = '0' where id = $id";

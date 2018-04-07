@@ -72,7 +72,10 @@ if($connection->connect_error){
         </div>
     </nav>
 </div>
+<div id="info">
     <p>Use any one or many fields to search for a user</p>
+</div>
+
     <div id="findusers">
         <form id="searchForm" method="post" action="finduser.php">
             <div id="findusers-form">

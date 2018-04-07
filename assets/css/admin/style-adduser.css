@@ -2,11 +2,13 @@
 File: style-adduser.css
 Created by: Jennifer Aube
 Date: March 10, 2018
-Last modified: March 30, 2018 by Jennifer Aube
+Last modified: April 7, 2018 by Jennifer Aube
 */
 .container-formadduser {
-    margin-top: 60px;
-    margin-left: 20px;
+    margin-top: 40px;
+    /*margin-left: 20px;*/
+    align-items: center;
+    /*align-content: center;*/
 
 }
 .addoneuser{
@@ -32,20 +34,23 @@ Last modified: March 30, 2018 by Jennifer Aube
     height:5%;
 }
 #addingusers{
-    margin-left: 50px;
-    margin-right: auto;
-    margin-top: 50px;
-    width: 360px;
+
+    width: 320px;
     padding: 20px;
-    position: relative;
+    margin-left:420px;
     -webkit-border-radius: 15px;
     border-radius: 15px;
+    align-items: center;
+}
+#addoneuser{
+    margin:auto;
 }
 #uploadingusers {
-    position: absolute;
+    margin-right: 40px;
+    position: center;
     left: 820px;
     top: 20px;
-    width: 500px;
+    width: 560px;
     height:15%;
 
 }

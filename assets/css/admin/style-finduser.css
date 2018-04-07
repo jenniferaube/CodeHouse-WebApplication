@@ -2,19 +2,25 @@
 File: style-finduser.css
 Created by: Jennifer Aube
 Date: March 10, 2018
-Last modified: March 31, 2018 by Jennifer Aube
+Last modified: April 07, 2018 by Jennifer Aube
 */
 p{
     margin-top: 150px;
-    margin-left: 525px;
+    margin-left: auto;
+}
+#info {
+    margin: auto;
+    text-align: center;
 }
 #findusers{
-    margin-left: 450px;
+    align-content: center;
+    margin: auto;
 }
 #findusers-form{
-    margin-left: 50px;
-    margin-right: auto;
-    margin-top: 20px;
+    /*margin-left: 50px;*/
+    /*margin-right: auto;*/
+    /*margin-top: 20px;*/
+    margin: auto;
     width: 50%;
 
     padding: 25px;
