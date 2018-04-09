@@ -2,7 +2,7 @@
 
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/dao/appointment_DAO.php";
-
+//Session set up.
 $session = new Session();
 $session->blockPage();
 $session->blockProfessor();
@@ -86,23 +86,17 @@ $session->logoutUser();
 				<!--Script to disable resubmission. -->
 				<script>
 					$(document).ready(function () {
-
+//						Deactivate button after submission.
 						$("#contact-form").submit(function (e) {
-
-
 							//disable the submit button
 							$("#btn-submit").attr("disabled", true);
-							//$("#form_time").attr("disabled",true);
-                            //$("#form_message").attr("disabled",true);
-							
-
 							return true;
 
 						});
 					});
 				</script>
 
-
+<!-- Form to get time and the message for appointment. -->
 				<form id="contact-form" method="post" action="message_sent.php" role="form">
 
 					<div class="messages"></div>

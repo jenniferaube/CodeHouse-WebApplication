@@ -8,7 +8,7 @@
 
 include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/dao/appointment_DAO.php";
-
+//Session set up.
 $session = new Session();
 $session->blockPage();
 $session->blockProfessor();
@@ -97,7 +97,7 @@ $session->logoutUser();
             <h1>Request Appointment</h1>
 
             <p class="lead">Please select the professor you wish to contact.</p>
-
+<!-- Form to get professor and the date for appointment. -->
             <form id="contact-form" method="post" action="student_selecttime.php" role="form">
 
                 <div class="messages"></div>
@@ -115,7 +115,7 @@ $session->logoutUser();
 //                                    Last modified: April 2, 2018 by Hiral Nilesh Bhatt
                                     $conn = Connection::getConnection();
                                     $student = $_SESSION['userLogin'];
-									
+//Select professors only for current user student.									
                                     $sql = "select distinct concat(u.first_name , u.last_name) as 'Name' , u.email as 'email', u.id as 'PROFID'  
 										from user u, professor p where u.type='1' and u.id  in 
 										(select prof_id from course where program_id in
@@ -143,6 +143,7 @@ $session->logoutUser();
 <!--                                Date: March 31, 2018-->
 <!--                                Last modified: April 2, 2018 by Hiral Nilesh Bhatt-->
                                 <script type="text/javascript">
+//									Block dates in datepicker.
                                     $(function () {
 										var date = new Date();
 										date.setDate(date.getDate() + 1);

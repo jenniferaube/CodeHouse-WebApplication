@@ -5,21 +5,20 @@
 	include_once $_SERVER['DOCUMENT_ROOT']."/assets/class/session.php";
     include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/sql/connection.php";
 	include_once $_SERVER['DOCUMENT_ROOT'] . "/assets/class/dao/appointment_DAO.php";
+//Session set up.
     $session = new Session();
     $session->blockPage();
     $session->blockProfessor();
     $session->blockAdmin();
     $session->logoutUser();
-	
+//Email set up.	
 	require 'PHPMailer/src/PHPMailer.php';
 	require 'PHPMailer/src/Exception.php';
 	require 'PHPMailer/src/SMTP.php';
 	
 	$mail = new PHPMailer\PHPMailer\PHPMailer();
     
-
-
-	
+//Getting form inputs
 	 $subject = "Algonquin Kiosk Appointment Request";
 	 $message = $_POST['message'];
 	 
@@ -110,6 +109,7 @@
 
 		<div class="info-block">
 		<h4>
+<!-- Display message on screen. -->
 		<?php
 		 try{
 				$mail->send();
@@ -119,7 +119,7 @@
 			} catch(Exception $e){
 				//Something went bad
 				echo "Please contact your administrator. ";
-			}
+			}//Sending two emails.
 			$mail->ClearAllRecipients();
 			$mail->Body = $txt_stud;
 			$mail->addAddress($student, 'Professor');
