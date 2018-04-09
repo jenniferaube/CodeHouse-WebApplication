@@ -92,8 +92,8 @@ $session->logoutUser();
 
 							//disable the submit button
 							$("#btn-submit").attr("disabled", true);
-							$("#form_time").attr("disabled",true);
-                            $("#form_message").attr("disabled",true);
+							//$("#form_time").attr("disabled",true);
+                            //$("#form_message").attr("disabled",true);
 							
 
 							return true;

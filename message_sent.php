@@ -34,8 +34,8 @@
 	$from = "ictkiosk@algonquincollege.com";
 	//ictkiosk@algonquincollege.com-- GoHabsGo!
 
-	$txt_prof = "Hello, \r\n An appointment has been requested by student: ". $student_name. " on " .$time. ".\r\n The reason specified: " .$message.". \r\n Please reach out to the student at:".$student;
-	$txt_stud = "Hello, \r\n Following request was made by you: \r\n" . $message." to your professor.\r\n Professor will reply back for confirmation.";
+	$txt_prof = "Hello, \r\n\r\n An appointment has been requested by student: ". $student_name. " on " .$time. ".\r\n The reason specified: " .$message.". \r\n Please reach out to the student at:".$student."\r\nThank you.";
+	$txt_stud = "Hello, \r\n\r\n Following request was made by you: \r\n" . $message." to your professor.\r\n Professor will reply back for confirmation.\r\n Thank you.";
 	
   $mail->Host = "smtp.office365.com";
   $mail->Port = 587;
