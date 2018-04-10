@@ -100,10 +100,12 @@ if (isset($_POST['submit_btn'])) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"><img src="/assets/img/ac-icon.png"></a>
+            <a class="navbar-brand" href="/logged_out.php"><img src="/assets/img/ac-icon.png"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav"></ul>
+            <ul class="nav navbar-nav">
+                <li class=""><a class="icon" href="/professor.php"><img src="/assets/img/home.png"></a></li>
+            </ul>
             <ul id="menuRight" class="nav navbar-nav navbar-right">
                 <li class=""><a class="icon" onclick="goBack()"><img src="assets/img/back.png"></a></li>
                 <li id="mapIcon" class=""><a class="icon" href="/map.php"><img src="/assets/img/map.png"></a></li>
